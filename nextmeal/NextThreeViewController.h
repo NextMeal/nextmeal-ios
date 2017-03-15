@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  NextThreeViewController.h
 //  nextmeal
 //
 //  Created by Anson Liu on 3/9/17.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
 
+@interface NextThreeViewController : UIViewController
 
 @end
-

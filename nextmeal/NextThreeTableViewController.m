@@ -8,6 +8,7 @@
 
 #import "NextThreeTableViewController.h"
 
+#import "Constants.h"
 #import "Menu.h"
 
 @interface NextThreeTableViewController ()
@@ -60,7 +61,7 @@
 
 #pragma mark - Logic methods
 
-//Finds the week/day/meal index of the next meal depending on device time.
+//Finds the week/day/meal index of the immediate next meal depending on device time.
 - (void)nextMealWeekIndex:(NSInteger *)weekIndex dayIndex:(NSInteger *)dayIndex mealIndex:(NSInteger *)mealIndex {
     //Calculate days since start of week is today.
     NSCalendar *calenderObj = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
@@ -98,17 +99,29 @@
     }
 }
 
+//Finds the next meal indices based on the passed indices.
+- (void)nextMealIndicesWeekIndex:(NSInteger *)weekIndex dayIndex:(NSInteger *)dayIndex mealIndex:(NSInteger *)mealIndex {
+    *mealIndex += 1;
+    if (*mealIndex > 2) {
+        *mealIndex = 0;
+        *dayIndex += 1;
+        if (*dayIndex > 6) {
+            *dayIndex = 0;
+            *weekIndex += 1;
+        }
+    }
+}
+
 - (NSArray<Meal *> *)nextNthMealsN:(NSInteger)n previousNextMeals:(NSArray<Meal *> *)previousNextMeals weekIndex:(NSInteger)weekIndex dayIndex:(NSInteger)dayIndex mealIndex:(NSInteger)mealIndex {
     if (n > 0) {
-        if (mealIndex > 2) {
-            mealIndex = 0;
-            dayIndex += 1;
-            if (dayIndex > 6) {
-                dayIndex = 0;
-                weekIndex += 1;
-            }
-        }
-        return [self nextNthMealsN:n - 1 previousNextMeals:[previousNextMeals arrayByAddingObject:[[[self.loadedMenu.weeks objectAtIndex:weekIndex].days objectAtIndex:dayIndex].meals objectAtIndex:mealIndex]] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex + 1];
+        //Add the next meal to the meal array
+        previousNextMeals = [previousNextMeals arrayByAddingObject:[[[self.loadedMenu.weeks objectAtIndex:weekIndex].days objectAtIndex:dayIndex].meals objectAtIndex:mealIndex]];
+        
+        //Compute the next meal indices
+        [self nextMealIndicesWeekIndex:&weekIndex dayIndex:&dayIndex mealIndex:&mealIndex];
+        
+        //Recurse
+        return [self nextNthMealsN:n - 1 previousNextMeals:previousNextMeals weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
     } else {
         return previousNextMeals;
     }
@@ -151,6 +164,55 @@
     
     cell.textLabel.text = [self itemForIndexPath:indexPath].title;
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    //Setup date formatter
+    NSDateFormatter *allMenuSectionHeaderDateFormatter = [[NSDateFormatter alloc] init];
+    allMenuSectionHeaderDateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+    allMenuSectionHeaderDateFormatter.dateFormat = @"EEEE MM/dd/yy";
+    allMenuSectionHeaderDateFormatter.timeZone = [NSTimeZone systemTimeZone];
+    
+    //Determine NSDate of start of current week
+    NSCalendar *calenderObj = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *startOfWeek;
+    [calenderObj rangeOfUnit:NSCalendarUnitWeekOfYear startDate:&startOfWeek interval:nil forDate:[NSDate date]];
+    
+    //Determine the immediate next meal indices
+    NSInteger weekIndex = 0;
+    NSInteger dayIndex = 0;
+    NSInteger mealIndex = 0;
+    [self nextMealWeekIndex:&weekIndex dayIndex:&dayIndex mealIndex:&mealIndex];
+    
+    //Continue finding the next meal indices if needed based on the section index.
+    for (NSInteger i = 0; i < section; i++)
+        [self nextMealIndicesWeekIndex:&weekIndex dayIndex:&dayIndex mealIndex:&mealIndex];
+    
+    //Determine the date of the section from the next weekIndex and dayIndex.
+    NSDate *sectionDate = [startOfWeek dateByAddingTimeInterval:60 * 60 * 24 * 7 * weekIndex + 60 * 60 * 24 * dayIndex];
+    
+    //Determine which meal the section is for by the mealIndex.
+    NSString *mealTitle;
+    switch (mealIndex) {
+        case 0:
+            mealTitle = kMorningMealTitle;
+            break;
+        case 1:
+            mealTitle = kNoonMealTitle;
+            break;
+        case 2:
+            mealTitle = kEveningMealTitle;
+            break;
+            
+        default:
+            NSLog(@"Section %ld %% 3 produced %d. Unknown meal type.", (long)section, section % 3);
+            break;
+    }
+    
+    //Build section header title using the date of section and section meal.
+    NSString *sectionHeaderTitle = [NSString stringWithFormat:@"%@ %@", [allMenuSectionHeaderDateFormatter stringFromDate:sectionDate], mealTitle];
+    
+    return sectionHeaderTitle;
 }
 
 @end

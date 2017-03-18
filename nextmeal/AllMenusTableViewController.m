@@ -149,17 +149,21 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    //Setup date formatter
     NSDateFormatter *allMenuSectionHeaderDateFormatter = [[NSDateFormatter alloc] init];
     allMenuSectionHeaderDateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
     allMenuSectionHeaderDateFormatter.dateFormat = @"EEEE MM/dd/yy";
     allMenuSectionHeaderDateFormatter.timeZone = [NSTimeZone systemTimeZone];
     
+    //Determine NSDate of start of current week
     NSCalendar *calenderObj = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     NSDate *startOfWeek;
     [calenderObj rangeOfUnit:NSCalendarUnitWeekOfYear startDate:&startOfWeek interval:nil forDate:[NSDate date]];
     
+    //Determine the date of the section from the section index.
     NSDate *sectionDate = [startOfWeek dateByAddingTimeInterval:1 * 60 * 60 * 24 * (section / 3)];
     
+    //Determine which meal the section is for by the section index.
     NSString *mealTitle;
     switch (section % 3) {
         case 0:
@@ -177,6 +181,7 @@
             break;
     }
     
+    //Build section header title using the date of section and section meal.
     NSString *sectionHeaderTitle = [NSString stringWithFormat:@"%@ %@", [allMenuSectionHeaderDateFormatter stringFromDate:sectionDate], mealTitle];
     
     return sectionHeaderTitle;

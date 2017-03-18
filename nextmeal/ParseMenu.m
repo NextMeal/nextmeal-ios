@@ -185,8 +185,10 @@
             request.HTTPMethod = @"POST";
             NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 Week *outputWeek = [self parseMenu:data];
+                
                 [outputMenu updateWeekIndex:i withWeek:outputWeek];
                 
+                //Save menu to disk and call delegate if all requests have completed. (All week in the menu have seven days.)
                 if ([outputMenu allWeeksLoadedWithSevenDays]) {
                     saveMenu(outputMenu);
                     alertDelegate(outputMenu, response, error);

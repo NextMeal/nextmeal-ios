@@ -12,7 +12,6 @@
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
 		285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
 		285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FBA1E7236D60092A233 /* LaunchScreen.storyboard */; };
-		285E0FC51E7238A60092A233 /* NextThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FC41E7238A60092A233 /* NextThreeViewController.m */; };
 		285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */; };
 		285E0FCE1E723A1C0092A233 /* AllMenusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FCD1E723A1C0092A233 /* AllMenusViewController.m */; };
 		285E0FD11E7240C90092A233 /* ReadWriteLocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */; };
@@ -24,6 +23,7 @@
 		285E0FE51E76094D0092A233 /* ParseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE41E76094D0092A233 /* ParseMenu.m */; };
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
 		289586EF1E7780430053A408 /* sampleMenu2.json in Resources */ = {isa = PBXBuildFile; fileRef = 289586EE1E7780430053A408 /* sampleMenu2.json */; };
+		289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289939861E7DBC4900E255A6 /* MealDetailViewController.m */; };
 		289997861E78B7BB00E87BC5 /* NextThreeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -36,8 +36,6 @@
 		285E0FB81E7236D60092A233 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		285E0FBB1E7236D60092A233 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		285E0FBD1E7236D60092A233 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		285E0FC31E7238A60092A233 /* NextThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextThreeViewController.h; sourceTree = "<group>"; };
-		285E0FC41E7238A60092A233 /* NextThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextThreeViewController.m; sourceTree = "<group>"; };
 		285E0FC61E7239E40092A233 /* AllMenusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMenusTableViewController.h; sourceTree = "<group>"; };
 		285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMenusTableViewController.m; sourceTree = "<group>"; };
 		285E0FCC1E723A1C0092A233 /* AllMenusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMenusViewController.h; sourceTree = "<group>"; };
@@ -59,6 +57,8 @@
 		289586EB1E777C990053A408 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		289586EC1E777C990053A408 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		289586EE1E7780430053A408 /* sampleMenu2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleMenu2.json; sourceTree = "<group>"; };
+		289939851E7DBC4900E255A6 /* MealDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealDetailViewController.h; sourceTree = "<group>"; };
+		289939861E7DBC4900E255A6 /* MealDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealDetailViewController.m; sourceTree = "<group>"; };
 		289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextThreeTableViewController.h; sourceTree = "<group>"; };
 		289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextThreeTableViewController.m; sourceTree = "<group>"; };
 		289997881E78D3F500E87BC5 /* ParseMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseMenuProtocol.h; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 				289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */,
 				285E0FCC1E723A1C0092A233 /* AllMenusViewController.h */,
 				285E0FCD1E723A1C0092A233 /* AllMenusViewController.m */,
-				285E0FC31E7238A60092A233 /* NextThreeViewController.h */,
-				285E0FC41E7238A60092A233 /* NextThreeViewController.m */,
+				289939851E7DBC4900E255A6 /* MealDetailViewController.h */,
+				289939861E7DBC4900E255A6 /* MealDetailViewController.m */,
 				285E0FE21E7608840092A233 /* Logic */,
 				285E0FD81E74F3100092A233 /* Model */,
 				289997831E78B77400E87BC5 /* Assets */,
@@ -243,11 +243,11 @@
 				285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */,
 				285E0FCE1E723A1C0092A233 /* AllMenusViewController.m in Sources */,
 				289997861E78B7BB00E87BC5 /* NextThreeTableViewController.m in Sources */,
+				289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */,
 				285E0FDE1E74F3C70092A233 /* Day.m in Sources */,
 				285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */,
 				285E0FE11E74F3CF0092A233 /* Week.m in Sources */,
 				285E0FD11E7240C90092A233 /* ReadWriteLocalData.m in Sources */,
-				285E0FC51E7238A60092A233 /* NextThreeViewController.m in Sources */,
 				285E0FD71E74F30A0092A233 /* Item.m in Sources */,
 				285E0FAB1E7236D60092A233 /* main.m in Sources */,
 			);
@@ -372,7 +372,7 @@
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -384,7 +384,7 @@
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

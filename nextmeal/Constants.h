@@ -12,6 +12,8 @@
 #define kSampleFilename1 @"sampleMenu1.json"
 #define kSampleFilename2 @"sampleMenu2.json"
 
+#define kMaxItemsShownNextMeal 3
+
 #define kServerProtocol @"https"
 #define kServerHost @"navy.herokuapp.com"
 #define kServerMenu1Path @"/menu"

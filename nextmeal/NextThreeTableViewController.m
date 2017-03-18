@@ -10,6 +10,7 @@
 
 #import "Constants.h"
 #import "Menu.h"
+#import "MealDetailViewController.h"
 
 @interface NextThreeTableViewController ()
 
@@ -21,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self reloadMenuDataAndTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,7 +152,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self mealForSection:section].items.count;
+    return [self mealForSection:section].items.count < kMaxItemsShownNextMeal + 1 ? [self mealForSection:section].items.count : kMaxItemsShownNextMeal + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +164,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [self itemForIndexPath:indexPath].title;
+    if (indexPath.row == kMaxItemsShownNextMeal) {
+        cell.textLabel.text = @"View more";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    } else {
+        cell.textLabel.text = [self itemForIndexPath:indexPath].title;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.userInteractionEnabled = NO;
+    }
     return cell;
 }
 
@@ -170,7 +180,7 @@
     //Setup date formatter
     NSDateFormatter *allMenuSectionHeaderDateFormatter = [[NSDateFormatter alloc] init];
     allMenuSectionHeaderDateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
-    allMenuSectionHeaderDateFormatter.dateFormat = @"EEEE MM/dd/yy";
+    allMenuSectionHeaderDateFormatter.dateFormat = @"EEEE";
     allMenuSectionHeaderDateFormatter.timeZone = [NSTimeZone systemTimeZone];
     
     //Determine NSDate of start of current week
@@ -214,5 +224,20 @@
     
     return sectionHeaderTitle;
 }
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"MealDetailSegue" sender:self];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MealDetailViewController *mealDetailVC = [segue destinationViewController];
+    mealDetailVC.mealDateAndTitle = [self tableView:self.tableView titleForHeaderInSection:self.tableView.indexPathForSelectedRow.section];
+    mealDetailVC.loadedMeal = [_nextThreeMenus objectAtIndex:self.tableView.indexPathForSelectedRow.section];
+}
+
 
 @end

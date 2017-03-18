@@ -14,7 +14,7 @@
 + (BOOL)doesFileExist:(NSString *)filename;
 + (NSData *)readFileFromBundle:(NSString *)filename;
 + (NSData *)readFile:(NSString *)filename;
-+ (BOOL)saveFile:(NSData *)data withFilename:(NSString *)filename;
++ (BOOL)saveData:(NSData *)data withFilename:(NSString *)filename;
 + (BOOL)deleteFile:(NSString *)filename error:(NSError **)error;
 
 @end

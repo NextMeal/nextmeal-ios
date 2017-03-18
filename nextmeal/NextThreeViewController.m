@@ -30,13 +30,6 @@
     _menuTableView.delegate = _menuTableVC;
     
     [_menuTableView reloadData];
-    
-    NSCalendar *calenderObj = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *startOfWeek;
-    [calenderObj rangeOfUnit:NSCalendarUnitWeekOfYear startDate:&startOfWeek interval:nil forDate:[NSDate date]];
-    
-    NSLog(@"start %@ now %@", startOfWeek, [NSDate date]);
-
 }
 
 - (void)didReceiveMemoryWarning {

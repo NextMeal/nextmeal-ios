@@ -110,7 +110,28 @@
     return [self parseWeek:weekData];
 }
 
-+ (Menu *)retrieveMenus {
++ (Menu *)retrieveSavedMenus {
+    Menu *savedMenu = [NSKeyedUnarchiver unarchiveObjectWithData:[ReadWriteLocalData readFile:kMenuLastSavedFilename]];
+    
+    if (!savedMenu || ![savedMenu isKindOfClass:[Menu class]])
+        NSLog(@"savedMenu is nil or not kind of class Menu. %@ returns class of %@", savedMenu, [savedMenu class]);
+    
+    return savedMenu;
+}
+
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate {
+    
+    //Block for calling the delegate
+    void (^alertDelegate)(Menu *, NSURLResponse *, NSError *) = ^void(Menu *outputMenu, NSURLResponse *menuResponse, NSError *menuError) {
+        [delegate getMenuOnlineResultWithMenu:outputMenu withURLResponse:menuResponse withError:menuError];
+    };
+    
+    //Block for saving menu to disk
+    void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
+        NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
+        [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
+    };
+    
     Menu *outputMenu = [Menu new];
     
     if (kDebug) {
@@ -118,9 +139,39 @@
             NSData *menuData = [self readSampleLocalNumber:i];
             [outputMenu addWeek:[self parseMenu:menuData]];
         }
+        
+        //NSData *outputMenuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
+            sleep(20);
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                saveMenu(outputMenu);
+                alertDelegate(outputMenu, nil, nil);
+            });
+        });
+    } else {
+        /*
+        NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString: kServerURL] resolvingAgainstBaseURL:YES];
+        components.scheme = kServerProtocol;
+        components.path = kServerMenu1URL;
+        
+        
+        
+        NSString *noteDataString = [NSString stringWithFormat:@"key=%@", noteIdentifier];
+        
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+        NSURL *url = [NSURL URLWithString:kServerURL];
+        url = [url URLByAppendingPathComponent:@"get"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        request.HTTPBody = [noteDataString dataUsingEncoding:NSUTF8StringEncoding];
+        request.HTTPMethod = @"POST";
+        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            [_delegate getMeshNoteOnlineResultWithData:data withURLResponse:response withError:error];
+        }];
+        [postDataTask resume];
+         */
     }
     
-    return outputMenu;
 }
 
 @end

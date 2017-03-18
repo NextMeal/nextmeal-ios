@@ -35,6 +35,10 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_meals forKey:@"meals"];
+}
+
 - (void)addMeal:(Meal *)meal {
     if (!_meals)
         _meals = [NSArray array];

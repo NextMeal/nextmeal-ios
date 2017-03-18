@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "Menu.h"
+
+#import "ParseMenuProtocol.h"
 
 @interface ParseMenu : NSObject
 
-+ (Menu *)retrieveMenus;
++ (Menu *)retrieveSavedMenus;
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate;
 
 @end

@@ -12,6 +12,14 @@
 #define kSampleFilename1 @"sampleMenu1.json"
 #define kSampleFilename2 @"sampleMenu2.json"
 
+#define kServerProtocol @"https"
+#define kServerURL @"navy.herokuapp.com"
+#define kServerMenu1URL @"/menu"
+#define kServerMenu2URL @"/menu2"
+
+#define kMenuLastUpdatedKey @"menuLastUpdated"
+#define kMenuLastSavedFilename @"menuLatest"
+
 #define kSundayKey @"U"
 #define kMondayKey @"M"
 #define kTuesdayKey @"T"

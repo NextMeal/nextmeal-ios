@@ -18,14 +18,17 @@
 
 @implementation AllMenusTableViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (!self)
+        return nil;
+
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,18 +36,67 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - ParseMenuProtocol methods
+
+- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+    Menu *responseMenu = outputMenu;
+    if (responseMenu) {
+        _loadedMenu = responseMenu;
+     
+        //Update menu date in preferences
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self setRefreshControlTitle];
+        
+        if (self.tableView) {
+            [self.tableView reloadData];
+            
+        }
+    }
+    
+    //If the table view is not loaded yet, do nothing else.
+    [self.refreshControl endRefreshing];
+}
+
+
 #pragma mark - Reload data and UI methods
 
+- (void)setRefreshControlTitle {
+    //Setup UIRefreshControl initially
+    if (!self.refreshControl) {
+        self.refreshControl = [UIRefreshControl new];
+        [self.refreshControl addTarget:self action:@selector(reloadMenuData) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    //Retrieve last updated time from preferences
+    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
+    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
+    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
+    
+    //Setup date formatter
+    NSDateFormatter *refreshControlTimeFormatter = [[NSDateFormatter alloc] init];
+    refreshControlTimeFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+    refreshControlTimeFormatter.dateFormat = @"EEEE @ HH:mm";
+    refreshControlTimeFormatter.timeZone = [NSTimeZone systemTimeZone];
+    
+    //Determine refresh control title text
+    NSString *timeString = [NSString stringWithFormat:@"Last Updated %@", menuLastUpdatedObject ? [NSString stringWithFormat:@"on %@", [refreshControlTimeFormatter stringFromDate:menuLastUpdatedObject]] : @"Never"];
+    
+    //Set refresh control title
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:timeString];
+
+}
+
 - (void)reloadMenuData {
-    _loadedMenu = [ParseMenu retrieveMenus];
+    _loadedMenu = [ParseMenu retrieveSavedMenus];
+    [ParseMenu retrieveMenusWithDelegate:self];
 }
 
 - (void)reloadMenuDataAndTableView {
+    [self.refreshControl beginRefreshing];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
         [self reloadMenuData];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [self.tableView reloadData];
-        });
     });
 }
 

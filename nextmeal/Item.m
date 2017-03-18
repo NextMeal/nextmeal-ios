@@ -46,4 +46,8 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_title forKey:@"itemTitle"];
+}
+
 @end

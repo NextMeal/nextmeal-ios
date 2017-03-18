@@ -37,7 +37,9 @@
     
     [self nextMealWeekIndex:&weekIndex dayIndex:&dayIndex mealIndex:&mealIndex];
     
-    _nextThreeMenus = [self nextNthMealsN:3 previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
+    //Only load the next three meal indexes into an array if the menu has been loaded. On initial run there will be no menu.
+    if (self.loadedMenu)
+        _nextThreeMenus = [self nextNthMealsN:3 previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
 }
 
 - (void)reloadMenuData {
@@ -58,6 +60,7 @@
 
 #pragma mark - Logic methods
 
+//Finds the week/day/meal index of the next meal depending on device time.
 - (void)nextMealWeekIndex:(NSInteger *)weekIndex dayIndex:(NSInteger *)dayIndex mealIndex:(NSInteger *)mealIndex {
     //Calculate days since start of week is today.
     NSCalendar *calenderObj = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
@@ -97,7 +100,6 @@
 
 - (NSArray<Meal *> *)nextNthMealsN:(NSInteger)n previousNextMeals:(NSArray<Meal *> *)previousNextMeals weekIndex:(NSInteger)weekIndex dayIndex:(NSInteger)dayIndex mealIndex:(NSInteger)mealIndex {
     if (n > 0) {
-        mealIndex += 1;
         if (mealIndex > 2) {
             mealIndex = 0;
             dayIndex += 1;
@@ -106,7 +108,7 @@
                 weekIndex += 1;
             }
         }
-        return [self nextNthMealsN:n - 1 previousNextMeals:[previousNextMeals arrayByAddingObject:[[[self.loadedMenu.weeks objectAtIndex:weekIndex].days objectAtIndex:dayIndex].meals objectAtIndex:mealIndex]] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
+        return [self nextNthMealsN:n - 1 previousNextMeals:[previousNextMeals arrayByAddingObject:[[[self.loadedMenu.weeks objectAtIndex:weekIndex].days objectAtIndex:dayIndex].meals objectAtIndex:mealIndex]] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex + 1];
     } else {
         return previousNextMeals;
     }
@@ -129,8 +131,7 @@
     NSInteger numberOfMeals = 0;
     for (Week *week in self.loadedMenu.weeks)
         for (Day *day in week.days)
-            for (Meal *meal in day.meals)
-                numberOfMeals += 1;
+            numberOfMeals += day.meals.count;
                 
     return numberOfMeals < 3 ? numberOfMeals : 3;
 }

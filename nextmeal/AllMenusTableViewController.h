@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ParseMenuProtocol.h"
+
 #import "Menu.h"
 
-@interface AllMenusTableViewController : UITableViewController
+@interface AllMenusTableViewController : UITableViewController <ParseMenuProtocol>
 
 @property (nonatomic, copy, readwrite) Menu *loadedMenu;
 

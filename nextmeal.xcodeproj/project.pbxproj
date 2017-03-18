@@ -61,6 +61,7 @@
 		289586EE1E7780430053A408 /* sampleMenu2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleMenu2.json; sourceTree = "<group>"; };
 		289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextThreeTableViewController.h; sourceTree = "<group>"; };
 		289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextThreeTableViewController.m; sourceTree = "<group>"; };
+		289997881E78D3F500E87BC5 /* ParseMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseMenuProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +147,7 @@
 			children = (
 				285E0FCF1E7240C90092A233 /* ReadWriteLocalData.h */,
 				285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */,
+				289997881E78D3F500E87BC5 /* ParseMenuProtocol.h */,
 				285E0FE31E76094D0092A233 /* ParseMenu.h */,
 				285E0FE41E76094D0092A233 /* ParseMenu.m */,
 			);

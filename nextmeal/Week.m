@@ -35,6 +35,10 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_days forKey:@"days"];
+}
+
 - (void)addDay:(Day *)day {
     if (!_days)
         _days = [NSArray array];

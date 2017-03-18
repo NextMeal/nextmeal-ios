@@ -35,6 +35,10 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_weeks forKey:@"weeks"];
+}
+
 - (void)addWeek:(Week *)week {
     if (!_weeks)
         _weeks = [NSMutableArray array];

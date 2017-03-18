@@ -53,7 +53,7 @@
     return [[NSData alloc] initWithContentsOfFile:filepath];
 }
 
-+ (BOOL)saveFile:(NSData *)data withFilename:(NSString *)filename {
++ (BOOL)saveData:(NSData *)data withFilename:(NSString *)filename {
     if (!filename) {
         NSLog(@"no filename provided");
         return NO;

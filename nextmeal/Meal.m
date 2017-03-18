@@ -35,6 +35,10 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_items forKey:@"items"];
+}
+
 - (void)addItem:(Item *)item {
     if (!_items)
         _items = [NSArray array];

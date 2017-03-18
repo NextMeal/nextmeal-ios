@@ -90,7 +90,7 @@
 
 - (void)reloadMenuData {
     _loadedMenu = [ParseMenu retrieveSavedMenus];
-    [ParseMenu retrieveMenusWithDelegate:self];
+    [ParseMenu retrieveMenusWithDelegate:self withOriginType:foreground];
 }
 
 - (void)reloadMenuDataAndTableView {

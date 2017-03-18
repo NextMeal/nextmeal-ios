@@ -57,4 +57,12 @@
     [_weeks replaceObjectAtIndex:index withObject:week];
 }
 
+- (BOOL)allWeeksLoadedWithSevenDays {
+    for (Week *week in _weeks)
+        if (week.days.count != 7)
+            return NO;
+    
+    return YES;
+}
+
 @end

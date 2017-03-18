@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Constants.h"
+
 #import "Menu.h"
 
 #import "ParseMenuProtocol.h"
@@ -15,6 +17,6 @@
 @interface ParseMenu : NSObject
 
 + (Menu *)retrieveSavedMenus;
-+ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate;
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(RequestOriginType)originType;
 
 @end

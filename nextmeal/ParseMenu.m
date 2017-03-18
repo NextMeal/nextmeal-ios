@@ -119,7 +119,7 @@
     return savedMenu;
 }
 
-+ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate {
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(RequestOriginType)originType {
     
     //Block for calling the delegate
     void (^alertDelegate)(Menu *, NSURLResponse *, NSError *) = ^void(Menu *outputMenu, NSURLResponse *menuResponse, NSError *menuError) {
@@ -149,27 +149,51 @@
             });
         });
     } else {
-        /*
-        NSURLComponents *components = [NSURLComponents componentsWithURL:[NSURL URLWithString: kServerURL] resolvingAgainstBaseURL:YES];
-        components.scheme = kServerProtocol;
-        components.path = kServerMenu1URL;
+        NSArray<NSString *> *menuPaths = @[kServerMenu1Path, kServerMenu2Path];
         
+        //Create large enough unloaded week array in the menu object.
+        for (NSInteger i = 0; i < menuPaths.count; i++)
+            [outputMenu addWeek:[Week new]];
         
-        
-        NSString *noteDataString = [NSString stringWithFormat:@"key=%@", noteIdentifier];
-        
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
-        NSURL *url = [NSURL URLWithString:kServerURL];
-        url = [url URLByAppendingPathComponent:@"get"];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        request.HTTPBody = [noteDataString dataUsingEncoding:NSUTF8StringEncoding];
-        request.HTTPMethod = @"POST";
-        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            [_delegate getMeshNoteOnlineResultWithData:data withURLResponse:response withError:error];
-        }];
-        [postDataTask resume];
-         */
+        for (NSInteger i = 0; i < menuPaths.count; i++) {
+            //Build request URL
+            NSURLComponents *components = [NSURLComponents new];
+            components.host = kServerHost;
+            components.scheme = kServerProtocol;
+            components.path = [menuPaths objectAtIndex:i];
+            //NSLog(@"%@",components.string);
+            
+            //Determine appropriate origin type string to put in request data.
+            NSString *originTypeString;
+            switch (originType) {
+                case foreground:
+                    originTypeString = @"foreground";
+                    break;
+                case background:
+                    originTypeString = @"backgroundFetch";
+                    break;
+            }
+            
+            //Build request data string.
+            NSString *requestDataString = [NSString stringWithFormat:@"status=%@&appVersion=%@", originTypeString, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+            
+            NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+            NSURL *url = components.URL;
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            request.HTTPBody = [requestDataString dataUsingEncoding:NSUTF8StringEncoding];
+            request.HTTPMethod = @"POST";
+            NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                Week *outputWeek = [self parseMenu:data];
+                [outputMenu updateWeekIndex:i withWeek:outputWeek];
+                
+                if ([outputMenu allWeeksLoadedWithSevenDays]) {
+                    saveMenu(outputMenu);
+                    alertDelegate(outputMenu, response, error);
+                }
+            }];
+            [postDataTask resume];
+        }
     }
     
 }

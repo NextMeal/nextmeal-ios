@@ -8,14 +8,14 @@
 
 #ifndef Constants_h
 
-#define kDebug YES
+#define kDebug NO
 #define kSampleFilename1 @"sampleMenu1.json"
 #define kSampleFilename2 @"sampleMenu2.json"
 
 #define kServerProtocol @"https"
-#define kServerURL @"navy.herokuapp.com"
-#define kServerMenu1URL @"/menu"
-#define kServerMenu2URL @"/menu2"
+#define kServerHost @"navy.herokuapp.com"
+#define kServerMenu1Path @"/menu"
+#define kServerMenu2Path @"/menu2"
 
 #define kMenuLastUpdatedKey @"menuLastUpdated"
 #define kMenuLastSavedFilename @"menuLatest"
@@ -37,6 +37,11 @@
 #define kMorningMealTitle @"Breakfast"
 #define kNoonMealTitle @"Lunch"
 #define kEveningMealTitle @"Dinner"
+
+typedef enum {
+    foreground,
+    background
+} RequestOriginType;
 
 #define Constants_h
 

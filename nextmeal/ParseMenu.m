@@ -170,11 +170,13 @@
         for (NSInteger i = 0; i < menuPaths.count; i++)
             [outputMenu addWeek:[Week new]];
         
-        //Create array to keep track of requests
-        NSLock *requestArrayLock = [NSLock new];
+        //Create array to keep track of requests completion
+        NSLock *requestCompletionArrayLock = [NSLock new];
         NSMutableArray<NSNumber *> *requestComplete = [[NSMutableArray alloc] initWithCapacity:menuPaths.count];
         for (NSInteger i = 0; i < menuPaths.count; i++)
              [requestComplete addObject:[NSNumber numberWithBool:NO]];
+        NSLock *requestErrorLock = [NSLock new];
+        NSError * __block requestLastError;
         
         for (NSInteger i = 0; i < menuPaths.count; i++) {
             //Build request URL
@@ -206,37 +208,46 @@
             request.HTTPMethod = @"POST";
             NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 //Lock/unlock the requestComplete counter array
-                [requestArrayLock lock];
+                [requestCompletionArrayLock lock];
                 [requestComplete replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
-                [requestArrayLock unlock];
+                [requestCompletionArrayLock unlock];
                 
-                //If the request had not error, parse the data
-                if (!error) {
+                
+                //If the request had no error, parse the data
+                if (error) {
+                    [requestErrorLock lock];
+                    requestLastError = error;
+                    [requestErrorLock unlock];
+                } else {
                     Week *outputWeek = [self parseMenu:data error:&error];
                     
                     //Update menu object if parse has no error
-                    if (!error)
+                    if (error) {
+                        [requestErrorLock lock];
+                        requestLastError = error;
+                        [requestErrorLock unlock];
+                    } else
                         [outputMenu updateWeekIndex:i withWeek:outputWeek];
                 }
                 
                 //Save menu to disk and call delegate if all requests have completed. Lock/unlock request complete array and loop to check if all values are YES.
                 BOOL allRequestsComplete = YES;
-                [requestArrayLock lock];
+                [requestCompletionArrayLock lock];
                 for (NSNumber *value in requestComplete)
                     if (![value boolValue])
                         allRequestsComplete = NO;
-                [requestArrayLock unlock];
+                [requestCompletionArrayLock unlock];
                 
                 if (allRequestsComplete) {
                     NSLog(@"all requests complete");
                     
                     //If no errors, save the output menu
-                    if (!error)
+                    if (!requestLastError)
                         saveMenu(outputMenu);
                     
                     //Call delegate on main thread
                     dispatch_async(dispatch_get_main_queue(), ^(void){
-                        alertDelegate(outputMenu, response, error);
+                        alertDelegate(outputMenu, response, requestLastError);
                     });
                 }
             }];

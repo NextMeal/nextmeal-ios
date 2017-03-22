@@ -32,6 +32,12 @@
     if (error) {
         NSLog(@"Error getting menu %@", [error localizedDescription]);
         self.navigationItem.prompt = [error localizedDescription];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
+            sleep(5);
+            if ([self.navigationItem.prompt isEqualToString:[error localizedDescription]])
+                self.navigationItem.prompt = nil;
+        });
+        
     } else {
         Menu *responseMenu = outputMenu;
         if (responseMenu) {

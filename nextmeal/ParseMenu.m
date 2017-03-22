@@ -123,11 +123,13 @@
     return [self parseWeek:weekData error:error];
 }
 
-+ (Menu *)retrieveSavedMenus {
++ (Menu *)retrieveSavedMenusWithError:(NSError **)error {
     Menu *savedMenu = [NSKeyedUnarchiver unarchiveObjectWithData:[ReadWriteLocalData readFile:kMenuLastSavedFilename]];
     
-    if (!savedMenu || ![savedMenu isKindOfClass:[Menu class]])
-        NSLog(@"savedMenu is nil or not kind of class Menu. %@ returns class of %@", savedMenu, [savedMenu class]);
+    if (!savedMenu || ![savedMenu isKindOfClass:[Menu class]]) {
+        NSString *errorString = [NSString stringWithFormat:@"savedMenu is nil or not kind of class Menu.\n%@ returns class of %@", savedMenu, [savedMenu class]];
+        *error = [[NSError alloc] initWithDomain:kNMRetrieveSavedErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+    }
     
     return savedMenu;
 }

@@ -16,7 +16,7 @@
 
 @interface ParseMenu : NSObject
 
-+ (Menu *)retrieveSavedMenus;
++ (Menu *)retrieveSavedMenusWithError:(NSError **)error;
 + (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(RequestOriginType)originType;
 
 @end

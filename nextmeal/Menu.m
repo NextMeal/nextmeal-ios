@@ -11,7 +11,6 @@
 @interface Menu ()
 
 @property (readwrite) NSMutableArray<Week *> *weeks;
-@property (readwrite) NSMutableArray<NSValue *> *weeksSet;
 
 @end
 
@@ -32,25 +31,19 @@
     }
     
     _weeks = [decoder decodeObjectForKey:@"weeks"];
-    _weeksSet = [decoder decodeObjectForKey:@"weeksSet"];
     
     return self;
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeObject:_weeks forKey:@"weeks"];
-    [encoder encodeObject:_weeksSet forKey:@"weeksSet"];
 }
 
 - (void)addWeek:(Week *)week {
     if (!_weeks)
         _weeks = [NSMutableArray array];
     
-    if (!_weeksSet)
-        _weeksSet = [NSMutableArray array];
-    
     [_weeks addObject:week];
-    [_weeksSet addObject:[NSNumber numberWithBool:NO]];
 }
 
 - (void)updateWeekIndex:(NSInteger)index withWeek:(Week *)week {
@@ -59,17 +52,22 @@
         [self addWeek:[Week new]];
     
     [_weeks replaceObjectAtIndex:index withObject:week];
-    [_weeksSet replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:YES]];
 }
 
-- (BOOL)allWeeksSet {
-    if (!_weeksSet)
-        return NO;
-    
-    for (NSValue *value in _weeksSet)
-        if ([value isKindOfClass:[NSNumber class]] && ![(NSNumber *)value boolValue])
+//Check day count and meal counts.
+- (BOOL)allWeeksValid {
+    for (Week *week in _weeks) {
+        if (!week || week.days.count != 7)
             return NO;
-    
+        for (Day *day in week.days) {
+            if (!day || day.meals.count != 3)
+                return NO;
+            for (Meal *meal in day.meals)
+                if (!meal)
+                    return NO;
+        }
+    }
+         
     return YES;
 }
 

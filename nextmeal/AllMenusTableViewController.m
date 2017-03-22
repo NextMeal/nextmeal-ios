@@ -43,7 +43,7 @@
             
             [self setRefreshControlTitle];
             
-            self.navigationItem.prompt = [error localizedDescription];
+            self.navigationItem.prompt = nil;
             
             [self.tableView reloadData];
         }
@@ -82,7 +82,13 @@
 }
 
 - (void)reloadMenuData {
-    _loadedMenu = [ParseMenu retrieveSavedMenus];
+    NSError *error;
+    Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
+    if (!error)
+        _loadedMenu = savedMenu;
+    else
+        self.navigationItem.prompt = [error localizedDescription];
+    
     [self.tableView reloadData];
     
     [ParseMenu retrieveMenusWithDelegate:self withOriginType:foreground];
@@ -187,14 +193,6 @@
     
     [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    self.navigationItem.prompt = nil;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"hi");
 }
 
 - (void)didReceiveMemoryWarning {

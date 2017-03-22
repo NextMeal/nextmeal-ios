@@ -18,6 +18,6 @@
 - (void)addWeek:(Week *)week;
 - (void)updateWeekIndex:(NSInteger)index withWeek:(Week *)week;
 
-- (BOOL)allWeeksSet;
+- (BOOL)allWeeksValid;
 
 @end

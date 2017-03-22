@@ -20,15 +20,6 @@
 
 @implementation NextThreeTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - ParseMenuProtocol methods
 
 //Call on main thread!
@@ -58,19 +49,17 @@
 
 - (void)reloadMenuData {
     [super reloadMenuData];
+    
+    if ([self.loadedMenu allWeeksValid]) {
+        [self findNextThreeMenus];
+        [self.tableView reloadData];
+    } else {
+        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
+    }
 }
 
 - (void)reloadMenuDataAndTableView {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
-        [self reloadMenuData];
-        
-        if ([self.loadedMenu allWeeksSet]) {
-            [self findNextThreeMenus];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self.tableView reloadData];
-            });
-        }
-    });
+    [super reloadMenuDataAndTableView];
 }
 
 #pragma mark - Logic methods
@@ -260,5 +249,15 @@
     mealDetailVC.loadedMeal = [_nextThreeMenus objectAtIndex:self.tableView.indexPathForSelectedRow.section];
 }
 
+#pragma mark - VC lifecycle methods
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end

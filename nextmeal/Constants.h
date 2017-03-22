@@ -24,6 +24,7 @@
 #define kMenuLastSavedFilename @"menuLatest"
 
 #define kNMParseErrorDomain @"NMParseErrorDomain"
+#define kNMRetrieveSavedErrorDomain @"NMRetrieveSavedErrorDomain"
 
 #define kSundayKey @"U"
 #define kMondayKey @"M"

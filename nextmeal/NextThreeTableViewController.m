@@ -22,8 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self reloadMenuDataAndTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,8 +29,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - ParseMenuProtocol methods
+
+//Call on main thread!
+- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+    [super getMenuOnlineResultWithMenu:outputMenu withURLResponse:response withError:error];
+    
+    if (self.loadedMenu) {
+        [self findNextThreeMenus];
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - Reload data and UI methods
 
+//Make sure valid menu is loaded when calling.
 - (void)findNextThreeMenus {
     NSInteger weekIndex = 0;
     NSInteger dayIndex = 0;
@@ -42,22 +53,23 @@
     
     //Only load the next three meal indexes into an array if the menu has been loaded. On initial run there will be no menu.
     if (self.loadedMenu)
-        _nextThreeMenus = [self nextNthMealsN:3 previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
+        _nextThreeMenus = [self nextNthMealsN:kNumberOfNextMealsShown previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
 }
 
 - (void)reloadMenuData {
     [super reloadMenuData];
-    
-    [self findNextThreeMenus];
 }
 
 - (void)reloadMenuDataAndTableView {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
         [self reloadMenuData];
-        [self findNextThreeMenus];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [self.tableView reloadData];
-        });
+        
+        if ([self.loadedMenu allWeeksSet]) {
+            [self findNextThreeMenus];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self.tableView reloadData];
+            });
+        }
     });
 }
 
@@ -147,11 +159,16 @@
     for (Week *week in self.loadedMenu.weeks)
         for (Day *day in week.days)
             numberOfMeals += day.meals.count;
-                
-    return numberOfMeals < 3 ? numberOfMeals : 3;
+    
+    //Add one additional section for the version number.
+    return (numberOfMeals < kNumberOfNextMealsShown ? numberOfMeals : kNumberOfNextMealsShown) + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //Return 0 rows for the last section which shows the app version number.
+    if (section == tableView.numberOfSections - 1)
+        return 0;
+    
     return [self mealForSection:section].items.count < kMaxItemsShownNextMeal + 1 ? [self mealForSection:section].items.count : kMaxItemsShownNextMeal + 1;
 }
 
@@ -177,6 +194,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    //Return app version number for the last section which shows the app version number.
+    if (section == tableView.numberOfSections - 1)
+        return [NSString stringWithFormat:@"v%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    
     //Setup date formatter
     NSDateFormatter *allMenuSectionHeaderDateFormatter = [[NSDateFormatter alloc] init];
     allMenuSectionHeaderDateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -215,7 +236,7 @@
             break;
             
         default:
-            NSLog(@"Section %ld %% 3 produced %d. Unknown meal type.", (long)section, section % 3);
+            NSLog(@"Section %ld %% 3 produced %ld. Unknown meal type.", (long)section, section % 3);
             break;
     }
     

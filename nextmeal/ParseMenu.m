@@ -29,9 +29,11 @@
     return [ReadWriteLocalData readFileFromBundle:filename];
 }
 
-+ (Item *)parseItem:(NSObject *)itemData {
++ (Item *)parseItem:(NSObject *)itemData error:(NSError **)error {
     if (![itemData isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"Parsed itemData is not of kind class NSDictionary.\n%@", itemData);
+        NSString *errorString = [NSString stringWithFormat:@"Parsed itemData is not of kind class NSDictionary.\n%@", itemData];
+        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        return nil;
     }
     
     NSString *itemTitle = [((NSDictionary *)itemData) objectForKey:kMealItemTitleKey];
@@ -48,15 +50,18 @@
     return outputItem;
 }
 
-+ (Meal *)parseMeal:(NSObject *)mealData {
++ (Meal *)parseMeal:(NSObject *)mealData error:(NSError **)error {
     if (![mealData isKindOfClass:[NSArray class]]) {
-        NSLog(@"Parsed mealData is not of kind class NSArray.\n%@", mealData);
+        NSString *errorString = [NSString stringWithFormat:@"Parsed mealData is not of kind class NSArray.\n%@", mealData];
+        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        return nil;
+
     }
     
     Meal *outputMeal = [Meal new];
     
     for (NSObject *itemData in (NSArray *)mealData) {
-        Item *outputItem = [self parseItem:itemData];
+        Item *outputItem = [self parseItem:itemData error:error];
         if (outputItem)
             [outputMeal addItem:outputItem];
     }
@@ -64,9 +69,11 @@
     return outputMeal;
 }
 
-+ (Day *)parseDay:(NSObject *)dayData {
++ (Day *)parseDay:(NSObject *)dayData error:(NSError **)error {
     if (![dayData isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"Parsed dayData is not of kind class NSDictionary.\n%@", dayData);
+        NSString *errorString = [NSString stringWithFormat:@"Parsed dayData is not of kind class NSDictionary.\n%@", dayData];
+        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        return nil;
     }
     
     Day *outputDay = [Day new];
@@ -76,15 +83,17 @@
     NSArray<NSObject *> *mealDatas = [((NSDictionary *)dayData) objectsForKeys:mealKeys notFoundMarker:[NSObject new]];
     
     for (NSObject *mealData in mealDatas) {
-        [outputDay addMeal:[self parseMeal:mealData]];
+        [outputDay addMeal:[self parseMeal:mealData error:error]];
     }
     
     return outputDay;
 }
 
-+ (Week *)parseWeek:(NSObject *)weekData {
++ (Week *)parseWeek:(NSObject *)weekData error:(NSError **)error {
     if (![weekData isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"Parsed object is not of kind class NSDictionary.\n%@", weekData);
+        NSString *errorString = [NSString stringWithFormat:@"Parsed object is not of kind class NSDictionary.\n%@", weekData];
+        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        return nil;
     }
     
     NSArray<NSString *> *dayKeys = @[kSundayKey, kMondayKey, kTuesdayKey, kWednesdayKey, kThursdayKey, kFridayKey, kSaturdayKey];
@@ -94,20 +103,24 @@
     Week *outputWeek = [Week new];
     
     for (NSObject *dayData in dayDatas) {
-        [outputWeek addDay:[self parseDay:dayData]];
+        [outputWeek addDay:[self parseDay:dayData error:error]];
     }
     
     return outputWeek;
 }
 
-+ (Week *)parseMenu:(NSData *)menuData {
++ (Week *)parseMenu:(NSData *)menuData error:(NSError **)error {
     NSError *parseError;
     NSObject *weekData = [NSJSONSerialization JSONObjectWithData:menuData options:0 error:&parseError];
     
-    if (parseError)
+    if (parseError) {
         NSLog(@"Error parsing data.\n%@\n%@", [parseError localizedDescription], menuData);
+        
+        *error = parseError;
+        return nil;
+    }
     
-    return [self parseWeek:weekData];
+    return [self parseWeek:weekData error:error];
 }
 
 + (Menu *)retrieveSavedMenus {
@@ -137,14 +150,14 @@
     if (kDebug) {
         for (int i = 1; i < 3; i++) {
             NSData *menuData = [self readSampleLocalNumber:i];
-            [outputMenu addWeek:[self parseMenu:menuData]];
+            [outputMenu addWeek:[self parseMenu:menuData error:nil]];
         }
         
         //NSData *outputMenuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
             sleep(20);
+            saveMenu(outputMenu);
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                saveMenu(outputMenu);
                 alertDelegate(outputMenu, nil, nil);
             });
         });
@@ -154,6 +167,12 @@
         //Create large enough unloaded week array in the menu object.
         for (NSInteger i = 0; i < menuPaths.count; i++)
             [outputMenu addWeek:[Week new]];
+        
+        //Create array to keep track of requests
+        NSLock *requestArrayLock = [NSLock new];
+        NSMutableArray<NSNumber *> *requestComplete = [[NSMutableArray alloc] initWithCapacity:menuPaths.count];
+        for (NSInteger i = 0; i < menuPaths.count; i++)
+             [requestComplete addObject:[NSNumber numberWithBool:NO]];
         
         for (NSInteger i = 0; i < menuPaths.count; i++) {
             //Build request URL
@@ -184,14 +203,39 @@
             request.HTTPBody = [requestDataString dataUsingEncoding:NSUTF8StringEncoding];
             request.HTTPMethod = @"POST";
             NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                Week *outputWeek = [self parseMenu:data];
+                //Lock/unlock the requestComplete counter array
+                [requestArrayLock lock];
+                [requestComplete replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
+                [requestArrayLock unlock];
                 
-                [outputMenu updateWeekIndex:i withWeek:outputWeek];
+                //If the request had not error, parse the data
+                if (!error) {
+                    Week *outputWeek = [self parseMenu:data error:&error];
+                    
+                    //Update menu object if parse has no error
+                    if (!error)
+                        [outputMenu updateWeekIndex:i withWeek:outputWeek];
+                }
                 
-                //Save menu to disk and call delegate if all requests have completed. (All week in the menu have seven days.)
-                if ([outputMenu allWeeksLoadedWithSevenDays]) {
-                    saveMenu(outputMenu);
-                    alertDelegate(outputMenu, response, error);
+                //Save menu to disk and call delegate if all requests have completed. Lock/unlock request complete array and loop to check if all values are YES.
+                BOOL allRequestsComplete = YES;
+                [requestArrayLock lock];
+                for (NSNumber *value in requestComplete)
+                    if (![value boolValue])
+                        allRequestsComplete = NO;
+                [requestArrayLock unlock];
+                
+                if (allRequestsComplete) {
+                    NSLog(@"all requests complete");
+                    
+                    //If no errors, save the output menu
+                    if (!error)
+                        saveMenu(outputMenu);
+                    
+                    //Call delegate on main thread
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        alertDelegate(outputMenu, response, error);
+                    });
                 }
             }];
             [postDataTask resume];

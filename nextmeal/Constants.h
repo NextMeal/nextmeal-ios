@@ -12,6 +12,7 @@
 #define kSampleFilename1 @"sampleMenu1.json"
 #define kSampleFilename2 @"sampleMenu2.json"
 
+#define kNumberOfNextMealsShown 3
 #define kMaxItemsShownNextMeal 3
 
 #define kServerProtocol @"https"
@@ -21,6 +22,8 @@
 
 #define kMenuLastUpdatedKey @"menuLastUpdated"
 #define kMenuLastSavedFilename @"menuLatest"
+
+#define kNMParseErrorDomain @"NMParseErrorDomain"
 
 #define kSundayKey @"U"
 #define kMondayKey @"M"

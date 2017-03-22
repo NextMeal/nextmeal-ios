@@ -26,38 +26,29 @@
     return self;
 }
 
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self reloadMenuDataAndTableView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - ParseMenuProtocol methods
 
 - (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
-    Menu *responseMenu = outputMenu;
-    if (responseMenu) {
-        _loadedMenu = responseMenu;
-     
-        //Update menu date in preferences
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [self setRefreshControlTitle];
-        
-        if (self.tableView) {
-            [self.tableView reloadData];
+    if (error) {
+        NSLog(@"Error getting menu %@", [error localizedDescription]);
+        self.navigationItem.prompt = [error localizedDescription];
+    } else {
+        Menu *responseMenu = outputMenu;
+        if (responseMenu) {
+            _loadedMenu = responseMenu;
             
+            //Update menu date in preferences
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [self setRefreshControlTitle];
+            
+            self.navigationItem.prompt = [error localizedDescription];
+            
+            [self.tableView reloadData];
         }
     }
     
-    //If the table view is not loaded yet, do nothing else.
     [self.refreshControl endRefreshing];
 }
 
@@ -68,7 +59,7 @@
     //Setup UIRefreshControl initially
     if (!self.refreshControl) {
         self.refreshControl = [UIRefreshControl new];
-        [self.refreshControl addTarget:self action:@selector(reloadMenuData) forControlEvents:UIControlEventValueChanged];
+        [self.refreshControl addTarget:self action:@selector(reloadMenuDataAndTableView) forControlEvents:UIControlEventValueChanged];
     }
     
     //Retrieve last updated time from preferences
@@ -92,14 +83,14 @@
 
 - (void)reloadMenuData {
     _loadedMenu = [ParseMenu retrieveSavedMenus];
+    [self.tableView reloadData];
+    
     [ParseMenu retrieveMenusWithDelegate:self withOriginType:foreground];
 }
 
 - (void)reloadMenuDataAndTableView {
     [self.refreshControl beginRefreshing];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
-        [self reloadMenuData];
-    });
+    [self reloadMenuData];
 }
 
 #pragma mark - Logic methods
@@ -179,7 +170,7 @@
             break;
             
         default:
-            NSLog(@"Section %ld %% 3 produced %d. Unknown meal type.", (long)section, section % 3);
+            NSLog(@"Section %ld %% 3 produced %ld. Unknown meal type.", (long)section, section % 3);
             break;
     }
     
@@ -187,6 +178,28 @@
     NSString *sectionHeaderTitle = [NSString stringWithFormat:@"%@ %@", [allMenuSectionHeaderDateFormatter stringFromDate:sectionDate], mealTitle];
     
     return sectionHeaderTitle;
+}
+
+#pragma mark - VC lifecycle methods
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setRefreshControlTitle];
+    [self reloadMenuDataAndTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationItem.prompt = nil;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"hi");
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

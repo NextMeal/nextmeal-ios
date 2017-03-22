@@ -13,10 +13,11 @@
 @interface Menu : NSObject
 
 @property (readonly) NSArray<Week *> *weeks;
+@property (readonly) NSArray<NSValue *> *weeksSet;
 
 - (void)addWeek:(Week *)week;
 - (void)updateWeekIndex:(NSInteger)index withWeek:(Week *)week;
 
-- (BOOL)allWeeksLoadedWithSevenDays;
+- (BOOL)allWeeksSet;
 
 @end

@@ -38,6 +38,7 @@
 #define kNMRetrieveSavedErrorDomain @"NMRetrieveSavedErrorDomain"
 
 #define kNMServiceType @"NMMultipeerMenu"
+#define kNMDiscoveryInfoMenuUpdateDate @"menuUpdateDate"
 
 
 #pragma mark - Menu JSON key constants

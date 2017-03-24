@@ -38,87 +38,6 @@
             </objects>
             <point key="canvasLocation" x="2270" y="385"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vNM-g3-uZq">
-            <objects>
-                <navigationController id="Lyp-Ue-u1w" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s55-V0-tmT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="lew-w7-juI" kind="relationship" relationship="rootViewController" id="rMN-Yz-N7w"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9iQ-SQ-eMd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1249" y="1159"/>
-        </scene>
-        <!--Extras-->
-        <scene sceneID="iKE-OV-wrD">
-            <objects>
-                <viewController id="lew-w7-juI" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nAZ-eV-iaO"/>
-                        <viewControllerLayoutGuide type="bottom" id="TwV-HS-vjG"/>
-                    </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="BUz-1P-yBa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="akJ-nQ-QzR">
-                                <rect key="frame" x="57" y="64" width="260" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ku-yD-76O" customClass="Button" customModule="nextmeal" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="50"/>
-                                        <color key="backgroundColor" red="0.20784313979999999" green="0.13725490870000001" blue="0.5176470876" alpha="1" colorSpace="calibratedRGB"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedColor">
-                                                <color key="value" red="0.1647058824" green="0.0078431372550000003" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MkX-fP-UoD">
-                                        <rect key="frame" x="70.5" y="9" width="119" height="32"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Get a ride" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhC-vn-9kL">
-                                                <rect key="frame" x="40" y="6" width="79" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Lyft Logo - White" translatesAutoresizingMaskIntoConstraints="NO" id="sCa-ys-jyR">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="HhC-vn-9kL" firstAttribute="leading" secondItem="sCa-ys-jyR" secondAttribute="trailing" constant="8" id="9qW-Xt-MuV"/>
-                                            <constraint firstItem="HhC-vn-9kL" firstAttribute="centerY" secondItem="sCa-ys-jyR" secondAttribute="centerY" id="XGa-b3-oyV"/>
-                                            <constraint firstItem="sCa-ys-jyR" firstAttribute="leading" secondItem="MkX-fP-UoD" secondAttribute="leading" id="h5h-QE-Vwe"/>
-                                            <constraint firstAttribute="trailing" secondItem="HhC-vn-9kL" secondAttribute="trailing" id="qli-OH-XYC"/>
-                                            <constraint firstItem="sCa-ys-jyR" firstAttribute="top" secondItem="MkX-fP-UoD" secondAttribute="top" id="xJx-XS-TNg"/>
-                                            <constraint firstAttribute="bottom" secondItem="sCa-ys-jyR" secondAttribute="bottom" id="y2r-A2-JDj"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="3ku-yD-76O" secondAttribute="bottom" id="Bo8-eQ-bqz"/>
-                                    <constraint firstItem="MkX-fP-UoD" firstAttribute="centerY" secondItem="akJ-nQ-QzR" secondAttribute="centerY" id="GkO-S6-458"/>
-                                    <constraint firstItem="MkX-fP-UoD" firstAttribute="centerX" secondItem="akJ-nQ-QzR" secondAttribute="centerX" id="Lw5-Zi-I9k"/>
-                                    <constraint firstItem="3ku-yD-76O" firstAttribute="top" secondItem="akJ-nQ-QzR" secondAttribute="top" id="ViB-Ud-ZcY"/>
-                                    <constraint firstAttribute="trailing" secondItem="3ku-yD-76O" secondAttribute="trailing" id="sak-UU-CtZ"/>
-                                    <constraint firstItem="3ku-yD-76O" firstAttribute="leading" secondItem="akJ-nQ-QzR" secondAttribute="leading" id="wfa-GZ-tcV"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                    </scrollView>
-                    <navigationItem key="navigationItem" title="Extras" id="w0A-8d-WCf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ged-6S-MJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2270" y="1158"/>
-        </scene>
         <!--Next Meal-->
         <scene sceneID="B6f-ns-yni">
             <objects>
@@ -132,11 +51,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hrZ-dH-aLM" id="lLo-7G-neM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IwL-l2-MaX">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -247,8 +166,18 @@
             </objects>
             <point key="canvasLocation" x="1249" y="384"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nto-po-7GQ">
+            <objects>
+                <navigationController id="dSA-Kl-BhM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Plz-vp-yvN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gRs-d3-XsI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="416" y="1523"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="Lyft Logo - White" width="16" height="16"/>
-    </resources>
 </document>

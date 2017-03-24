@@ -11,10 +11,14 @@
 #import "Constants.h"
 #import "Menu.h"
 #import "MealDetailViewController.h"
+#import "NMMultiPeer.h"
+
+#import "ParseMenu.h"
 
 @interface NextThreeTableViewController ()
 
 @property NSArray<Meal *> *nextThreeMenus;
+@property NMMultipeer *localPeerManager;
 
 @end
 
@@ -56,6 +60,12 @@
     } else {
         NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
+    
+    if (!_localPeerManager) {
+        _localPeerManager = [NMMultipeer new];
+        _localPeerManager.delegate = self;
+    }
+    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
 }
 
 - (void)reloadMenuDataAndTableView {

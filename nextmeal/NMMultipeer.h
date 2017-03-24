@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ParseMenuProtocol.h"
+
 @class Menu;
 
 @interface NMMultipeer : NSObject
+
+@property id<ParseMenuProtocol> delegate;
 
 - (void)startAdvertisingAndBrowsingWithMenu:(Menu *)menu andDate:(NSDate *)date;
 - (void)stopAdvertisingAndBrowsing;

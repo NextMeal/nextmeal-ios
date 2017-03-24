@@ -12,6 +12,8 @@
 
 #import "ParseMenu.h"
 
+#import "ReadWriteLocalData.h"
+
 @interface AllMenusTableViewController ()
 
 @end
@@ -46,6 +48,13 @@
             //Update menu date in preferences
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            //Block for saving menu to disk
+            void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
+                NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
+                [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
+            };
+            saveMenu(responseMenu);
             
             [self setRefreshControlTitle];
             

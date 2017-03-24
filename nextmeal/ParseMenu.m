@@ -145,12 +145,6 @@
         [delegate getMenuOnlineResultWithMenu:outputMenu withURLResponse:menuResponse withError:menuError];
     };
     
-    //Block for saving menu to disk
-    void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
-        NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
-        [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
-    };
-    
     Menu *outputMenu = [Menu new];
     
     if (kDebug) {
@@ -162,7 +156,7 @@
         //NSData *outputMenuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
             sleep(20);
-            saveMenu(outputMenu);
+            //saveMenu(outputMenu);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 alertDelegate(outputMenu, nil, nil);
             });
@@ -248,9 +242,11 @@
                 if (allRequestsComplete) {
                     //NSLog(@"all requests complete");
                     
+                    /*
                     //If no errors, save the output menu
                     if (!requestLastError)
                         saveMenu(outputMenu);
+                     */
                     
                     //Call delegate on main thread
                     dispatch_async(dispatch_get_main_queue(), ^(void){

@@ -34,7 +34,7 @@
         self.navigationItem.prompt = [error localizedDescription];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
             sleep(5);
-            if ([self.navigationItem.prompt isEqualToString:[error localizedDescription]])
+            if ([self.navigationItem.prompt isEqual:[error localizedDescription]])
                 self.navigationItem.prompt = nil;
         });
         
@@ -55,11 +55,21 @@
         }
     }
     
-    [self.refreshControl endRefreshing];
+    [self stopRefreshingElements];
 }
 
 
 #pragma mark - Reload data and UI methods
+
+- (void)startRefreshingElements {
+    [self.refreshControl beginRefreshing];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)stopRefreshingElements {
+    [self.refreshControl endRefreshing];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
 
 - (void)setRefreshControlTitle {
     //Setup UIRefreshControl initially
@@ -97,11 +107,11 @@
     
     [self.tableView reloadData];
     
-    [ParseMenu retrieveMenusWithDelegate:self withOriginType:foreground];
+    [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
 }
 
 - (void)reloadMenuDataAndTableView {
-    [self.refreshControl beginRefreshing];
+    [self startRefreshingElements];
     [self reloadMenuData];
 }
 

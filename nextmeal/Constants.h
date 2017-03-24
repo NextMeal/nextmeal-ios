@@ -8,23 +8,39 @@
 
 #ifndef Constants_h
 
+#pragma mark - Debug constants
+
 #define kDebug NO
 #define kSampleFilename1 @"sampleMenu1.json"
 #define kSampleFilename2 @"sampleMenu2.json"
 
+
+#pragma mark - Menu display configurable options
+
 #define kNumberOfNextMealsShown 3
 #define kMaxItemsShownNextMeal 3
+
+
+#pragma mark - Saved keys and filenames
+
+#define kMenuLastUpdatedKey @"menuLastUpdated"
+#define kMenuLastSavedFilename @"menuLatest"
+
+
+#pragma mark - Connectivity constants
 
 #define kServerProtocol @"https"
 #define kServerHost @"navy.herokuapp.com"
 #define kServerMenu1Path @"/menu"
 #define kServerMenu2Path @"/menu2"
 
-#define kMenuLastUpdatedKey @"menuLastUpdated"
-#define kMenuLastSavedFilename @"menuLatest"
-
 #define kNMParseErrorDomain @"NMParseErrorDomain"
 #define kNMRetrieveSavedErrorDomain @"NMRetrieveSavedErrorDomain"
+
+#define kNMServiceType @"NMMultipeerMenu"
+
+
+#pragma mark - Menu JSON key constants
 
 #define kSundayKey @"U"
 #define kMondayKey @"M"
@@ -44,10 +60,13 @@
 #define kNoonMealTitle @"Lunch"
 #define kEveningMealTitle @"Dinner"
 
+
+#pragma mark - Type definitions
+
 typedef enum {
-    foreground,
-    background
-} RequestOriginType;
+    NMForeground,
+    NMBackground
+} NMRequestOriginType;
 
 #define Constants_h
 

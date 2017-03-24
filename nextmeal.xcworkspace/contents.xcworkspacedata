@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../Lyft-iOS-sdk-1.0.4/LyftSDK.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "container:nextmeal.xcodeproj">
    </FileRef>
 </Workspace>

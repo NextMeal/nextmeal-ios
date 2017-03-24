@@ -13,10 +13,11 @@
 #import "Menu.h"
 
 #import "ParseMenuProtocol.h"
+#import <UIKit/UIKit.h>
 
 @interface ParseMenu : NSObject
 
 + (Menu *)retrieveSavedMenusWithError:(NSError **)error;
-+ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(RequestOriginType)originType;
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(NMRequestOriginType)originType;
 
 @end

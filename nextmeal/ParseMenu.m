@@ -12,6 +12,10 @@
 
 #import "ReadWriteLocalData.h"
 
+@interface ParseMenu ()
+
+@end
+
 @implementation ParseMenu
 
 + (NSData *)readSampleLocalNumber:(NSInteger)number {
@@ -134,7 +138,7 @@
     return savedMenu;
 }
 
-+ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(RequestOriginType)originType {
++ (void)retrieveMenusWithDelegate:(id<ParseMenuProtocol>)delegate withOriginType:(NMRequestOriginType)originType {
     
     //Block for calling the delegate
     void (^alertDelegate)(Menu *, NSURLResponse *, NSError *) = ^void(Menu *outputMenu, NSURLResponse *menuResponse, NSError *menuError) {
@@ -189,11 +193,14 @@
             //Determine appropriate origin type string to put in request data.
             NSString *originTypeString;
             switch (originType) {
-                case foreground:
+                case NMForeground:
                     originTypeString = @"foreground";
                     break;
-                case background:
+                case NMBackground:
                     originTypeString = @"backgroundFetch";
+                    break;
+                default:
+                    originTypeString = [NSString stringWithFormat:@"%u",originType];
                     break;
             }
             
@@ -239,7 +246,7 @@
                 [requestCompletionArrayLock unlock];
                 
                 if (allRequestsComplete) {
-                    NSLog(@"all requests complete");
+                    //NSLog(@"all requests complete");
                     
                     //If no errors, save the output menu
                     if (!requestLastError)

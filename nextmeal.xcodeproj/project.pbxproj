@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880901E831913005CD9B9 /* BackgroundFetchMenu.m */; };
+		280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880931E8324B0005CD9B9 /* NMMultipeer.m */; };
+		280880961E835524005CD9B9 /* LyftButtonNone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280880951E835524005CD9B9 /* LyftButtonNone.xib */; };
 		285E0FAB1E7236D60092A233 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAA1E7236D60092A233 /* main.m */; };
 		285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAD1E7236D60092A233 /* AppDelegate.m */; };
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
@@ -41,6 +44,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2808808F1E831913005CD9B9 /* BackgroundFetchMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundFetchMenu.h; sourceTree = "<group>"; };
+		280880901E831913005CD9B9 /* BackgroundFetchMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundFetchMenu.m; sourceTree = "<group>"; };
+		280880921E8324B0005CD9B9 /* NMMultipeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeer.h; sourceTree = "<group>"; };
+		280880931E8324B0005CD9B9 /* NMMultipeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMMultipeer.m; sourceTree = "<group>"; };
+		280880951E835524005CD9B9 /* LyftButtonNone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LyftButtonNone.xib; sourceTree = "<group>"; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		285E0FAA1E7236D60092A233 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		285E0FAC1E7236D60092A233 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,6 +96,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2808808D1E82F5FF005CD9B9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				285E0FC61E7239E40092A233 /* AllMenusTableViewController.h */,
+				285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */,
+				289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */,
+				289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */,
+				289939851E7DBC4900E255A6 /* MealDetailViewController.h */,
+				289939861E7DBC4900E255A6 /* MealDetailViewController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2808808E1E82F614005CD9B9 /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				285E0FCC1E723A1C0092A233 /* AllMenusViewController.h */,
+				285E0FCD1E723A1C0092A233 /* AllMenusViewController.m */,
+			);
+			name = Old;
+			sourceTree = "<group>";
+		};
 		285E0F9D1E7236D60092A233 = {
 			isa = PBXGroup;
 			children = (
@@ -110,18 +140,13 @@
 				285E0FAC1E7236D60092A233 /* AppDelegate.h */,
 				285E0FAD1E7236D60092A233 /* AppDelegate.m */,
 				285E0FD21E7245960092A233 /* Constants.h */,
-				285E0FC61E7239E40092A233 /* AllMenusTableViewController.h */,
-				285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */,
-				289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */,
-				289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */,
-				285E0FCC1E723A1C0092A233 /* AllMenusViewController.h */,
-				285E0FCD1E723A1C0092A233 /* AllMenusViewController.m */,
-				289939851E7DBC4900E255A6 /* MealDetailViewController.h */,
-				289939861E7DBC4900E255A6 /* MealDetailViewController.m */,
+				2808808D1E82F5FF005CD9B9 /* View */,
 				285E0FE21E7608840092A233 /* Logic */,
 				285E0FD81E74F3100092A233 /* Model */,
+				2808808E1E82F614005CD9B9 /* Old */,
 				289997831E78B77400E87BC5 /* Assets */,
 				285E0FB51E7236D60092A233 /* Main.storyboard */,
+				280880951E835524005CD9B9 /* LyftButtonNone.xib */,
 				285E0FB81E7236D60092A233 /* Assets.xcassets */,
 				285E0FBA1E7236D60092A233 /* LaunchScreen.storyboard */,
 				285E0FBD1E7236D60092A233 /* Info.plist */,
@@ -163,6 +188,10 @@
 				289997881E78D3F500E87BC5 /* ParseMenuProtocol.h */,
 				285E0FE31E76094D0092A233 /* ParseMenu.h */,
 				285E0FE41E76094D0092A233 /* ParseMenu.m */,
+				2808808F1E831913005CD9B9 /* BackgroundFetchMenu.h */,
+				280880901E831913005CD9B9 /* BackgroundFetchMenu.m */,
+				280880921E8324B0005CD9B9 /* NMMultipeer.h */,
+				280880931E8324B0005CD9B9 /* NMMultipeer.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -210,6 +239,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 3E2UWZ76C2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -240,6 +274,7 @@
 				285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */,
 				285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */,
 				285E0FB71E7236D60092A233 /* Main.storyboard in Resources */,
+				280880961E835524005CD9B9 /* LyftButtonNone.xib in Resources */,
 				289586EF1E7780430053A408 /* sampleMenu2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,8 +295,10 @@
 				289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */,
 				285E0FDE1E74F3C70092A233 /* Day.m in Sources */,
 				285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */,
+				280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */,
 				285E0FE11E74F3CF0092A233 /* Week.m in Sources */,
 				285E0FD11E7240C90092A233 /* ReadWriteLocalData.m in Sources */,
+				280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */,
 				285E0FD71E74F30A0092A233 /* Item.m in Sources */,
 				285E0FAB1E7236D60092A233 /* main.m in Sources */,
 			);

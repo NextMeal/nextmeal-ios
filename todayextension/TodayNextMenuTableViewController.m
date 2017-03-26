@@ -9,9 +9,9 @@
 #import "TodayNextMenuTableViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
 
-#import "Menu.h"
+#import "Constants.h"
+
 #import "ReadWriteLocalData.h"
-#import "ParseMenuProtocol.h"
 #import "ParseMenu.h"
 
 @interface TodayNextMenuTableViewController () <NCWidgetProviding>
@@ -20,12 +20,165 @@
 
 @implementation TodayNextMenuTableViewController
 
+#pragma mark - ParseMenuProtocol methods
+
+//Call on main thread!
+- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+    if (error) {
+        NSLog(@"Error getting menu %@", [error localizedDescription]);
+        self.navigationItem.prompt = [error localizedDescription];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
+            sleep(5);
+            if ([self.navigationItem.prompt isEqual:[error localizedDescription]])
+                self.navigationItem.prompt = nil;
+        });
+        
+    } else {
+        Menu *responseMenu = outputMenu;
+        if (responseMenu) {
+            self.loadedMenu = responseMenu;
+            
+            //Update menu date in preferences
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            //Block for saving menu to disk
+            void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
+                NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
+                [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
+            };
+            saveMenu(responseMenu);
+            
+            [self setRefreshControlTitle];
+            
+            self.navigationItem.prompt = nil;
+            
+            [self.tableView reloadData];
+        }
+    }
+    
+    [self stopRefreshingElements];
+    
+    if (self.loadedMenu) {
+        [self findNextMenus];
+        [self.tableView reloadData];
+    }
+}
+
+#pragma mark - Reload data and UI methods
+
+- (void)startRefreshingElements {
+    [self.refreshControl beginRefreshing];
+}
+
+- (void)stopRefreshingElements {
+    [self.refreshControl endRefreshing];
+}
+
+- (void)setRefreshControlTitle {
+    //Setup UIRefreshControl initially
+    if (!self.refreshControl) {
+        self.refreshControl = [UIRefreshControl new];
+        [self.refreshControl addTarget:self action:@selector(reloadMenuDataAndTableView) forControlEvents:UIControlEventValueChanged];
+    }
+    
+    //Retrieve last updated time from preferences
+    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
+    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
+    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
+    
+    //Setup date formatter
+    NSDateFormatter *refreshControlTimeFormatter = [[NSDateFormatter alloc] init];
+    refreshControlTimeFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+    refreshControlTimeFormatter.dateFormat = @"EEEE @ HH:mm";
+    refreshControlTimeFormatter.timeZone = [NSTimeZone systemTimeZone];
+    
+    //Determine refresh control title text
+    NSString *timeString = [NSString stringWithFormat:@"Last Updated %@", menuLastUpdatedObject ? [NSString stringWithFormat:@"on %@", [refreshControlTimeFormatter stringFromDate:menuLastUpdatedObject]] : @"Never"];
+    
+    //Set refresh control title
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:timeString];
+    
+}
+
+- (void)reloadMenuData {
+    NSError *error;
+    Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
+    if (!error)
+        self.loadedMenu = savedMenu;
+    else
+        self.navigationItem.prompt = [error localizedDescription];
+    
+    [self.tableView reloadData];
+    
+    [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
+    
+    
+    if ([self.loadedMenu allWeeksValid]) {
+        [self findNextMenus];
+        [self.tableView reloadData];
+    } else {
+        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
+    }
+}
+
+- (void)reloadMenuDataAndTableView {
+    [self startRefreshingElements];
+    [self reloadMenuData];
+}
+
+#pragma mark - Table view data source. MODIFIED FROM NEXTMENUSDISPLAY CLASS
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numberOfMeals = 0;
+    return kNumberOfNextMealsShownWidget;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self mealForSection:section].items.count < kMaxItemsShownNextMealWidget + 1 ? [self mealForSection:section].items.count : kMaxItemsShownNextMealWidget + 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *simpleTableIdentifier = @"NextMenusReuseIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier forIndexPath:indexPath];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    if (indexPath.row == kMaxItemsShownNextMealWidget) {
+        cell.textLabel.text = @"View more";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    } else {
+        cell.textLabel.text = [self itemForIndexPath:indexPath].title;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.userInteractionEnabled = NO;
+    }
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"clicked");
+}
+
 #pragma mark - VC lifecycle methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
+    
+    [self setRefreshControlTitle];
+    [self reloadMenuDataAndTableView];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +193,7 @@
     // If there's no update required, use NCUpdateResultNoData
     // If there's an update, use NCUpdateResultNewData
 
+    NSLog(@"widget update");
     completionHandler(NCUpdateResultNewData);
 }
 

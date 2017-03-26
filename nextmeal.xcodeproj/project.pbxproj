@@ -27,8 +27,33 @@
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
 		289586EF1E7780430053A408 /* sampleMenu2.json in Resources */ = {isa = PBXBuildFile; fileRef = 289586EE1E7780430053A408 /* sampleMenu2.json */; };
 		289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289939861E7DBC4900E255A6 /* MealDetailViewController.m */; };
-		289997861E78B7BB00E87BC5 /* NextThreeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */; };
+		289997861E78B7BB00E87BC5 /* NextMenusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289997851E78B7BB00E87BC5 /* NextMenusTableViewController.m */; };
+		28AC00281E8580E600D2988F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AC00271E8580E600D2988F /* NotificationCenter.framework */; };
+		28AC002C1E8580E600D2988F /* TodayNextMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AC002B1E8580E600D2988F /* TodayNextMenuTableViewController.m */; };
+		28AC002F1E8580E600D2988F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28AC002D1E8580E600D2988F /* MainInterface.storyboard */; };
+		28AC00331E8580E600D2988F /* todayextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 28AC00251E8580E600D2988F /* todayextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		28B732CD1E86228E007C2442 /* ParseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE41E76094D0092A233 /* ParseMenu.m */; };
+		28B732CE1E862296007C2442 /* ReadWriteLocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */; };
+		28B732CF1E862F67007C2442 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD61E74F30A0092A233 /* Item.m */; };
+		28B732D01E862F6A007C2442 /* Meal.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDA1E74F3400092A233 /* Meal.m */; };
+		28B732D11E862F6C007C2442 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDD1E74F3C70092A233 /* Day.m */; };
+		28B732D21E862F6F007C2442 /* Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE01E74F3CF0092A233 /* Week.m */; };
+		28B732D31E862F72007C2442 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
+		28B732D61E86A1D4007C2442 /* AllMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */; };
+		28B732D91E86A43A007C2442 /* NextMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */; };
+		28B732DD1E8761DB007C2442 /* AllMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */; };
+		28B732DE1E8761DE007C2442 /* NextMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28AC00311E8580E600D2988F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 285E0F9E1E7236D60092A233 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28AC00241E8580E600D2988F;
+			remoteInfo = todayextension;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		280880891E7F5DE0005CD9B9 /* Embed Frameworks */ = {
@@ -39,6 +64,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28AC00371E8580E600D2988F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				28AC00331E8580E600D2988F /* todayextension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -80,9 +116,23 @@
 		289586EE1E7780430053A408 /* sampleMenu2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sampleMenu2.json; sourceTree = "<group>"; };
 		289939851E7DBC4900E255A6 /* MealDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealDetailViewController.h; sourceTree = "<group>"; };
 		289939861E7DBC4900E255A6 /* MealDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealDetailViewController.m; sourceTree = "<group>"; };
-		289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextThreeTableViewController.h; sourceTree = "<group>"; };
-		289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextThreeTableViewController.m; sourceTree = "<group>"; };
+		289997841E78B7BB00E87BC5 /* NextMenusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMenusTableViewController.h; sourceTree = "<group>"; };
+		289997851E78B7BB00E87BC5 /* NextMenusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMenusTableViewController.m; sourceTree = "<group>"; };
 		289997881E78D3F500E87BC5 /* ParseMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseMenuProtocol.h; sourceTree = "<group>"; };
+		28AC00251E8580E600D2988F /* todayextension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = todayextension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		28AC00271E8580E600D2988F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		28AC002A1E8580E600D2988F /* TodayNextMenuTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayNextMenuTableViewController.h; sourceTree = "<group>"; };
+		28AC002B1E8580E600D2988F /* TodayNextMenuTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayNextMenuTableViewController.m; sourceTree = "<group>"; };
+		28AC002E1E8580E600D2988F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		28AC00301E8580E600D2988F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28B732CB1E8618C7007C2442 /* todayextension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = todayextension.entitlements; sourceTree = "<group>"; };
+		28B732CC1E861919007C2442 /* nextmeal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nextmeal.entitlements; sourceTree = "<group>"; };
+		28B732D41E86A1D4007C2442 /* AllMenusDisplayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMenusDisplayTableViewController.h; sourceTree = "<group>"; };
+		28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllMenusDisplayTableViewController.m; sourceTree = "<group>"; };
+		28B732D71E86A439007C2442 /* NextMenusDisplayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMenusDisplayTableViewController.h; sourceTree = "<group>"; };
+		28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMenusDisplayTableViewController.m; sourceTree = "<group>"; };
+		28B732DA1E86A72E007C2442 /* NextMenusDisplayTableViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMenusDisplayTableViewControllerSubclass.h; sourceTree = "<group>"; };
+		28B732DB1E86AA6D007C2442 /* AllMenusDisplayTableViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMenusDisplayTableViewControllerSubclass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,16 +143,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28AC00221E8580E600D2988F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AC00281E8580E600D2988F /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		2808808D1E82F5FF005CD9B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28B732DB1E86AA6D007C2442 /* AllMenusDisplayTableViewControllerSubclass.h */,
+				28B732D41E86A1D4007C2442 /* AllMenusDisplayTableViewController.h */,
+				28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */,
 				285E0FC61E7239E40092A233 /* AllMenusTableViewController.h */,
 				285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */,
-				289997841E78B7BB00E87BC5 /* NextThreeTableViewController.h */,
-				289997851E78B7BB00E87BC5 /* NextThreeTableViewController.m */,
+				28B732DA1E86A72E007C2442 /* NextMenusDisplayTableViewControllerSubclass.h */,
+				28B732D71E86A439007C2442 /* NextMenusDisplayTableViewController.h */,
+				28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */,
+				289997841E78B7BB00E87BC5 /* NextMenusTableViewController.h */,
+				289997851E78B7BB00E87BC5 /* NextMenusTableViewController.m */,
 				289939851E7DBC4900E255A6 /* MealDetailViewController.h */,
 				289939861E7DBC4900E255A6 /* MealDetailViewController.m */,
 			);
@@ -122,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				285E0FA81E7236D60092A233 /* nextmeal */,
+				28AC00291E8580E600D2988F /* todayextension */,
+				28AC00261E8580E600D2988F /* Frameworks */,
 				285E0FA71E7236D60092A233 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				285E0FA61E7236D60092A233 /* nextmeal.app */,
+				28AC00251E8580E600D2988F /* todayextension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +204,7 @@
 		285E0FA81E7236D60092A233 /* nextmeal */ = {
 			isa = PBXGroup;
 			children = (
+				28B732CC1E861919007C2442 /* nextmeal.entitlements */,
 				285E0FAC1E7236D60092A233 /* AppDelegate.h */,
 				285E0FAD1E7236D60092A233 /* AppDelegate.m */,
 				285E0FD21E7245960092A233 /* Constants.h */,
@@ -205,6 +273,26 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		28AC00261E8580E600D2988F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28AC00271E8580E600D2988F /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		28AC00291E8580E600D2988F /* todayextension */ = {
+			isa = PBXGroup;
+			children = (
+				28B732CB1E8618C7007C2442 /* todayextension.entitlements */,
+				28AC002A1E8580E600D2988F /* TodayNextMenuTableViewController.h */,
+				28AC002B1E8580E600D2988F /* TodayNextMenuTableViewController.m */,
+				28AC002D1E8580E600D2988F /* MainInterface.storyboard */,
+				28AC00301E8580E600D2988F /* Info.plist */,
+			);
+			path = todayextension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,15 +304,34 @@
 				285E0FA31E7236D60092A233 /* Frameworks */,
 				285E0FA41E7236D60092A233 /* Resources */,
 				280880891E7F5DE0005CD9B9 /* Embed Frameworks */,
+				28AC00371E8580E600D2988F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				28AC00321E8580E600D2988F /* PBXTargetDependency */,
 			);
 			name = nextmeal;
 			productName = nextmeal;
 			productReference = 285E0FA61E7236D60092A233 /* nextmeal.app */;
 			productType = "com.apple.product-type.application";
+		};
+		28AC00241E8580E600D2988F /* todayextension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28AC00361E8580E600D2988F /* Build configuration list for PBXNativeTarget "todayextension" */;
+			buildPhases = (
+				28AC00211E8580E600D2988F /* Sources */,
+				28AC00221E8580E600D2988F /* Frameworks */,
+				28AC00231E8580E600D2988F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = todayextension;
+			productName = todayextension;
+			productReference = 28AC00251E8580E600D2988F /* todayextension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -240,7 +347,20 @@
 						DevelopmentTeam = 3E2UWZ76C2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					28AC00241E8580E600D2988F = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3E2UWZ76C2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
 						};
@@ -261,6 +381,7 @@
 			projectRoot = "";
 			targets = (
 				285E0FA51E7236D60092A233 /* nextmeal */,
+				28AC00241E8580E600D2988F /* todayextension */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +400,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28AC00231E8580E600D2988F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AC002F1E8580E600D2988F /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -291,7 +420,7 @@
 				289586ED1E777C990053A408 /* Menu.m in Sources */,
 				285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */,
 				285E0FCE1E723A1C0092A233 /* AllMenusViewController.m in Sources */,
-				289997861E78B7BB00E87BC5 /* NextThreeTableViewController.m in Sources */,
+				289997861E78B7BB00E87BC5 /* NextMenusTableViewController.m in Sources */,
 				289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */,
 				285E0FDE1E74F3C70092A233 /* Day.m in Sources */,
 				285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */,
@@ -299,12 +428,39 @@
 				285E0FE11E74F3CF0092A233 /* Week.m in Sources */,
 				285E0FD11E7240C90092A233 /* ReadWriteLocalData.m in Sources */,
 				280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */,
+				28B732D91E86A43A007C2442 /* NextMenusDisplayTableViewController.m in Sources */,
+				28B732D61E86A1D4007C2442 /* AllMenusDisplayTableViewController.m in Sources */,
 				285E0FD71E74F30A0092A233 /* Item.m in Sources */,
 				285E0FAB1E7236D60092A233 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28AC00211E8580E600D2988F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28B732D11E862F6C007C2442 /* Day.m in Sources */,
+				28B732DD1E8761DB007C2442 /* AllMenusDisplayTableViewController.m in Sources */,
+				28B732D01E862F6A007C2442 /* Meal.m in Sources */,
+				28B732CF1E862F67007C2442 /* Item.m in Sources */,
+				28B732DE1E8761DE007C2442 /* NextMenusDisplayTableViewController.m in Sources */,
+				28B732CE1E862296007C2442 /* ReadWriteLocalData.m in Sources */,
+				28B732CD1E86228E007C2442 /* ParseMenu.m in Sources */,
+				28AC002C1E8580E600D2988F /* TodayNextMenuTableViewController.m in Sources */,
+				28B732D31E862F72007C2442 /* Menu.m in Sources */,
+				28B732D21E862F6F007C2442 /* Week.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		28AC00321E8580E600D2988F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28AC00241E8580E600D2988F /* todayextension */;
+			targetProxy = 28AC00311E8580E600D2988F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		285E0FB51E7236D60092A233 /* Main.storyboard */ = {
@@ -321,6 +477,14 @@
 				285E0FBB1E7236D60092A233 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		28AC002D1E8580E600D2988F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28AC002E1E8580E600D2988F /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -422,10 +586,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -434,11 +599,40 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		28AC00341E8580E600D2988F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = todayextension/todayextension.entitlements;
+				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				INFOPLIST_FILE = todayextension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		28AC00351E8580E600D2988F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = todayextension/todayextension.entitlements;
+				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				INFOPLIST_FILE = todayextension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -459,6 +653,15 @@
 			buildConfigurations = (
 				285E0FC11E7236D60092A233 /* Debug */,
 				285E0FC21E7236D60092A233 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28AC00361E8580E600D2988F /* Build configuration list for PBXNativeTarget "todayextension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28AC00341E8580E600D2988F /* Debug */,
+				28AC00351E8580E600D2988F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

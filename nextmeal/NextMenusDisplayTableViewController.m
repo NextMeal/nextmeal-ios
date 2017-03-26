@@ -1,45 +1,27 @@
 //
-//  NextThreeTableViewController.m
+//  NextMenusDisplayTableViewController.m
 //  nextmeal
 //
-//  Created by Anson Liu on 3/14/17.
+//  Created by Anson Liu on 3/25/17.
 //  Copyright © 2017 Anson Liu. All rights reserved.
 //
 
-#import "NextThreeTableViewController.h"
+#import "NextMenusDisplayTableViewController.h"
+#import "NextMenusDisplayTableViewControllerSubclass.h"
 
 #import "Constants.h"
 #import "Menu.h"
-#import "MealDetailViewController.h"
-#import "NMMultiPeer.h"
 
-#import "ParseMenu.h"
-
-@interface NextThreeTableViewController ()
-
-@property NSArray<Meal *> *nextThreeMenus;
-@property NMMultipeer *localPeerManager;
+@interface NextMenusDisplayTableViewController ()
 
 @end
 
-@implementation NextThreeTableViewController
+@implementation NextMenusDisplayTableViewController
 
-#pragma mark - ParseMenuProtocol methods
-
-//Call on main thread!
-- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
-    [super getMenuOnlineResultWithMenu:outputMenu withURLResponse:response withError:error];
-    
-    if (self.loadedMenu) {
-        [self findNextThreeMenus];
-        [self.tableView reloadData];
-    }
-}
-
-#pragma mark - Reload data and UI methods
+#pragma mark - Logic methods
 
 //Make sure valid menu is loaded when calling.
-- (void)findNextThreeMenus {
+- (void)findNextMenus {
     NSInteger weekIndex = 0;
     NSInteger dayIndex = 0;
     NSInteger mealIndex = 0;
@@ -48,31 +30,8 @@
     
     //Only load the next three meal indexes into an array if the menu has been loaded. On initial run there will be no menu.
     if (self.loadedMenu)
-        _nextThreeMenus = [self nextNthMealsN:kNumberOfNextMealsShown previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
+        _nextMenus = [self nextNthMealsN:kNumberOfNextMealsShown previousNextMeals:[NSArray<Meal *> new] weekIndex:weekIndex dayIndex:dayIndex mealIndex:mealIndex];
 }
-
-- (void)reloadMenuData {
-    [super reloadMenuData];
-    
-    if ([self.loadedMenu allWeeksValid]) {
-        [self findNextThreeMenus];
-        [self.tableView reloadData];
-    } else {
-        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
-    }
-    
-    if (!_localPeerManager) {
-        _localPeerManager = [NMMultipeer new];
-        _localPeerManager.delegate = self;
-    }
-    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
-}
-
-- (void)reloadMenuDataAndTableView {
-    [super reloadMenuDataAndTableView];
-}
-
-#pragma mark - Logic methods
 
 //Finds the week/day/meal index of the immediate next meal depending on device time.
 - (void)nextMealWeekIndex:(NSInteger *)weekIndex dayIndex:(NSInteger *)dayIndex mealIndex:(NSInteger *)mealIndex {
@@ -86,7 +45,7 @@
     //Determine which index of day is today. If next meal is tomorrow, we handle it further below.
     *dayIndex = daysSinceStartOfWeek;
     
-
+    
     //Calculate seconds since previous midnight.
     NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *dateComps = [gregorianCal components: (NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:[NSDate date]];
@@ -141,7 +100,7 @@
 }
 
 - (Meal *)mealForSection:(NSInteger)section {
-    return [_nextThreeMenus objectAtIndex:section];
+    return [_nextMenus objectAtIndex:section];
 }
 
 //Same as parent class method
@@ -172,7 +131,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"NextThreeReuseIdentifier";
+    static NSString *simpleTableIdentifier = @"NextMenusReuseIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier forIndexPath:indexPath];
     
@@ -243,20 +202,6 @@
     NSString *sectionHeaderTitle = [NSString stringWithFormat:@"%@ %@", [allMenuSectionHeaderDateFormatter stringFromDate:sectionDate], mealTitle];
     
     return sectionHeaderTitle;
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"MealDetailSegue" sender:self];
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MealDetailViewController *mealDetailVC = [segue destinationViewController];
-    mealDetailVC.mealDateAndTitle = [self tableView:self.tableView titleForHeaderInSection:self.tableView.indexPathForSelectedRow.section];
-    mealDetailVC.loadedMeal = [_nextThreeMenus objectAtIndex:self.tableView.indexPathForSelectedRow.section];
 }
 
 #pragma mark - VC lifecycle methods

@@ -20,6 +20,9 @@
 #define kNumberOfNextMealsShown 3
 #define kMaxItemsShownNextMeal 3
 
+#define kNumberOfNextMealsShownWidget 1
+#define kMaxItemsShownNextMealWidget 3
+
 
 #pragma mark - Saved keys and filenames
 

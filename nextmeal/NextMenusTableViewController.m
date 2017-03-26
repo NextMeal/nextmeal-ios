@@ -1,35 +1,32 @@
 //
-//  AllMenusTableViewController.m
+//  NextMenusTableViewController.m
 //  nextmeal
 //
-//  Created by Anson Liu on 3/9/17.
+//  Created by Anson Liu on 3/14/17.
 //  Copyright © 2017 Anson Liu. All rights reserved.
 //
 
-#import "AllMenusTableViewController.h"
+#import "NextMenusTableViewController.h"
 
 #import "Constants.h"
+#import "Menu.h"
+#import "MealDetailViewController.h"
+#import "NMMultiPeer.h"
+#import "ReadWriteLocalData.h"
 
 #import "ParseMenu.h"
 
-#import "ReadWriteLocalData.h"
+@interface NextMenusTableViewController ()
 
-@interface AllMenusTableViewController ()
+@property NMMultipeer *localPeerManager;
 
 @end
 
-@implementation AllMenusTableViewController
-
-- (instancetype)init {
-    self = [super init];
-    if (!self)
-        return nil;
-
-    return self;
-}
+@implementation NextMenusTableViewController
 
 #pragma mark - ParseMenuProtocol methods
 
+//Call on main thread!
 - (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
     if (error) {
         NSLog(@"Error getting menu %@", [error localizedDescription]);
@@ -65,8 +62,12 @@
     }
     
     [self stopRefreshingElements];
+    
+    if (self.loadedMenu) {
+        [self findNextMenus];
+        [self.tableView reloadData];
+    }
 }
-
 
 #pragma mark - Reload data and UI methods
 
@@ -103,7 +104,7 @@
     
     //Set refresh control title
     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:timeString];
-
+    
 }
 
 - (void)reloadMenuData {
@@ -117,11 +118,39 @@
     [self.tableView reloadData];
     
     [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
+    
+    
+    if ([self.loadedMenu allWeeksValid]) {
+        [self findNextMenus];
+        [self.tableView reloadData];
+    } else {
+        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
+    }
+    
+    if (!_localPeerManager) {
+        _localPeerManager = [NMMultipeer new];
+        _localPeerManager.delegate = self;
+    }
+    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
 }
 
 - (void)reloadMenuDataAndTableView {
     [self startRefreshingElements];
     [self reloadMenuData];
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"MealDetailSegue" sender:self];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MealDetailViewController *mealDetailVC = [segue destinationViewController];
+    mealDetailVC.mealDateAndTitle = [self tableView:self.tableView titleForHeaderInSection:self.tableView.indexPathForSelectedRow.section];
+    mealDetailVC.loadedMeal = [self.nextMenus objectAtIndex:self.tableView.indexPathForSelectedRow.section];
 }
 
 #pragma mark - VC lifecycle methods

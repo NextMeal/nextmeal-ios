@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>todayextension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>285E0FA51E7236D60092A233</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28AC00241E8580E600D2988F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

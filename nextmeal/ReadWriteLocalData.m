@@ -10,7 +10,13 @@
 
 @implementation ReadWriteLocalData
 
-+ (NSURL *)documentsPath {
++ (NSURL *)groupDocumentsPath {
+    NSURL *groupContainerURL = [[NSFileManager defaultManager]
+                                containerURLForSecurityApplicationGroupIdentifier:@"group.com.apparentetch.nextmeal"];
+    return  groupContainerURL;
+}
+
++ (NSURL *)localDocumentsPath {
      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
      NSString *documentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
      return [NSURL URLWithString:documentsDirectory];
@@ -23,7 +29,7 @@
     }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *documentsPath = [[self documentsPath] path];
+    NSString *documentsPath = [[self groupDocumentsPath] path];
     NSString *filepath = [documentsPath stringByAppendingPathComponent:filename];
     
     return [fileManager fileExistsAtPath:filepath];
@@ -47,7 +53,7 @@
         return nil;
     }
     
-    NSString *documentsPath = [[self documentsPath] path];
+    NSString *documentsPath = [[self groupDocumentsPath] path];
     NSString *filepath = [documentsPath stringByAppendingPathComponent:filename];
     
     return [[NSData alloc] initWithContentsOfFile:filepath];
@@ -59,7 +65,7 @@
         return NO;
     }
     
-    NSString *documentsPath = [[self documentsPath] path];
+    NSString *documentsPath = [[self groupDocumentsPath] path];
     NSString *filepath = [documentsPath stringByAppendingPathComponent:filename];
     
     return [data writeToFile:filepath atomically:YES];
@@ -71,7 +77,7 @@
         return NO;
     }
     
-    NSString *documentsPath = [[self documentsPath] path];
+    NSString *documentsPath = [[self groupDocumentsPath] path];
     NSString *filepath = [documentsPath stringByAppendingPathComponent:filename];
     
     return [[NSFileManager defaultManager] removeItemAtPath:filepath error:error];

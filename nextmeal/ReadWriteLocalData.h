@@ -10,7 +10,6 @@
 
 @interface ReadWriteLocalData : NSObject
 
-+ (NSURL *)documentsPath;
 + (BOOL)doesFileExist:(NSString *)filename;
 + (NSData *)readFileFromBundle:(NSString *)filename;
 + (NSData *)readFile:(NSString *)filename;

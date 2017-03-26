@@ -6,15 +6,12 @@
 //  Copyright © 2017 Anson Liu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-#import "ParseMenuProtocol.h"
+#import "AllMenusDisplayTableViewController.h"
+#import "AllMenusDisplayTableViewControllerSubclass.h"
 
 #import "Menu.h"
 
-@interface AllMenusTableViewController : UITableViewController <ParseMenuProtocol>
-
-@property (nonatomic, copy, readwrite) Menu *loadedMenu;
+@interface AllMenusTableViewController : AllMenusDisplayTableViewController
 
 - (void)reloadMenuData;
 - (void)reloadMenuDataAndTableView;

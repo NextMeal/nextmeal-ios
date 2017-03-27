@@ -589,6 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -602,6 +603,7 @@
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				INFOPLIST_FILE = nextmeal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";

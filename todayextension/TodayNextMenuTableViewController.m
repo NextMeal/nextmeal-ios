@@ -16,6 +16,8 @@
 
 @interface TodayNextMenuTableViewController () <NCWidgetProviding>
 
+@property void (^widgetPerformUpdateCompletionHandler)(NCUpdateResult);
+
 @end
 
 @implementation TodayNextMenuTableViewController
@@ -24,6 +26,8 @@
 
 //Call on main thread!
 - (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+    NCUpdateResult updateResult = NCUpdateResultNoData;
+    
     if (error) {
         NSLog(@"Error getting menu %@", [error localizedDescription]);
         self.navigationItem.prompt = [error localizedDescription];
@@ -32,7 +36,7 @@
             if ([self.navigationItem.prompt isEqual:[error localizedDescription]])
                 self.navigationItem.prompt = nil;
         });
-        
+        updateResult = NCUpdateResultFailed;
     } else {
         Menu *responseMenu = outputMenu;
         if (responseMenu) {
@@ -54,6 +58,8 @@
             self.navigationItem.prompt = nil;
             
             [self.tableView reloadData];
+            
+            updateResult = NCUpdateResultNewData;
         }
     }
     
@@ -63,6 +69,19 @@
         [self findNextMenus];
         [self.tableView reloadData];
     }
+    
+    [self computePreferredSize];
+    
+    if (_widgetPerformUpdateCompletionHandler != nil) {
+        _widgetPerformUpdateCompletionHandler(updateResult);
+        _widgetPerformUpdateCompletionHandler = nil;
+    }
+}
+
+#pragma mark - UI methods CUSTOM
+
+- (void)computePreferredSize {
+    self.preferredContentSize = CGSizeMake(0, [self.tableView numberOfRowsInSection:0] * self.tableView.rowHeight);
 }
 
 #pragma mark - Reload data and UI methods
@@ -120,6 +139,8 @@
     } else {
         NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
+    
+    [self computePreferredSize];
 }
 
 - (void)reloadMenuDataAndTableView {
@@ -130,7 +151,6 @@
 #pragma mark - Table view data source. MODIFIED FROM NEXTMENUSDISPLAY CLASS
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger numberOfMeals = 0;
     return kNumberOfNextMealsShownWidget;
 }
 
@@ -154,7 +174,6 @@
     } else {
         cell.textLabel.text = [self itemForIndexPath:indexPath].title;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.userInteractionEnabled = NO;
     }
     return cell;
 }
@@ -177,8 +196,6 @@
     
     [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,14 +204,9 @@
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-    // Perform any setup necessary in order to update the view.
-    
-    // If an error is encountered, use NCUpdateResultFailed
-    // If there's no update required, use NCUpdateResultNoData
-    // If there's an update, use NCUpdateResultNewData
-
-    NSLog(@"widget update");
-    completionHandler(NCUpdateResultNewData);
+    //Save completion handler to call when update is done. This is sort of a one off class, so we will not deal with passing it as a parameter.
+    _widgetPerformUpdateCompletionHandler = completionHandler;
+    [self reloadMenuDataAndTableView];
 }
 
 @end

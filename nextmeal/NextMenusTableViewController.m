@@ -67,6 +67,12 @@
         [self findNextMenus];
         [self.tableView reloadData];
     }
+    
+    if (!_localPeerManager) {
+        _localPeerManager = [NMMultipeer new];
+        _localPeerManager.delegate = self;
+    }
+    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
 }
 
 #pragma mark - Reload data and UI methods

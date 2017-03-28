@@ -81,7 +81,8 @@
 #pragma mark - UI methods CUSTOM
 
 - (void)computePreferredSize {
-    self.preferredContentSize = CGSizeMake(0, [self.tableView numberOfRowsInSection:0] * self.tableView.rowHeight);
+    self.preferredContentSize = CGSizeMake(0, [self.tableView numberOfRowsInSection:0] * 28);
+    NSLog(@"preferred content size %@", NSStringFromCGSize(self.preferredContentSize));
 }
 
 #pragma mark - Reload data and UI methods
@@ -173,8 +174,15 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     } else {
         cell.textLabel.text = [self itemForIndexPath:indexPath].title;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    //Detect if < iOS 10, color text white
+    if (![self.extensionContext respondsToSelector:@selector(setWidgetLargestAvailableDisplayMode:)]) {
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    
     return cell;
 }
 
@@ -186,13 +194,23 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"clicked");
+    
+    if (indexPath.row == [tableView numberOfRowsInSection:0] - 1) {
+        //NSString *testURL = @"nextmeal://";
+        NSString *targetURL = @"nextmeal://?origin=today";
+        //NSString *fallbackURL = @"https://nextmeal.tk";
+        [self.extensionContext openURL:[NSURL URLWithString:targetURL] completionHandler:nil];
+    }
 }
 
 #pragma mark - VC lifecycle methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([self.extensionContext respondsToSelector:@selector(setWidgetLargestAvailableDisplayMode:)]) {
+        self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeCompact;
+    }
     
     [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];

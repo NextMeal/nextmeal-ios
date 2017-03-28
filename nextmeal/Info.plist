@@ -44,6 +44,7 @@
 		<string>uberauth</string>
 		<string>uber</string>
 		<string>lyft</string>
+		<string>shipmate</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

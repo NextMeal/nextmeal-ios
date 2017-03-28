@@ -14,6 +14,21 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>watchapp (Complication).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>watchapp (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>watchapp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -23,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>28AC00241E8580E600D2988F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28F937531E8A089000D98267</key>
 		<dict>
 			<key>primary</key>
 			<true/>

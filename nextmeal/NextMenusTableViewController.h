@@ -10,6 +10,8 @@
 #import "NextMenusDisplayTableViewController.h"
 #import "NextMenusDisplayTableViewControllerSubclass.h"
 
-@interface NextMenusTableViewController : NextMenusDisplayTableViewController
+@import WatchConnectivity;
+
+@interface NextMenusTableViewController : NextMenusDisplayTableViewController <WCSessionDelegate>
 
 @end

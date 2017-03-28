@@ -8,6 +8,7 @@
 
 #ifndef Constants_h
 
+
 #pragma mark - Debug constants
 
 #define kDebug NO
@@ -15,10 +16,15 @@
 #define kSampleFilename2 @"sampleMenu2.json"
 
 
+#pragma mark - Settings bundle keys
+
+#define kSettingsP2PKey @"p2p_preference"
+
+
 #pragma mark - Menu display configurable options
 
 #define kNumberOfNextMealsShown 3
-#define kMaxItemsShownNextMeal 3
+#define kMaxItemsShownNextMeal 5
 
 #define kNumberOfNextMealsShownWidget 1
 #define kMaxItemsShownNextMealWidget 3
@@ -64,6 +70,12 @@
 #define kNoonMealTitle @"Lunch"
 #define kEveningMealTitle @"Dinner"
 
+
+#pragma mark - Watchkit key constants
+
+#define kNextMealKey @"nextMeal"
+#define kCachedMealKey @"cachedMeal"
+#define kItemTitleKey @"itemTitle"
 
 #pragma mark - Type definitions
 

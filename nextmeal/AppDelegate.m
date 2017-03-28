@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+#import "Constants.h"
 #import "BackgroundFetchMenu.h"
 
 @interface AppDelegate ()
@@ -22,10 +23,22 @@
     [[BackgroundFetchMenu new] retrieveMenusWithBackgroundFetchCompletionHandler:completionHandler];
 }
 
+#pragma mark - URL open
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    
+    return YES;
+}
+
 #pragma mark - Application lifecycle methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    //Set settings bundle defaults
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES]}];
     return YES;
 }
 

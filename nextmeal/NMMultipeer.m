@@ -104,6 +104,9 @@
                 [session sendData:[NSKeyedArchiver archivedDataWithRootObject:_localMenu] toPeers:@[peerID] withMode:MCSessionSendDataReliable error:&error];
                 if (error)
                     NSLog(@"Send data to peer %@ had error. %@", peerID.displayName, error.localizedDescription);
+                
+                //Disconnect when transfer done
+                [session disconnect];
             }
             break;
             
@@ -148,11 +151,13 @@
     
     NSLog(@"Time interval since remote peer date is %f", [_localMenuUpdateDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:[[info objectForKey:kNMDiscoveryInfoMenuUpdateDate] doubleValue]]]);
     
+    /*
     //If we are already connected to this peer, do not invite them to a session.
     if ([[_activePeerUpdateDates allKeys] containsObject:peerID]) {
         NSLog(@"We are already in a session with %@. Not inviting to a session.", peerID.displayName);
         return;
     }
+     */
     
     //If local menu date or data is nil and remote peer's discovery date is over X seconds ahead of us, invite them to a session.
     NSDate *remotePeerUpdateDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:kNMDiscoveryInfoMenuUpdateDate] doubleValue]];
@@ -165,7 +170,7 @@
         //Create session and invite peer
         MCSession *sharingSession = [[MCSession alloc] initWithPeer:_localPeerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
         sharingSession.delegate = self;
-        [browser invitePeer:peerID toSession:sharingSession withContext:nil timeout:10];
+        [browser invitePeer:peerID toSession:sharingSession withContext:nil timeout:30];
     }
 }
 

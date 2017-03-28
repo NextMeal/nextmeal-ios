@@ -24,6 +24,64 @@
 
 @implementation NextMenusTableViewController
 
+#pragma mark - WCSession methods
+
+- (void)sendMealToWatch:(Meal *)targetMeal {
+    if ([[WCSession defaultSession] isPaired]) {
+        NSError *sessionError;
+        NSData *mealData = [NSKeyedArchiver archivedDataWithRootObject:targetMeal];
+        [[WCSession defaultSession] updateApplicationContext:@{kNextMealKey : mealData} error:&sessionError];
+        //NSLog(@"length %lu", (unsigned long)[NSKeyedArchiver archivedDataWithRootObject:targetMeal].length);
+        //[[WCSession defaultSession] updateApplicationContext:@{kNextMealKey : @"test text"} error:&sessionError];
+        if (sessionError) {
+            NSLog(@"Error updating app context to WCSession %@", sessionError.localizedDescription);
+        }
+    }
+}
+
+- (void)setupWatchConnection {
+    //Initialize WCSession
+    if ([WCSession isSupported]) {
+        WCSession *watchSession = [WCSession defaultSession];
+        watchSession.delegate = self;
+        [watchSession activateSession];
+    }
+}
+
+#pragma mark - WCSession Delegate
+
+- (void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error {
+    if (error) {
+        NSLog(@"Error activating session %@", error.localizedDescription);
+    }
+}
+
+- (void)sessionDidDeactivate:(WCSession *)session {
+    NSLog(@"session deactivate");
+}
+
+- (void)sessionDidBecomeInactive:(WCSession *)session {
+    NSLog(@"session inactive");
+    
+}
+
+#pragma mark - P2P methods
+
+- (void)startAndUpdateLocalPeerManager {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsP2PKey] == YES) {
+        if (!_localPeerManager) {
+            _localPeerManager = [NMMultipeer new];
+            _localPeerManager.delegate = self;
+        }
+        [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
+    } else {
+        if (_localPeerManager) {
+            [_localPeerManager stopAdvertisingAndBrowsing];
+            _localPeerManager = nil;
+        }
+    }
+}
+
 #pragma mark - ParseMenuProtocol methods
 
 //Call on main thread!
@@ -66,13 +124,14 @@
     if (self.loadedMenu) {
         [self findNextMenus];
         [self.tableView reloadData];
+        
+        //Send the next meal to the watch
+        [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
+    } else {
+        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
     
-    if (!_localPeerManager) {
-        _localPeerManager = [NMMultipeer new];
-        _localPeerManager.delegate = self;
-    }
-    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
+    [self startAndUpdateLocalPeerManager];
 }
 
 #pragma mark - Reload data and UI methods
@@ -129,15 +188,14 @@
     if ([self.loadedMenu allWeeksValid]) {
         [self findNextMenus];
         [self.tableView reloadData];
+        
+        //Send the next meal to the watch
+        [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
     } else {
         NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
     
-    if (!_localPeerManager) {
-        _localPeerManager = [NMMultipeer new];
-        _localPeerManager.delegate = self;
-    }
-    [_localPeerManager startAdvertisingAndBrowsingWithMenu:self.loadedMenu andDate:[[NSUserDefaults standardUserDefaults] objectForKey:kMenuLastUpdatedKey]];
+    [self startAndUpdateLocalPeerManager];
 }
 
 - (void)reloadMenuDataAndTableView {
@@ -161,8 +219,14 @@
 
 #pragma mark - VC lifecycle methods
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupWatchConnection];
     
     [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];

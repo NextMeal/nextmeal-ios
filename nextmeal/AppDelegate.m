@@ -38,7 +38,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //Set settings bundle defaults
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES]}];
+    //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeachTotal : @0}];
+    
+    
     return YES;
 }
 

@@ -9,6 +9,7 @@ Initial Development & Media: Michael Madrid, Anson Liu, Awad Mohammed, Bobby Nef
 Get the menu on the computer at https://NextMeal.tk.
 
 Follow at facebook.com/nextmealapp.
+Email us at nextmealapp@gmail.com.
 
 Next Meal is open source. iOS, server, and accessory code is made available under MIT License (attribution required) at (https://github.com/NextMeal)
 

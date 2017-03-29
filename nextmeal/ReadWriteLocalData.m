@@ -19,7 +19,7 @@
 + (NSURL *)localDocumentsPath {
      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
      NSString *documentsDirectory = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-     return [NSURL URLWithString:documentsDirectory];
+    return documentsDirectory ? [NSURL URLWithString:documentsDirectory] : nil;
 }
 
 + (BOOL)doesFileExist:(NSString *)filename {

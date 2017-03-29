@@ -8,6 +8,8 @@
 
 #import "ExtrasViewController.h"
 
+#import "Constants.h"
+
 @interface ExtrasViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
@@ -60,7 +62,20 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    //[self viewWillAppear:animated];
+    [super viewWillAppear:animated];
+    
+    NSError *error;
+    NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
+    
+    NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
+    NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
+    double ratio = (double)seedCount / leachCount;
+    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics (Experimental):\nSeeds: %ld\nLeachs: %ld\nS/L Ratio: %f%@", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @"...to be seen!" : @""];
+    
+    NSString *aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", error ? error.localizedDescription : aboutText, statisticsText];
+    
+    _aboutTextView.text = aboutAndStatsText;
+    
     [_aboutTextView scrollRangeToVisible:NSMakeRange(0, 0)];
     [_taxiTextView scrollRangeToVisible:NSMakeRange(0, 0)];
 }
@@ -74,10 +89,6 @@
     _versionLabel.text = [NSString stringWithFormat:@"v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     
     NSError *error;
-    NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
-    _aboutTextView.text = error ? error.localizedDescription : aboutText;
-    
-    error = nil;
     NSString *taxiText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"taxi" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
     _taxiTextView.text = error ? error.localizedDescription : taxiText;
 }

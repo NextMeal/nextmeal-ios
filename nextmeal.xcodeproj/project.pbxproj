@@ -16,7 +16,6 @@
 		285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
 		285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FBA1E7236D60092A233 /* LaunchScreen.storyboard */; };
 		285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FC71E7239E40092A233 /* AllMenusTableViewController.m */; };
-		285E0FCE1E723A1C0092A233 /* AllMenusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FCD1E723A1C0092A233 /* AllMenusViewController.m */; };
 		285E0FD11E7240C90092A233 /* ReadWriteLocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */; };
 		285E0FD41E72464B0092A233 /* sampleMenu1.json in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FD31E72464B0092A233 /* sampleMenu1.json */; };
 		285E0FD71E74F30A0092A233 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD61E74F30A0092A233 /* Item.m */; };
@@ -60,13 +59,8 @@
 		28F937741E8A089000D98267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F937731E8A089000D98267 /* Assets.xcassets */; };
 		28F937781E8A089000D98267 /* watchapp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 28F937541E8A089000D98267 /* watchapp.app */; };
 		28F937861E8A0F0C00D98267 /* ItemRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F937851E8A0F0C00D98267 /* ItemRow.m */; };
-		28F937871E8A10B300D98267 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
-		28F937881E8A10B600D98267 /* Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE01E74F3CF0092A233 /* Week.m */; };
-		28F937891E8A10B900D98267 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDD1E74F3C70092A233 /* Day.m */; };
 		28F9378A1E8A10BC00D98267 /* Meal.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDA1E74F3400092A233 /* Meal.m */; };
 		28F9378B1E8A10BE00D98267 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD61E74F30A0092A233 /* Item.m */; };
-		28F9378C1E8A10C700D98267 /* ReadWriteLocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */; };
-		28F9378D1E8A10CC00D98267 /* ParseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE41E76094D0092A233 /* ParseMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -634,7 +628,6 @@
 				285E0FE51E76094D0092A233 /* ParseMenu.m in Sources */,
 				289586ED1E777C990053A408 /* Menu.m in Sources */,
 				285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */,
-				285E0FCE1E723A1C0092A233 /* AllMenusViewController.m in Sources */,
 				289997861E78B7BB00E87BC5 /* NextMenusTableViewController.m in Sources */,
 				289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */,
 				285E0FDE1E74F3C70092A233 /* Day.m in Sources */,
@@ -676,15 +669,10 @@
 				280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */,
 				28F9376C1E8A089000D98267 /* ExtensionDelegate.m in Sources */,
 				28F937721E8A089000D98267 /* ComplicationController.m in Sources */,
-				28F9378C1E8A10C700D98267 /* ReadWriteLocalData.m in Sources */,
-				28F937871E8A10B300D98267 /* Menu.m in Sources */,
 				28F937861E8A0F0C00D98267 /* ItemRow.m in Sources */,
 				28F9376F1E8A089000D98267 /* NotificationController.m in Sources */,
-				28F937891E8A10B900D98267 /* Day.m in Sources */,
 				286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */,
 				28F9378A1E8A10BC00D98267 /* Meal.m in Sources */,
-				28F9378D1E8A10CC00D98267 /* ParseMenu.m in Sources */,
-				28F937881E8A10B600D98267 /* Week.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

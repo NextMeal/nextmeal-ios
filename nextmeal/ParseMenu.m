@@ -36,7 +36,8 @@
 + (Item *)parseItem:(NSObject *)itemData error:(NSError **)error {
     if (![itemData isKindOfClass:[NSDictionary class]]) {
         NSString *errorString = [NSString stringWithFormat:@"Parsed itemData is not of kind class NSDictionary.\n%@", itemData];
-        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        if (*error)
+            *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
         return nil;
     }
     
@@ -57,7 +58,8 @@
 + (Meal *)parseMeal:(NSObject *)mealData error:(NSError **)error {
     if (![mealData isKindOfClass:[NSArray class]]) {
         NSString *errorString = [NSString stringWithFormat:@"Parsed mealData is not of kind class NSArray.\n%@", mealData];
-        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        if (*error)
+            *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
         return nil;
 
     }
@@ -76,7 +78,8 @@
 + (Day *)parseDay:(NSObject *)dayData error:(NSError **)error {
     if (![dayData isKindOfClass:[NSDictionary class]]) {
         NSString *errorString = [NSString stringWithFormat:@"Parsed dayData is not of kind class NSDictionary.\n%@", dayData];
-        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        if (*error)
+            *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
         return nil;
     }
     
@@ -96,7 +99,8 @@
 + (Week *)parseWeek:(NSObject *)weekData error:(NSError **)error {
     if (![weekData isKindOfClass:[NSDictionary class]]) {
         NSString *errorString = [NSString stringWithFormat:@"Parsed object is not of kind class NSDictionary.\n%@", weekData];
-        *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        if (*error)
+            *error = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
         return nil;
     }
     
@@ -132,7 +136,8 @@
     
     if (!savedMenu || ![savedMenu isKindOfClass:[Menu class]]) {
         NSString *errorString = [NSString stringWithFormat:@"savedMenu is nil or not kind of class Menu.\n%@ returns class of %@", savedMenu, [savedMenu class]];
-        *error = [[NSError alloc] initWithDomain:kNMRetrieveSavedErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+        if (*error)
+            *error = [[NSError alloc] initWithDomain:kNMRetrieveSavedErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
     }
     
     return savedMenu;
@@ -200,6 +205,11 @@
             
             //Build request data string.
             NSString *requestDataString = [NSString stringWithFormat:@"status=%@&appVersion=%@", originTypeString, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsP2PShareKey]) {
+                NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
+                NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
+                requestDataString = [NSString stringWithFormat:@"%@&deviceId=%@&deviceName=%@&seedCount=%ld&leachCount=%ld", requestDataString, [UIDevice currentDevice].identifierForVendor, [UIDevice currentDevice].name, (long)seedCount, (long)leachCount];
+            }
             
             NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
             NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];

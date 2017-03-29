@@ -80,11 +80,25 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
+- (void)refreshControlPulled {
+    //Retrieve last updated time from preferences
+    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
+    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
+    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
+    //If last updated time is within 10 seconds of current time, do not update.
+    if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
+        [self.refreshControl endRefreshing];
+        return;
+    }
+    
+    [self reloadMenuDataAndTableView];
+}
+
 - (void)setRefreshControlTitle {
     //Setup UIRefreshControl initially
     if (!self.refreshControl) {
         self.refreshControl = [UIRefreshControl new];
-        [self.refreshControl addTarget:self action:@selector(reloadMenuDataAndTableView) forControlEvents:UIControlEventValueChanged];
+        [self.refreshControl addTarget:self action:@selector(refreshControlPulled) forControlEvents:UIControlEventValueChanged];
     }
     
     //Retrieve last updated time from preferences

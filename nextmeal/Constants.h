@@ -19,6 +19,7 @@
 #pragma mark - Settings bundle keys
 
 #define kSettingsP2PKey @"p2p_preference"
+#define kSettingsP2PShareKey @"p2p_stats_preference"
 
 
 #pragma mark - Menu display configurable options
@@ -34,6 +35,9 @@
 
 #define kMenuLastUpdatedKey @"menuLastUpdated"
 #define kMenuLastSavedFilename @"menuLatest"
+
+#define kP2PSeedTotal @"seedTotal"
+#define kP2PLeachTotal @"leachTotal"
 
 
 #pragma mark - Connectivity constants

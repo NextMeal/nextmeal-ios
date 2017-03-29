@@ -30,6 +30,18 @@
 
 @implementation NMMultipeer
 
+#pragma mark - Seed/Leach count update methods
+
+- (void)incrementP2PSeedCount {
+    NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
+    [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PSeedTotal];
+}
+
+- (void)incrementP2PLeachount {
+    NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
+    [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PLeachTotal];
+}
+
 #pragma mark - PeerID creation
 
 - (void)createPeerID {
@@ -64,8 +76,13 @@
     //If received menu is valid and delegate is set, call delegate with updated menu.
     Menu *receivedMenu = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ([receivedMenu allWeeksValid] && _delegate) {
+        //The delegate will call startAndUpdateLocalPeerManager to update the local menu and date.
         NSLog(@"Received menu is valid. Alerting delegate.");
-        [_delegate getMenuOnlineResultWithMenu:receivedMenu withURLResponse:nil withError:nil];
+        //Call delegate on main thread
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [_delegate getMenuOnlineResultWithMenu:receivedMenu withURLResponse:nil withError:nil];
+        });
+        [self incrementP2PLeachount];
     }
     
     [session disconnect];
@@ -91,10 +108,16 @@
         case MCSessionStateNotConnected:
             sessionStateName = @"MCSessionStateNotConnected";
             [self removePeerFromDict:peerID];
+            
+            //Start looking for menus again.
+            [self startBrowsing];
             break;
             
         case MCSessionStateConnecting:
             sessionStateName = @"MCSessionStateConnecting";
+            
+            //Stop browsing to avoid getting two menus at once.
+            [self stopBrowsing];
             break;
             
         case MCSessionStateConnected:
@@ -104,6 +127,8 @@
                 [session sendData:[NSKeyedArchiver archivedDataWithRootObject:_localMenu] toPeers:@[peerID] withMode:MCSessionSendDataReliable error:&error];
                 if (error)
                     NSLog(@"Send data to peer %@ had error. %@", peerID.displayName, error.localizedDescription);
+                else
+                    [self incrementP2PSeedCount];
                 
                 //Disconnect when transfer done
                 [session disconnect];
@@ -149,8 +174,7 @@
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary<NSString *,NSString *> *)info {
     NSLog(@"Found peer %@ with info %@", peerID.displayName, info);
     
-    NSLog(@"Time interval since remote peer date is %f", [_localMenuUpdateDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:[[info objectForKey:kNMDiscoveryInfoMenuUpdateDate] doubleValue]]]);
-    
+    //This shouldn't be needed? If we are connected to a peer, the same peer shouldn't show up again.
     /*
     //If we are already connected to this peer, do not invite them to a session.
     if ([[_activePeerUpdateDates allKeys] containsObject:peerID]) {
@@ -161,6 +185,7 @@
     
     //If local menu date or data is nil and remote peer's discovery date is over X seconds ahead of us, invite them to a session.
     NSDate *remotePeerUpdateDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:kNMDiscoveryInfoMenuUpdateDate] doubleValue]];
+    NSLog(@"Time interval since remote peer date is %f", [_localMenuUpdateDate timeIntervalSinceDate:remotePeerUpdateDate]);
     if (!_localMenuUpdateDate || !_localMenu || [_localMenuUpdateDate timeIntervalSinceDate:remotePeerUpdateDate] < -10) {
         NSLog(@"Inviting peer %@ to session.", peerID.displayName);
         

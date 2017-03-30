@@ -39,7 +39,7 @@
     
     //Set settings bundle defaults
     //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeachTotal : @0}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeechTotal : @0}];
     
     
     return YES;

@@ -53,8 +53,6 @@
             };
             saveMenu(responseMenu);
             
-            [self setRefreshControlTitle];
-            
             self.navigationItem.prompt = nil;
             
             [self.tableView reloadData];
@@ -62,8 +60,6 @@
             updateResult = NCUpdateResultNewData;
         }
     }
-    
-    [self stopRefreshingElements];
     
     if (self.loadedMenu) {
         [self findNextMenus];
@@ -86,40 +82,6 @@
 }
 
 #pragma mark - Reload data and UI methods
-
-- (void)startRefreshingElements {
-    [self.refreshControl beginRefreshing];
-}
-
-- (void)stopRefreshingElements {
-    [self.refreshControl endRefreshing];
-}
-
-- (void)setRefreshControlTitle {
-    //Setup UIRefreshControl initially
-    if (!self.refreshControl) {
-        self.refreshControl = [UIRefreshControl new];
-        [self.refreshControl addTarget:self action:@selector(reloadMenuDataAndTableView) forControlEvents:UIControlEventValueChanged];
-    }
-    
-    //Retrieve last updated time from preferences
-    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
-    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
-    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
-    
-    //Setup date formatter
-    NSDateFormatter *refreshControlTimeFormatter = [[NSDateFormatter alloc] init];
-    refreshControlTimeFormatter.locale = [NSLocale autoupdatingCurrentLocale];
-    refreshControlTimeFormatter.dateFormat = @"EEEE @ HH:mm";
-    refreshControlTimeFormatter.timeZone = [NSTimeZone systemTimeZone];
-    
-    //Determine refresh control title text
-    NSString *timeString = [NSString stringWithFormat:@"Last Updated %@", menuLastUpdatedObject ? [NSString stringWithFormat:@"on %@", [refreshControlTimeFormatter stringFromDate:menuLastUpdatedObject]] : @"Never"];
-    
-    //Set refresh control title
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:timeString];
-    
-}
 
 - (void)reloadMenuData {
     NSError *error;
@@ -145,7 +107,6 @@
 }
 
 - (void)reloadMenuDataAndTableView {
-    [self startRefreshingElements];
     [self reloadMenuData];
 }
 
@@ -212,7 +173,6 @@
         self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeCompact;
     }
     
-    [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];
 }
 

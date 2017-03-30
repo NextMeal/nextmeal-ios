@@ -126,7 +126,7 @@
         [self.tableView reloadData];
         
         //Send the next meal to the watch
-        [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
+        [self sendMealToWatch:self.nextMenus.count > 0 ? self.nextMenus[0] : nil];
     } else {
         NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }

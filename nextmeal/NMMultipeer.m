@@ -38,8 +38,8 @@
 }
 
 - (void)incrementP2PLeachount {
-    NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
-    [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PLeachTotal];
+    NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
+    [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PLeechTotal];
 }
 
 #pragma mark - PeerID creation

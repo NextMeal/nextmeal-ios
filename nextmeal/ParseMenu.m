@@ -207,7 +207,7 @@
             NSString *requestDataString = [NSString stringWithFormat:@"status=%@&appVersion=%@", originTypeString, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
             if ([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsP2PShareKey]) {
                 NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
-                NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
+                NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
                 requestDataString = [NSString stringWithFormat:@"%@&deviceId=%@&deviceName=%@&seedCount=%ld&leachCount=%ld", requestDataString, [UIDevice currentDevice].identifierForVendor, [UIDevice currentDevice].name, (long)seedCount, (long)leachCount];
             }
             

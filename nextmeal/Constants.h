@@ -37,7 +37,7 @@
 #define kMenuLastSavedFilename @"menuLatest"
 
 #define kP2PSeedTotal @"seedTotal"
-#define kP2PLeachTotal @"leachTotal"
+#define kP2PLeechTotal @"leachTotal"
 
 
 #pragma mark - Connectivity constants

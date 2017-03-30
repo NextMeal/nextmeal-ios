@@ -10,7 +10,11 @@
 
 #import "Constants.h"
 
+@import MapKit;
+
 @interface ExtrasViewController ()
+
+@property (weak, nonatomic) IBOutlet MKMapView *backgroundMapView;
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UITextView *aboutTextView;
@@ -68,9 +72,9 @@
     NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
     
     NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
-    NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeachTotal];
+    NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
     double ratio = (double)seedCount / leachCount;
-    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics (Experimental):\nSeeds: %ld\nLeachs: %ld\nS/L Ratio: %f%@", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @"...to be seen!" : @""];
+    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics (Experimental):\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @"...to be seen!" : @""];
     
     NSString *aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", error ? error.localizedDescription : aboutText, statisticsText];
     
@@ -82,9 +86,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    // Hide nav bar
     self.navigationController.navigationBar.hidden = YES;
+    
+    //Set background map view to academy region
+    [_backgroundMapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(38.98096, -76.48373), MKCoordinateSpanMake(0.05, 0.05)) animated:YES];
     
     _versionLabel.text = [NSString stringWithFormat:@"v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     

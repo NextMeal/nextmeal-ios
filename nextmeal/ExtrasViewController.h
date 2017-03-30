@@ -10,6 +10,7 @@
 
 @interface ExtrasViewController : UIViewController
 
--(IBAction)taxiButtonClicked:(id)sender;
+- (IBAction)feedbackButtonClicked:(id)sender;
+- (IBAction)taxiButtonClicked:(id)sender;
 
 @end

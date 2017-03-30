@@ -10,9 +10,14 @@
 
 #import "Constants.h"
 
+#import "FeedbackTextFieldDelegate.h"
+
 @import MapKit;
 
 @interface ExtrasViewController ()
+
+@property FeedbackTextFieldDelegate *feedbackTextFieldDelegate;
+@property UIAlertController *sendingAlertController;
 
 @property (weak, nonatomic) IBOutlet MKMapView *backgroundMapView;
 
@@ -27,6 +32,90 @@
 @end
 
 @implementation ExtrasViewController
+
+- (void)sendFeedbackAction:(NSString *)feedback {
+    //NSURLSession version of
+    //http://stackoverflow.com/questions/12358002/submit-data-to-google-spreadsheet-form-from-objective-c
+    
+    //initialize url that is going to be fetched.
+    NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/e/1FAIpQLSfq9oiddVHHDfPikoD3IGnoljuBcY7mRh8PFkr9aCVWFkiNGw/formResponse"];
+    
+    //initialize a request from url
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
+    
+    //set http method
+    [request setHTTPMethod:@"POST"];
+    //initialize a post data
+    NSString *postData = [NSString stringWithFormat:@"entry.822294369=%@", feedback];
+    //set request content type we MUST set this value.
+    
+    [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    //set post data of request
+    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //initialize a connection from request
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    
+    _sendingAlertController = [UIAlertController
+                               alertControllerWithTitle:@"Sending"
+                               message:nil
+                               preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:_sendingAlertController animated:YES completion:nil];
+    
+    NSURLSessionDataTask *uploadTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        [_sendingAlertController dismissViewControllerAnimated:YES completion:^() {
+            UIAlertController *sentAlert = [UIAlertController
+                                            alertControllerWithTitle:error ? @"Unable to send. Please try later." : @"Sent successfully!"
+                                            message:error ? error.localizedDescription : nil
+                                            preferredStyle:UIAlertControllerStyleAlert];
+            [sentAlert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:sentAlert animated:YES completion:nil];
+        }];
+    }];
+    
+    [uploadTask resume];
+}
+
+
+- (IBAction)feedbackButtonClicked:(id)sender {
+    UIAlertController *feedbackAlert = [UIAlertController
+                                        alertControllerWithTitle:@"Ideas and Suggestion Box"
+                                        message:nil
+                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sendAction = [UIAlertAction
+                                 actionWithTitle:@"Send"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [self sendFeedbackAction:feedbackAlert.textFields.firstObject.text];
+                                 }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [feedbackAlert dismissViewControllerAnimated:YES completion:nil];
+                                   }];
+    
+    [feedbackAlert addTextFieldWithConfigurationHandler:^(UITextField *textfield) {
+        _feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
+        _feedbackTextFieldDelegate.createAction = sendAction;
+        textfield.delegate = _feedbackTextFieldDelegate;
+        textfield.placeholder = @"Your suggestion here.";
+        textfield.autocorrectionType = UITextAutocorrectionTypeDefault;
+        textfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        textfield.keyboardAppearance = UIKeyboardAppearanceAlert;
+        sendAction.enabled = NO;
+    }];
+    
+    [feedbackAlert addAction:sendAction];
+    [feedbackAlert addAction:cancelAction];
+    
+    [self presentViewController:feedbackAlert animated:YES completion:nil];
+}
 
 - (IBAction)taxiButtonClicked:(id)sender {
     NSString *testURL;

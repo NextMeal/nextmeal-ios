@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2800AFA41E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2800AFA31E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m */; };
 		280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880901E831913005CD9B9 /* BackgroundFetchMenu.m */; };
 		280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880931E8324B0005CD9B9 /* NMMultipeer.m */; };
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
@@ -134,6 +135,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2800AFA21E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackTextFieldDelegate.h; sourceTree = "<group>"; };
+		2800AFA31E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackTextFieldDelegate.m; sourceTree = "<group>"; };
 		2808808F1E831913005CD9B9 /* BackgroundFetchMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundFetchMenu.h; sourceTree = "<group>"; };
 		280880901E831913005CD9B9 /* BackgroundFetchMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundFetchMenu.m; sourceTree = "<group>"; };
 		280880921E8324B0005CD9B9 /* NMMultipeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeer.h; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 				280880901E831913005CD9B9 /* BackgroundFetchMenu.m */,
 				280880921E8324B0005CD9B9 /* NMMultipeer.h */,
 				280880931E8324B0005CD9B9 /* NMMultipeer.m */,
+				2800AFA21E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.h */,
+				2800AFA31E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -627,6 +632,7 @@
 				285E0FDB1E74F3400092A233 /* Meal.m in Sources */,
 				285E0FE51E76094D0092A233 /* ParseMenu.m in Sources */,
 				289586ED1E777C990053A408 /* Menu.m in Sources */,
+				2800AFA41E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m in Sources */,
 				285E0FC81E7239E40092A233 /* AllMenusTableViewController.m in Sources */,
 				289997861E78B7BB00E87BC5 /* NextMenusTableViewController.m in Sources */,
 				289939871E7DBC4900E255A6 /* MealDetailViewController.m in Sources */,

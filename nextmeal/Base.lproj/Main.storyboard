@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pjj-ur-5Qu" id="ivV-nh-PMI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -97,7 +97,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="of4-FI-gzV" id="B3f-Kq-KTa">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -223,7 +223,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Meal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCL-hB-2NJ">
-                                                <rect key="frame" x="106" y="0.0" width="190" height="64.5"/>
+                                                <rect key="frame" x="106" y="0.0" width="121.5" height="64.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -240,18 +240,29 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="6"/>
                                                 </variation>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Tv-16-TLK">
+                                                <rect key="frame" x="236" y="0.0" width="46" height="64.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="📮"/>
+                                                <connections>
+                                                    <action selector="feedbackButtonClicked:" destination="noO-F3-PQP" eventType="touchUpInside" id="s1i-LP-BLC"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="JZG-EM-W4Z" firstAttribute="leading" secondItem="Cae-g4-OnV" secondAttribute="leading" id="JE1-9u-6To"/>
-                                            <constraint firstAttribute="trailing" secondItem="JCL-hB-2NJ" secondAttribute="trailing" constant="8" id="NGV-sv-hch"/>
+                                            <constraint firstItem="7Tv-16-TLK" firstAttribute="leading" secondItem="JCL-hB-2NJ" secondAttribute="trailing" constant="8.5" id="Jsh-Q1-GY0"/>
                                             <constraint firstItem="JCL-hB-2NJ" firstAttribute="leading" secondItem="JZG-EM-W4Z" secondAttribute="trailing" constant="8" id="NnG-S0-9IJ"/>
                                             <constraint firstItem="h4c-cM-itv" firstAttribute="leading" secondItem="JZG-EM-W4Z" secondAttribute="trailing" constant="8" id="Pxv-CK-BY8"/>
                                             <constraint firstItem="JZG-EM-W4Z" firstAttribute="top" secondItem="Cae-g4-OnV" secondAttribute="top" id="Sg8-Ni-nUW"/>
                                             <constraint firstAttribute="bottom" secondItem="h4c-cM-itv" secondAttribute="bottom" id="YNv-n2-Ymo"/>
                                             <constraint firstItem="h4c-cM-itv" firstAttribute="top" secondItem="JCL-hB-2NJ" secondAttribute="bottom" constant="2" id="YbB-b1-XCM"/>
+                                            <constraint firstItem="7Tv-16-TLK" firstAttribute="top" secondItem="Cae-g4-OnV" secondAttribute="top" id="c0x-0n-9va"/>
+                                            <constraint firstItem="h4c-cM-itv" firstAttribute="top" secondItem="7Tv-16-TLK" secondAttribute="bottom" constant="2" id="c3K-Xp-X9W"/>
                                             <constraint firstAttribute="trailing" secondItem="h4c-cM-itv" secondAttribute="trailing" constant="8" id="p9C-mo-mnM"/>
                                             <constraint firstItem="JCL-hB-2NJ" firstAttribute="top" secondItem="Cae-g4-OnV" secondAttribute="top" id="phV-RF-2ER"/>
                                             <constraint firstAttribute="bottom" secondItem="JZG-EM-W4Z" secondAttribute="bottom" id="veH-cc-Jzz"/>
+                                            <constraint firstAttribute="trailing" secondItem="7Tv-16-TLK" secondAttribute="trailing" constant="22" id="ySX-ZC-eow"/>
                                             <constraint firstItem="h4c-cM-itv" firstAttribute="height" secondItem="JCL-hB-2NJ" secondAttribute="height" multiplier="0.5" id="zZN-OH-gd2"/>
                                         </constraints>
                                     </view>

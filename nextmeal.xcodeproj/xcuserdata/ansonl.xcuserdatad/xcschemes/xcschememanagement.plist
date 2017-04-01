@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>imessageextension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>nextmeal.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -38,6 +43,11 @@
 			<true/>
 		</dict>
 		<key>28AC00241E8580E600D2988F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28F5498A1E8E063C00937C71</key>
 		<dict>
 			<key>primary</key>
 			<true/>

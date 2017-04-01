@@ -24,6 +24,18 @@
 		285E0FDE1E74F3C70092A233 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDD1E74F3C70092A233 /* Day.m */; };
 		285E0FE11E74F3CF0092A233 /* Week.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE01E74F3CF0092A233 /* Week.m */; };
 		285E0FE51E76094D0092A233 /* ParseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE41E76094D0092A233 /* ParseMenu.m */; };
+		286AF40A1E8F396600067907 /* websense-alpha-rect.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4091E8F396600067907 /* websense-alpha-rect.png */; };
+		286AF40C1E8F398400067907 /* bill-the-goat-leaping.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF40B1E8F398400067907 /* bill-the-goat-leaping.png */; };
+		286AF40E1E8F398D00067907 /* cs-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF40D1E8F398D00067907 /* cs-logo.png */; };
+		286AF4101E8F399400067907 /* mech-e-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF40F1E8F399400067907 /* mech-e-logo.png */; };
+		286AF4121E8F399C00067907 /* naps-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4111E8F399C00067907 /* naps-logo.png */; };
+		286AF4141E8F39A400067907 /* nimitz-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4131E8F39A400067907 /* nimitz-logo.png */; };
+		286AF4161E8F39AA00067907 /* nuclear-engineering-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4151E8F39AA00067907 /* nuclear-engineering-logo.png */; };
+		286AF4181E8F39B000067907 /* ocean-goat-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4171E8F39B000067907 /* ocean-goat-logo.png */; };
+		286AF41A1E8F39B700067907 /* oceano-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4191E8F39B700067907 /* oceano-logo.png */; };
+		286AF41C1E8F39C500067907 /* stem-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41B1E8F39C500067907 /* stem-logo.png */; };
+		286AF41E1E8F39CE00067907 /* trident-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41D1E8F39CE00067907 /* trident-logo.png */; };
+		286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */; };
 		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; };
 		286EBDC11E8AADE200B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDC01E8AADE200B1EF2E /* WatchConnectivity.framework */; };
 		286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */; };
@@ -46,6 +58,21 @@
 		28B732D91E86A43A007C2442 /* NextMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */; };
 		28B732DD1E8761DB007C2442 /* AllMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */; };
 		28B732DE1E8761DE007C2442 /* NextMenusDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */; };
+		28F549631E8D733600937C71 /* NextMealTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F549621E8D733600937C71 /* NextMealTabBarController.m */; };
+		28F5498D1E8E063C00937C71 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F5498C1E8E063C00937C71 /* Messages.framework */; };
+		28F549941E8E063C00937C71 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F549921E8E063C00937C71 /* MainInterface.storyboard */; };
+		28F549961E8E063C00937C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F549951E8E063C00937C71 /* Assets.xcassets */; };
+		28F5499A1E8E063C00937C71 /* imessageextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 28F5498B1E8E063C00937C71 /* imessageextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		28F549A71E8E06E200937C71 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F549A01E8E06E200937C71 /* MessagesViewController.m */; };
+		28F549A81E8E06E200937C71 /* FluffcornStickerBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F549A21E8E06E200937C71 /* FluffcornStickerBrowserViewController.m */; };
+		28F549A91E8E06E200937C71 /* StickerPackInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F549A41E8E06E200937C71 /* StickerPackInfo.m */; };
+		28F549AA1E8E06E200937C71 /* FeedbackTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F549A61E8E06E200937C71 /* FeedbackTextFieldDelegate.m */; };
+		28F549AD1E8E06EC00937C71 /* stickerPacks.json in Resources */ = {isa = PBXBuildFile; fileRef = 28F549AB1E8E06EC00937C71 /* stickerPacks.json */; };
+		28F549AE1E8E06EC00937C71 /* newPacks.json in Resources */ = {isa = PBXBuildFile; fileRef = 28F549AC1E8E06EC00937C71 /* newPacks.json */; };
+		28F549B11E8E06F300937C71 /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28F549AF1E8E06F300937C71 /* about.txt */; };
+		28F549B21E8E06F300937C71 /* openSourceCredit.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28F549B01E8E06F300937C71 /* openSourceCredit.txt */; };
+		28F549B41E8E06FD00937C71 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28F549B31E8E06FD00937C71 /* Settings.bundle */; };
+		28F54A221E8E0B2300937C71 /* nextmeal-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F54A211E8E0B2300937C71 /* nextmeal-logo.png */; };
 		28F937491E89C6BE00D98267 /* ExtrasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F937481E89C6BE00D98267 /* ExtrasViewController.m */; };
 		28F9374B1E89C87F00D98267 /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28F9374A1E89C87F00D98267 /* about.txt */; };
 		28F9374D1E89C8DB00D98267 /* taxi.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28F9374C1E89C8DB00D98267 /* taxi.txt */; };
@@ -71,6 +98,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 28AC00241E8580E600D2988F;
 			remoteInfo = todayextension;
+		};
+		28F549981E8E063C00937C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 285E0F9E1E7236D60092A233 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28F5498A1E8E063C00937C71;
+			remoteInfo = imessageextension;
 		};
 		28F937621E8A089000D98267 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -105,6 +139,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				28F5499A1E8E063C00937C71 /* imessageextension.appex in Embed App Extensions */,
 				28AC00331E8580E600D2988F /* todayextension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -169,6 +204,18 @@
 		285E0FE01E74F3CF0092A233 /* Week.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Week.m; sourceTree = "<group>"; };
 		285E0FE31E76094D0092A233 /* ParseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseMenu.h; sourceTree = "<group>"; };
 		285E0FE41E76094D0092A233 /* ParseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseMenu.m; sourceTree = "<group>"; };
+		286AF4091E8F396600067907 /* websense-alpha-rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "websense-alpha-rect.png"; sourceTree = "<group>"; };
+		286AF40B1E8F398400067907 /* bill-the-goat-leaping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bill-the-goat-leaping.png"; sourceTree = "<group>"; };
+		286AF40D1E8F398D00067907 /* cs-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cs-logo.png"; sourceTree = "<group>"; };
+		286AF40F1E8F399400067907 /* mech-e-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mech-e-logo.png"; sourceTree = "<group>"; };
+		286AF4111E8F399C00067907 /* naps-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "naps-logo.png"; sourceTree = "<group>"; };
+		286AF4131E8F39A400067907 /* nimitz-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nimitz-logo.png"; sourceTree = "<group>"; };
+		286AF4151E8F39AA00067907 /* nuclear-engineering-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nuclear-engineering-logo.png"; sourceTree = "<group>"; };
+		286AF4171E8F39B000067907 /* ocean-goat-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ocean-goat-logo.png"; sourceTree = "<group>"; };
+		286AF4191E8F39B700067907 /* oceano-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oceano-logo.png"; sourceTree = "<group>"; };
+		286AF41B1E8F39C500067907 /* stem-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stem-logo.png"; sourceTree = "<group>"; };
+		286AF41D1E8F39CE00067907 /* trident-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trident-logo.png"; sourceTree = "<group>"; };
+		286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anchor-blue-yellow.png"; sourceTree = "<group>"; };
 		286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		286EBDC01E8AADE200B1EF2E /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		286EBDC21E8AAE4500B1EF2E /* DetailInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInterfaceController.h; sourceTree = "<group>"; };
@@ -195,6 +242,28 @@
 		28B732D81E86A43A007C2442 /* NextMenusDisplayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMenusDisplayTableViewController.m; sourceTree = "<group>"; };
 		28B732DA1E86A72E007C2442 /* NextMenusDisplayTableViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMenusDisplayTableViewControllerSubclass.h; sourceTree = "<group>"; };
 		28B732DB1E86AA6D007C2442 /* AllMenusDisplayTableViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllMenusDisplayTableViewControllerSubclass.h; sourceTree = "<group>"; };
+		28F549611E8D733600937C71 /* NextMealTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextMealTabBarController.h; sourceTree = "<group>"; };
+		28F549621E8D733600937C71 /* NextMealTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextMealTabBarController.m; sourceTree = "<group>"; };
+		28F5498B1E8E063C00937C71 /* imessageextension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = imessageextension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F5498C1E8E063C00937C71 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		28F549931E8E063C00937C71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		28F549951E8E063C00937C71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28F549971E8E063C00937C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F5499E1E8E066200937C71 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		28F5499F1E8E06E200937C71 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		28F549A01E8E06E200937C71 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		28F549A11E8E06E200937C71 /* FluffcornStickerBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FluffcornStickerBrowserViewController.h; sourceTree = "<group>"; };
+		28F549A21E8E06E200937C71 /* FluffcornStickerBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FluffcornStickerBrowserViewController.m; sourceTree = "<group>"; };
+		28F549A31E8E06E200937C71 /* StickerPackInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerPackInfo.h; sourceTree = "<group>"; };
+		28F549A41E8E06E200937C71 /* StickerPackInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerPackInfo.m; sourceTree = "<group>"; };
+		28F549A51E8E06E200937C71 /* FeedbackTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackTextFieldDelegate.h; sourceTree = "<group>"; };
+		28F549A61E8E06E200937C71 /* FeedbackTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackTextFieldDelegate.m; sourceTree = "<group>"; };
+		28F549AB1E8E06EC00937C71 /* stickerPacks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stickerPacks.json; sourceTree = "<group>"; };
+		28F549AC1E8E06EC00937C71 /* newPacks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newPacks.json; sourceTree = "<group>"; };
+		28F549AF1E8E06F300937C71 /* about.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = about.txt; sourceTree = "<group>"; };
+		28F549B01E8E06F300937C71 /* openSourceCredit.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = openSourceCredit.txt; sourceTree = "<group>"; };
+		28F549B31E8E06FD00937C71 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		28F54A211E8E0B2300937C71 /* nextmeal-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextmeal-logo.png"; sourceTree = "<group>"; };
 		28F937471E89C6BE00D98267 /* ExtrasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtrasViewController.h; sourceTree = "<group>"; };
 		28F937481E89C6BE00D98267 /* ExtrasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtrasViewController.m; sourceTree = "<group>"; };
 		28F9374A1E89C87F00D98267 /* about.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = about.txt; sourceTree = "<group>"; };
@@ -237,6 +306,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28F549881E8E063C00937C71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F5498D1E8E063C00937C71 /* Messages.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F9375D1E8A089000D98267 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -251,6 +328,8 @@
 		2808808D1E82F5FF005CD9B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				28F549611E8D733600937C71 /* NextMealTabBarController.h */,
+				28F549621E8D733600937C71 /* NextMealTabBarController.m */,
 				28B732DB1E86AA6D007C2442 /* AllMenusDisplayTableViewControllerSubclass.h */,
 				28B732D41E86A1D4007C2442 /* AllMenusDisplayTableViewController.h */,
 				28B732D51E86A1D4007C2442 /* AllMenusDisplayTableViewController.m */,
@@ -286,6 +365,7 @@
 				28AC00291E8580E600D2988F /* todayextension */,
 				28F937551E8A089000D98267 /* watchapp */,
 				28F937641E8A089000D98267 /* watchapp Extension */,
+				28F5498E1E8E063C00937C71 /* imessageextension */,
 				28AC00261E8580E600D2988F /* Frameworks */,
 				285E0FA71E7236D60092A233 /* Products */,
 			);
@@ -298,6 +378,7 @@
 				28AC00251E8580E600D2988F /* todayextension.appex */,
 				28F937541E8A089000D98267 /* watchapp.app */,
 				28F937601E8A089000D98267 /* watchapp Extension.appex */,
+				28F5498B1E8E063C00937C71 /* imessageextension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,6 +444,33 @@
 			name = Logic;
 			sourceTree = "<group>";
 		};
+		286AF4211E8F3DCA00067907 /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				28F54A211E8E0B2300937C71 /* nextmeal-logo.png */,
+				286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */,
+				286AF41D1E8F39CE00067907 /* trident-logo.png */,
+				286AF4111E8F399C00067907 /* naps-logo.png */,
+				286AF4131E8F39A400067907 /* nimitz-logo.png */,
+				286AF41B1E8F39C500067907 /* stem-logo.png */,
+				286AF40F1E8F399400067907 /* mech-e-logo.png */,
+				286AF40D1E8F398D00067907 /* cs-logo.png */,
+				286AF4191E8F39B700067907 /* oceano-logo.png */,
+				286AF4151E8F39AA00067907 /* nuclear-engineering-logo.png */,
+				286AF4171E8F39B000067907 /* ocean-goat-logo.png */,
+				286AF40B1E8F398400067907 /* bill-the-goat-leaping.png */,
+			);
+			name = Logos;
+			sourceTree = "<group>";
+		};
+		286AF4221E8F3DD100067907 /* Original */ = {
+			isa = PBXGroup;
+			children = (
+				286AF4091E8F396600067907 /* websense-alpha-rect.png */,
+			);
+			name = Original;
+			sourceTree = "<group>";
+		};
 		289997831E78B77400E87BC5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +492,7 @@
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
 				28F9374E1E89CB4B00D98267 /* MapKit.framework */,
 				28AC00271E8580E600D2988F /* NotificationCenter.framework */,
+				28F5498C1E8E063C00937C71 /* Messages.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -398,6 +507,40 @@
 				28AC00301E8580E600D2988F /* Info.plist */,
 			);
 			path = todayextension;
+			sourceTree = "<group>";
+		};
+		28F5498E1E8E063C00937C71 /* imessageextension */ = {
+			isa = PBXGroup;
+			children = (
+				28F5499E1E8E066200937C71 /* Constants.h */,
+				28F5499F1E8E06E200937C71 /* MessagesViewController.h */,
+				28F549A01E8E06E200937C71 /* MessagesViewController.m */,
+				28F549A11E8E06E200937C71 /* FluffcornStickerBrowserViewController.h */,
+				28F549A21E8E06E200937C71 /* FluffcornStickerBrowserViewController.m */,
+				28F549A31E8E06E200937C71 /* StickerPackInfo.h */,
+				28F549A41E8E06E200937C71 /* StickerPackInfo.m */,
+				28F549A51E8E06E200937C71 /* FeedbackTextFieldDelegate.h */,
+				28F549A61E8E06E200937C71 /* FeedbackTextFieldDelegate.m */,
+				28F549921E8E063C00937C71 /* MainInterface.storyboard */,
+				28F549951E8E063C00937C71 /* Assets.xcassets */,
+				28F549971E8E063C00937C71 /* Info.plist */,
+				28F549AB1E8E06EC00937C71 /* stickerPacks.json */,
+				28F549AC1E8E06EC00937C71 /* newPacks.json */,
+				28F549AF1E8E06F300937C71 /* about.txt */,
+				28F549B01E8E06F300937C71 /* openSourceCredit.txt */,
+				28F54A201E8E072D00937C71 /* Art Assets */,
+				28F549B31E8E06FD00937C71 /* Settings.bundle */,
+			);
+			path = imessageextension;
+			sourceTree = "<group>";
+		};
+		28F54A201E8E072D00937C71 /* Art Assets */ = {
+			isa = PBXGroup;
+			children = (
+				286AF4221E8F3DD100067907 /* Original */,
+				286AF4211E8F3DCA00067907 /* Logos */,
+			);
+			name = "Art Assets";
 			sourceTree = "<group>";
 		};
 		28F937551E8A089000D98267 /* watchapp */ = {
@@ -459,6 +602,7 @@
 			dependencies = (
 				28AC00321E8580E600D2988F /* PBXTargetDependency */,
 				28F937771E8A089000D98267 /* PBXTargetDependency */,
+				28F549991E8E063C00937C71 /* PBXTargetDependency */,
 			);
 			name = nextmeal;
 			productName = nextmeal;
@@ -481,6 +625,23 @@
 			productName = todayextension;
 			productReference = 28AC00251E8580E600D2988F /* todayextension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		28F5498A1E8E063C00937C71 /* imessageextension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28F5499B1E8E063C00937C71 /* Build configuration list for PBXNativeTarget "imessageextension" */;
+			buildPhases = (
+				28F549871E8E063C00937C71 /* Sources */,
+				28F549881E8E063C00937C71 /* Frameworks */,
+				28F549891E8E063C00937C71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = imessageextension;
+			productName = imessageextension;
+			productReference = 28F5498B1E8E063C00937C71 /* imessageextension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
 		};
 		28F937531E8A089000D98267 /* watchapp */ = {
 			isa = PBXNativeTarget;
@@ -548,6 +709,11 @@
 							};
 						};
 					};
+					28F5498A1E8E063C00937C71 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = 3E2UWZ76C2;
+						ProvisioningStyle = Automatic;
+					};
 					28F937531E8A089000D98267 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 3E2UWZ76C2;
@@ -577,6 +743,7 @@
 				28AC00241E8580E600D2988F /* todayextension */,
 				28F937531E8A089000D98267 /* watchapp */,
 				28F9375F1E8A089000D98267 /* watchapp Extension */,
+				28F5498A1E8E063C00937C71 /* imessageextension */,
 			);
 		};
 /* End PBXProject section */
@@ -605,6 +772,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28F549891E8E063C00937C71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F54A221E8E0B2300937C71 /* nextmeal-logo.png in Resources */,
+				286AF4141E8F39A400067907 /* nimitz-logo.png in Resources */,
+				286AF4181E8F39B000067907 /* ocean-goat-logo.png in Resources */,
+				28F549961E8E063C00937C71 /* Assets.xcassets in Resources */,
+				28F549AE1E8E06EC00937C71 /* newPacks.json in Resources */,
+				286AF40E1E8F398D00067907 /* cs-logo.png in Resources */,
+				28F549B11E8E06F300937C71 /* about.txt in Resources */,
+				286AF40C1E8F398400067907 /* bill-the-goat-leaping.png in Resources */,
+				286AF40A1E8F396600067907 /* websense-alpha-rect.png in Resources */,
+				286AF4101E8F399400067907 /* mech-e-logo.png in Resources */,
+				286AF41A1E8F39B700067907 /* oceano-logo.png in Resources */,
+				286AF41C1E8F39C500067907 /* stem-logo.png in Resources */,
+				28F549AD1E8E06EC00937C71 /* stickerPacks.json in Resources */,
+				286AF4121E8F399C00067907 /* naps-logo.png in Resources */,
+				286AF4161E8F39AA00067907 /* nuclear-engineering-logo.png in Resources */,
+				28F549B21E8E06F300937C71 /* openSourceCredit.txt in Resources */,
+				28F549941E8E063C00937C71 /* MainInterface.storyboard in Resources */,
+				28F549B41E8E06FD00937C71 /* Settings.bundle in Resources */,
+				286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */,
+				286AF41E1E8F39CE00067907 /* trident-logo.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F937521E8A089000D98267 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -630,6 +824,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				285E0FDB1E74F3400092A233 /* Meal.m in Sources */,
+				28F549631E8D733600937C71 /* NextMealTabBarController.m in Sources */,
 				285E0FE51E76094D0092A233 /* ParseMenu.m in Sources */,
 				289586ED1E777C990053A408 /* Menu.m in Sources */,
 				2800AFA41E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.m in Sources */,
@@ -667,6 +862,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28F549871E8E063C00937C71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F549A91E8E06E200937C71 /* StickerPackInfo.m in Sources */,
+				28F549A71E8E06E200937C71 /* MessagesViewController.m in Sources */,
+				28F549A81E8E06E200937C71 /* FluffcornStickerBrowserViewController.m in Sources */,
+				28F549AA1E8E06E200937C71 /* FeedbackTextFieldDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F9375C1E8A089000D98267 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -689,6 +895,11 @@
 			isa = PBXTargetDependency;
 			target = 28AC00241E8580E600D2988F /* todayextension */;
 			targetProxy = 28AC00311E8580E600D2988F /* PBXContainerItemProxy */;
+		};
+		28F549991E8E063C00937C71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28F5498A1E8E063C00937C71 /* imessageextension */;
+			targetProxy = 28F549981E8E063C00937C71 /* PBXContainerItemProxy */;
 		};
 		28F937631E8A089000D98267 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -723,6 +934,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				28AC002E1E8580E600D2988F /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		28F549921E8E063C00937C71 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28F549931E8E063C00937C71 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -886,6 +1105,36 @@
 			};
 			name = Release;
 		};
+		28F5499C1E8E063C00937C71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				INFOPLIST_FILE = imessageextension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.imessageextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		28F5499D1E8E063C00937C71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				INFOPLIST_FILE = imessageextension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.imessageextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		28F9377A1E8A089000D98267 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -976,6 +1225,15 @@
 			buildConfigurations = (
 				28AC00341E8580E600D2988F /* Debug */,
 				28AC00351E8580E600D2988F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28F5499B1E8E063C00937C71 /* Build configuration list for PBXNativeTarget "imessageextension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28F5499C1E8E063C00937C71 /* Debug */,
+				28F5499D1E8E063C00937C71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

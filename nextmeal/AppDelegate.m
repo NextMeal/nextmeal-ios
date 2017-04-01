@@ -28,6 +28,36 @@
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSLog(@"open url %@", url.absoluteString);
+    
+    NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+    
+    NSMutableDictionary *queryItemDict = [NSMutableDictionary dictionaryWithCapacity:components.queryItems.count];
+    
+    for (NSURLQueryItem *queryItem in components.queryItems) {
+        [queryItemDict setObject:queryItem.value forKey:queryItem.name];
+    }
+    
+    if ([[queryItemDict allKeys] containsObject:kSelectedViewKey]) {
+        NSUInteger selectedIndex = 0;
+        if ([[queryItemDict objectForKey:kSelectedViewKey] isEqual:kSelectedViewNextMeal])
+            selectedIndex = 0;
+        else if ([[queryItemDict objectForKey:kSelectedViewKey] isEqual:kSelectedViewExtendedMenu])
+            selectedIndex = 1;
+        else if ([[queryItemDict objectForKey:kSelectedViewKey] isEqual:kSelectedViewExtras])
+            selectedIndex = 2;
+        
+        NSDictionary *userInfo = @{kSelectedViewIndexKey:[NSNumber numberWithUnsignedInteger:selectedIndex]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoadView object:self userInfo:userInfo];
+    }
+    
+    if ([[queryItemDict allKeys] containsObject:kSelectedSectionKey]) {
+        NSUInteger selectedSection = 0;
+        NSLog(@"%@",[[queryItemDict objectForKey:kSelectedSectionKey] class]);
+        selectedSection = (NSUInteger)[[queryItemDict objectForKey:kSelectedSectionKey] integerValue];
+        NSDictionary *userInfo = @{kSelectedSectionKey:[NSNumber numberWithUnsignedInteger:selectedSection]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoadSection object:self userInfo:userInfo];
+    }
     
     
     return YES;

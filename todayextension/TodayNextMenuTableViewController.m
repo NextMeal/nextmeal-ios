@@ -158,7 +158,7 @@
     
     if (indexPath.row == [tableView numberOfRowsInSection:0] - 1) {
         //NSString *testURL = @"nextmeal://";
-        NSString *targetURL = @"nextmeal://?origin=today";
+        NSString *targetURL = @"nextmeal://?origin=today&selectedView=nextMeal&selectedSection=0";
         //NSString *fallbackURL = @"https://nextmeal.tk";
         [self.extensionContext openURL:[NSURL URLWithString:targetURL] completionHandler:nil];
     }

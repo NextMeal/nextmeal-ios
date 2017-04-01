@@ -231,6 +231,15 @@
     mealDetailVC.loadedMeal = [self.nextMenus objectAtIndex:self.tableView.indexPathForSelectedRow.section];
 }
 
+
+- (void)showSection:(NSNotification *)notification {
+    NSUInteger targetSection = [[notification.userInfo valueForKey:kSelectedSectionKey] unsignedIntegerValue];
+    
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:targetSection] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    
+    [self performSegueWithIdentifier:@"MealDetailSegue" sender:self];
+}
+
 #pragma mark - VC lifecycle methods
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -244,6 +253,8 @@
     
     [self setRefreshControlTitle];
     [self reloadMenuDataAndTableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSection:) name:kNotificationLoadSection object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

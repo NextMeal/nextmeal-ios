@@ -1,0 +1,53 @@
+{
+    "packOrder": [
+                  "Original",
+                  "Logos"
+                  ],
+    "allPacks": {
+        "Original": {
+            "order": [{
+                      "filename": "websense-alpha-rect",
+                      "description": "Page Blocked"
+                      }]
+        },
+        "Logos": {
+            "order": [{
+                      "filename": "nextmeal-logo",
+                      "description": "Next Meal"
+                      },{
+                      "filename": "anchor-blue-yellow",
+                      "description": "Navy Anchor"
+                      },{
+                      "filename": "trident-logo",
+                      "description": "USNA Trident"
+                      },{
+                      "filename": "naps-logo",
+                      "description": "NAPS"
+                      },{
+                      "filename": "nimitz-logo",
+                      "description": "Nimitz Library"
+                      },{
+                      "filename": "stem-logo",
+                      "description": "USNA STEM"
+                      },{
+                      "filename": "mech-e-logo",
+                      "description": "Mechanical Engineering"
+                      },{
+                      "filename": "cs-logo",
+                      "description": "Computer Science"
+                      },{
+                      "filename": "oceano-logo",
+                      "description": "Oceanography"
+                      },{
+                      "filename": "nuclear-engineering-logo",
+                      "description": "Nuclear Engineering"
+                      },{
+                      "filename": "ocean-goat-logo",
+                      "description": "Ocean Goat"
+                      },{
+                      "filename": "bill-the-goat-leaping",
+                      "description": "Bill the Goat Leaping"
+                      }]
+        }
+    }
+}

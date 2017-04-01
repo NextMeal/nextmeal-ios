@@ -16,6 +16,23 @@
 #define kSampleFilename2 @"sampleMenu2.json"
 
 
+#pragma mark - URL parameters
+
+#define kSelectedViewKey @"selectedView"
+#define kSelectedViewNextMeal @"nextMeal"
+#define kSelectedViewExtendedMenu @"extendedMenu"
+#define kSelectedViewExtras @"extras"
+
+#define kSelectedSectionKey @"selectedSection"
+
+
+#pragma mark - NSNotification keys
+
+#define kNotificationLoadView @"loadView"
+#define kSelectedViewIndexKey @"selectedViewIndex"
+
+#define kNotificationLoadSection @"loadSection"
+
 #pragma mark - Settings bundle keys
 
 #define kSettingsP2PKey @"p2p_preference"

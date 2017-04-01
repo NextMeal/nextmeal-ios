@@ -19,6 +19,7 @@ In the iOS app for the `UITableViewController` subclass, the ***Display** classe
 The subclasses which are named bare without any suffixes are subclasses of the ***Display** classes. They contain methods that actually initiate and handle the refreshing and reloading the `UITableView`. 
 The header files suffixed wth ***Subclass** are contain interfaces for the ***Display** classes. These interfaces expose properties of the ***Display** classes that are meant to be protected (accessible only to the parent and subclasses). The ***Subclass** files are imported in the ***Display** classes and any subclasses of the ***Display** classes that require use of the parent class properties.
 
-
+License and redistribution
+-------
 Next Meal source code is distributed under MIT License. Attribution to Anson Liu is required.
-All sticker assets to used under fair use and are copyright to their original creators.  
+All sticker assets are used under fair use and are copyright to their original creators.  

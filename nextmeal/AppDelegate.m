@@ -11,6 +11,10 @@
 #import "Constants.h"
 #import "BackgroundFetchMenu.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
+
 @interface AppDelegate ()
 
 @end
@@ -53,7 +57,6 @@
     
     if ([[queryItemDict allKeys] containsObject:kSelectedSectionKey]) {
         NSUInteger selectedSection = 0;
-        NSLog(@"%@",[[queryItemDict objectForKey:kSelectedSectionKey] class]);
         selectedSection = (NSUInteger)[[queryItemDict objectForKey:kSelectedSectionKey] integerValue];
         NSDictionary *userInfo = @{kSelectedSectionKey:[NSNumber numberWithUnsignedInteger:selectedSection]};
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoadSection object:self userInfo:userInfo];
@@ -67,10 +70,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    /* https://www.herzbube.ch/blog/2016/08/how-hide-fabric-api-key-and-build-secret-open-source-project */
+    NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
+    NSStringEncoding usedEncoding;
+    NSString* fabricAPIKey = [NSString stringWithContentsOfURL:resourceURL usedEncoding:&usedEncoding error:NULL];
+    
+    // The string that results from reading the bundle resource contains a trailing
+    // newline character, which we must remove now because Fabric/Crashlytics
+    // can't handle extraneous whitespace.
+    NSCharacterSet* whitespaceToTrim = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
+    
+    [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+    //[Fabric with:@[[Crashlytics class]]];
+    
     //Set settings bundle defaults
     //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeechTotal : @0}];
-    
     
     return YES;
 }

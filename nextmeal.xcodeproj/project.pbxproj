@@ -36,8 +36,10 @@
 		286AF41C1E8F39C500067907 /* stem-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41B1E8F39C500067907 /* stem-logo.png */; };
 		286AF41E1E8F39CE00067907 /* trident-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41D1E8F39CE00067907 /* trident-logo.png */; };
 		286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */; };
+		286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43A1E8F494D00067907 /* Fabric.framework */; };
+		286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43B1E8F494D00067907 /* Crashlytics.framework */; };
+		286AF43F1E8F4E1B00067907 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
 		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; };
-		286EBDC11E8AADE200B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDC01E8AADE200B1EF2E /* WatchConnectivity.framework */; };
 		286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */; };
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
 		289586EF1E7780430053A408 /* sampleMenu2.json in Resources */ = {isa = PBXBuildFile; fileRef = 289586EE1E7780430053A408 /* sampleMenu2.json */; };
@@ -216,8 +218,11 @@
 		286AF41B1E8F39C500067907 /* stem-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stem-logo.png"; sourceTree = "<group>"; };
 		286AF41D1E8F39CE00067907 /* trident-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trident-logo.png"; sourceTree = "<group>"; };
 		286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anchor-blue-yellow.png"; sourceTree = "<group>"; };
+		286AF43A1E8F494D00067907 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		286AF43B1E8F494D00067907 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		286AF43E1E8F4E1B00067907 /* fabric.apikey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.apikey; sourceTree = "<group>"; };
+		286AF4401E8F4E2200067907 /* fabric.buildsecret */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.buildsecret; sourceTree = "<group>"; };
 		286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
-		286EBDC01E8AADE200B1EF2E /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		286EBDC21E8AAE4500B1EF2E /* DetailInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInterfaceController.h; sourceTree = "<group>"; };
 		286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInterfaceController.m; sourceTree = "<group>"; };
 		289586EB1E777C990053A408 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
@@ -295,6 +300,8 @@
 			files = (
 				286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */,
 				28F9374F1E89CB4B00D98267 /* MapKit.framework in Frameworks */,
+				286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */,
+				286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +325,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				286EBDC11E8AADE200B1EF2E /* WatchConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +374,8 @@
 				28F5498E1E8E063C00937C71 /* imessageextension */,
 				28AC00261E8580E600D2988F /* Frameworks */,
 				285E0FA71E7236D60092A233 /* Products */,
+				286AF43A1E8F494D00067907 /* Fabric.framework */,
+				286AF43B1E8F494D00067907 /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -479,6 +487,8 @@
 				28F9374C1E89C8DB00D98267 /* taxi.txt */,
 				285E0FD31E72464B0092A233 /* sampleMenu1.json */,
 				289586EE1E7780430053A408 /* sampleMenu2.json */,
+				286AF43E1E8F4E1B00067907 /* fabric.apikey */,
+				286AF4401E8F4E2200067907 /* fabric.buildsecret */,
 				285E0FB51E7236D60092A233 /* Main.storyboard */,
 				285E0FBA1E7236D60092A233 /* LaunchScreen.storyboard */,
 			);
@@ -488,7 +498,6 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				286EBDC01E8AADE200B1EF2E /* WatchConnectivity.framework */,
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
 				28F9374E1E89CB4B00D98267 /* MapKit.framework */,
 				28AC00271E8580E600D2988F /* NotificationCenter.framework */,
@@ -596,6 +605,7 @@
 				280880891E7F5DE0005CD9B9 /* Embed Frameworks */,
 				28AC00371E8580E600D2988F /* Embed App Extensions */,
 				28F937801E8A089000D98267 /* Embed Watch Content */,
+				286AF4391E8F493800067907 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -756,6 +766,7 @@
 				28F937511E89F99300D98267 /* Settings.bundle in Resources */,
 				285E0FD41E72464B0092A233 /* sampleMenu1.json in Resources */,
 				285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */,
+				286AF43F1E8F4E1B00067907 /* fabric.apikey in Resources */,
 				285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */,
 				28F9374B1E89C87F00D98267 /* about.txt in Resources */,
 				28F9374D1E89C8DB00D98267 /* taxi.txt in Resources */,
@@ -817,6 +828,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		286AF4391E8F493800067907 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FABRIC_APIKEY=$(cat ${SRCROOT}/fabric.apikey)\nFABRIC_BUILDSECRET=$(cat ${SRCROOT}/fabric.buildsecret)\n${SRCROOT}/Fabric.framework/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET}";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		285E0FA21E7236D60092A233 /* Sources */ = {
@@ -1055,9 +1082,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Crashlytics.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1069,9 +1104,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Crashlytics.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

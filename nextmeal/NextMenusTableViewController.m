@@ -242,6 +242,10 @@
 
 #pragma mark - VC lifecycle methods
 
+-(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }

@@ -38,7 +38,6 @@
 		286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */; };
 		286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43A1E8F494D00067907 /* Fabric.framework */; };
 		286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43B1E8F494D00067907 /* Crashlytics.framework */; };
-		286AF43F1E8F4E1B00067907 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
 		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; };
 		286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */; };
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
@@ -766,7 +765,6 @@
 				28F937511E89F99300D98267 /* Settings.bundle in Resources */,
 				285E0FD41E72464B0092A233 /* sampleMenu1.json in Resources */,
 				285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */,
-				286AF43F1E8F4E1B00067907 /* fabric.apikey in Resources */,
 				285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */,
 				28F9374B1E89C87F00D98267 /* about.txt in Resources */,
 				28F9374D1E89C8DB00D98267 /* taxi.txt in Resources */,

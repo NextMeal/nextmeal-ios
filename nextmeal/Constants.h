@@ -28,6 +28,7 @@
 
 #pragma mark - NSNotification keys
 
+#define kUnwindDetailView @"unwindDetailView"
 #define kNotificationLoadView @"loadView"
 #define kSelectedViewIndexKey @"selectedViewIndex"
 

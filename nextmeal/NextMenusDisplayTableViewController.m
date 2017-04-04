@@ -143,6 +143,7 @@
         cell.textLabel.text = @"View more";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.userInteractionEnabled = YES;
     } else {
         cell.textLabel.text = [self itemForIndexPath:indexPath].title;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

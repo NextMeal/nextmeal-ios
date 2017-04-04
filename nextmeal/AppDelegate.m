@@ -51,6 +51,8 @@
         else if ([[queryItemDict objectForKey:kSelectedViewKey] isEqual:kSelectedViewExtras])
             selectedIndex = 2;
         
+        //Must call unwind notification before loading detail view notification because the segue will get messed up if the unwinding detail view is in background
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUnwindDetailView object:self userInfo:nil];
         NSDictionary *userInfo = @{kSelectedViewIndexKey:[NSNumber numberWithUnsignedInteger:selectedIndex]};
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoadView object:self userInfo:userInfo];
     }
@@ -58,6 +60,7 @@
     if ([[queryItemDict allKeys] containsObject:kSelectedSectionKey]) {
         NSUInteger selectedSection = 0;
         selectedSection = (NSUInteger)[[queryItemDict objectForKey:kSelectedSectionKey] integerValue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUnwindDetailView object:self userInfo:nil];
         NSDictionary *userInfo = @{kSelectedSectionKey:[NSNumber numberWithUnsignedInteger:selectedSection]};
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLoadSection object:self userInfo:userInfo];
     }
@@ -69,20 +72,8 @@
 #pragma mark - Application lifecycle methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    /* https://www.herzbube.ch/blog/2016/08/how-hide-fabric-api-key-and-build-secret-open-source-project */
-    NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
-    NSStringEncoding usedEncoding;
-    NSString* fabricAPIKey = [NSString stringWithContentsOfURL:resourceURL usedEncoding:&usedEncoding error:NULL];
-    
-    // The string that results from reading the bundle resource contains a trailing
-    // newline character, which we must remove now because Fabric/Crashlytics
-    // can't handle extraneous whitespace.
-    NSCharacterSet* whitespaceToTrim = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
-    
-    [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
-    //[Fabric with:@[[Crashlytics class]]];
+
+    [Fabric with:@[[Crashlytics class]]];
     
     //Set settings bundle defaults
     //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers

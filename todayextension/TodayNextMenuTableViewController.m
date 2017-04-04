@@ -164,6 +164,20 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return tableView.rowHeight;
+    /*
+     shared cache llvm error???
+     
+    NSLog(@"%ld", (long)[tableView numberOfRowsInSection:0]);
+    if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
+        return tableView.rowHeight / 2;
+    } else {
+        return tableView.rowHeight;
+    }
+     */
+}
+
 #pragma mark - VC lifecycle methods
 
 - (void)viewDidLoad {

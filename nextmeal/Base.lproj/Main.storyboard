@@ -125,8 +125,12 @@
                             <outlet property="delegate" destination="deG-FT-Zi9" id="9M4-xl-xQt"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="mPn-hh-kSP" kind="unwind" identifier="unwindToNextMenus" unwindAction="prepareForUnwind:" id="xSL-gN-w9F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvH-dN-S6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mPn-hh-kSP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3321" y="-434"/>
         </scene>

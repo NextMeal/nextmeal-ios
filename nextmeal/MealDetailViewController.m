@@ -8,6 +8,8 @@
 
 #import "MealDetailViewController.h"
 
+#import "Constants.h"
+
 #import "Meal.h"
 
 @interface MealDetailViewController ()
@@ -17,6 +19,10 @@
 
 @implementation MealDetailViewController
 
+- (void)unwindToNextMenus:(NSNotification *)notification {
+    [self performSegueWithIdentifier:@"unwindToNextMenus" sender:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -25,6 +31,8 @@
     _mealDetailTableView.delegate = self;
     
     self.navigationItem.title = _mealDateAndTitle;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unwindToNextMenus:) name:kUnwindDetailView object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

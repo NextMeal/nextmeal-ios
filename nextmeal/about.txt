@@ -2,7 +2,7 @@ Know the next three meals being served in King Hall!
 
 Currently Maintainers:
 Anson Liu (ansonliu.com)
-Kim Do
+Kim Do (kimpossible.co)
 
 Initial Development & Media: Michael Madrid, Anson Liu, Awad Mohammed, Bobby Nefzger, Alfred Garvey
 
@@ -11,7 +11,7 @@ Get the menu on the computer at https://NextMeal.tk.
 Follow at facebook.com/nextmealapp.
 Email us at nextmealapp@gmail.com.
 
-Next Meal is open source. iOS app, server side, and accessory code is made available under MIT License (attribution required) at (https://github.com/NextMeal)
+Next Meal is open source. iOS app, web app, and server side code is made available under MIT License (attribution required) at (github.com/NextMeal)
 
 Acknowledgments:
 - Icons8 (icons8.com) for art elements.

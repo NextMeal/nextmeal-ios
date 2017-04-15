@@ -33,28 +33,6 @@
     
 }
 
-#pragma mark - Reload data and UI methods
-
-- (void)startRefreshingElements {
-    
-}
-
-- (void)stopRefreshingElements {
-    
-}
-
-- (void)setRefreshControlTitle {
-
-}
-
-- (void)reloadMenuData {
-    
-}
-
-- (void)reloadMenuDataAndTableView {
-    
-}
-
 #pragma mark - Logic methods
 
 - (Meal *)mealForSection:(NSInteger)section {

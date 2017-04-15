@@ -186,18 +186,23 @@
     
 }
 
-- (void)reloadMenuData {
+- (void)reloadMenuDataFromLocal {
     NSError *error;
     Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
     if (!error)
         self.loadedMenu = savedMenu;
     else
         self.navigationItem.prompt = [error localizedDescription];
+}
+
+- (void)reloadMenuDataLocalAndRemote {
+    if (!self.loadedMenu) {
+        [self reloadMenuDataFromLocal];
+    }
     
     [self.tableView reloadData];
     
     [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
-    
     
     if ([self.loadedMenu allWeeksValid]) {
         [self findNextMenus];
@@ -214,7 +219,7 @@
 
 - (void)reloadMenuDataAndTableView {
     [self startRefreshingElements];
-    [self reloadMenuData];
+    [self reloadMenuDataLocalAndRemote];
 }
 
 #pragma mark - Table view delegate
@@ -233,6 +238,8 @@
 
 
 - (void)showSection:(NSNotification *)notification {
+    [self reloadMenuDataLocalAndRemote];
+    
     NSUInteger targetSection = [[notification.userInfo valueForKey:kSelectedSectionKey] unsignedIntegerValue];
     
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:targetSection] animated:YES scrollPosition:UITableViewScrollPositionNone];

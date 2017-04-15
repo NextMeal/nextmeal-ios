@@ -13,7 +13,7 @@
 
 @interface AllMenusTableViewController : AllMenusDisplayTableViewController
 
-- (void)reloadMenuData;
+- (void)reloadMenuDataLocalAndRemote;
 - (void)reloadMenuDataAndTableView;
 
 @end

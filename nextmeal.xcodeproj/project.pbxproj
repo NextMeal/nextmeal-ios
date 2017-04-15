@@ -373,8 +373,6 @@
 				28F5498E1E8E063C00937C71 /* imessageextension */,
 				28AC00261E8580E600D2988F /* Frameworks */,
 				285E0FA71E7236D60092A233 /* Products */,
-				286AF43A1E8F494D00067907 /* Fabric.framework */,
-				286AF43B1E8F494D00067907 /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -497,6 +495,8 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				286AF43A1E8F494D00067907 /* Fabric.framework */,
+				286AF43B1E8F494D00067907 /* Crashlytics.framework */,
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
 				28F9374E1E89CB4B00D98267 /* MapKit.framework */,
 				28AC00271E8580E600D2988F /* NotificationCenter.framework */,

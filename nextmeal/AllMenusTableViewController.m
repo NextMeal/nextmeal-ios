@@ -120,13 +120,19 @@
 
 }
 
-- (void)reloadMenuData {
+- (void)reloadMenuDataFromLocal {
     NSError *error;
     Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
     if (!error)
         self.loadedMenu = savedMenu;
     else
         self.navigationItem.prompt = [error localizedDescription];
+}
+
+- (void)reloadMenuDataLocalAndRemote {
+    if (!self.loadedMenu) {
+        [self reloadMenuDataFromLocal];
+    }
     
     [self.tableView reloadData];
     
@@ -135,7 +141,7 @@
 
 - (void)reloadMenuDataAndTableView {
     [self startRefreshingElements];
-    [self reloadMenuData];
+    [self reloadMenuDataLocalAndRemote];
 }
 
 #pragma mark - VC lifecycle methods

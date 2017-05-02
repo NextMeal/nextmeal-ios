@@ -12,6 +12,7 @@
 		280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880931E8324B0005CD9B9 /* NMMultipeer.m */; };
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
 		281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
 		285E0FAB1E7236D60092A233 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAA1E7236D60092A233 /* main.m */; };
 		285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAD1E7236D60092A233 /* AppDelegate.m */; };
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
@@ -771,6 +772,7 @@
 				28F937511E89F99300D98267 /* Settings.bundle in Resources */,
 				285E0FD41E72464B0092A233 /* sampleMenu1.json in Resources */,
 				285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */,
+				281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */,
 				285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */,
 				28F9374B1E89C87F00D98267 /* about.txt in Resources */,
 				28F9374D1E89C8DB00D98267 /* taxi.txt in Resources */,

@@ -14,7 +14,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-
 @interface AppDelegate ()
 
 @end
@@ -72,8 +71,20 @@
 #pragma mark - Application lifecycle methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    [Fabric with:@[[Crashlytics class]]];
+    //Fabric
+    //See https://github.com/ansonl/fabric-ios-extension
+    //Get API key from fabric.apikey file in mainBundle
+    NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
+    NSStringEncoding usedEncoding;
+    NSString* fabricAPIKey = [NSString stringWithContentsOfURL:resourceURL usedEncoding:&usedEncoding error:NULL];
+    
+    // The string that results from reading the bundle resource contains a trailing
+    // newline character, which we must remove now because Fabric/Crashlytics
+    // can't handle extraneous whitespace.
+    NSCharacterSet* whitespaceToTrim = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
+    
+    [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
     
     //Set settings bundle defaults
     //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers

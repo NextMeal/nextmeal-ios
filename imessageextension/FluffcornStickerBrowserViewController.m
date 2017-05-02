@@ -41,19 +41,19 @@
 - (void)loadStickersInPack:(NSString *)packName {
     /*
      //Cannot access stickerpack in xcode assets
-    NSString *packPath = [[NSBundle mainBundle] pathForResource:packName ofType:@"stickerpack"];
-    
-    NSError *error;
-    NSArray<NSString *> *packStickers = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:packPath error:&error];
-    if (error)
-        NSLog(@"Error getting contentsOfDirectoryAtPath %@ %@", packPath, error.localizedDescription);
-    
-    for (NSString *stickerName in packStickers)
-        [self createSticker:stickerName fromPack:packName localizedDescription:stickerName];
+     NSString *packPath = [[NSBundle mainBundle] pathForResource:packName ofType:@"stickerpack"];
+     
+     NSError *error;
+     NSArray<NSString *> *packStickers = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:packPath error:&error];
+     if (error)
+     NSLog(@"Error getting contentsOfDirectoryAtPath %@ %@", packPath, error.localizedDescription);
+     
+     for (NSString *stickerName in packStickers)
+     [self createSticker:stickerName fromPack:packName localizedDescription:stickerName];
      */
     
     _stickers = [[NSMutableArray alloc] init];
-
+    
     NSDictionary *allPacks = [_packInfo objectForKey:kAllPacksKey];
     NSDictionary *targetPack = [allPacks objectForKey:packName];
     
@@ -112,16 +112,17 @@
 
 - (void)createSticker:(NSString *)asset fromPack:(NSString *)packName localizedDescription:(NSString *)localizedDescription {
     /*
-    NSString *stickerPath = [[NSBundle mainBundle] pathForResource:asset ofType:@"png" inDirectory:[NSString stringWithFormat:@"%@.stickerpack",packName]];
+     NSString *stickerPath = [[NSBundle mainBundle] pathForResource:asset ofType:@"png" inDirectory:[NSString stringWithFormat:@"%@.stickerpack",packName]];
      */
     NSString *extension = @"png";
     
     NSString *stickerPath = [[NSBundle mainBundle] pathForResource:asset ofType:extension];
     //NSLog(@"%@", stickerPath);
     
-    if (!stickerPath)
+    if (!stickerPath) {
         NSLog(@"Couldn't create the sticker path for %@", asset);
-    
+        return;
+    }
     NSURL *stickerURL = [NSURL fileURLWithPath:stickerPath];
     
     MSSticker *sticker;
@@ -131,7 +132,7 @@
         NSLog(@"Error init sticker %@", error.localizedDescription);
     else
         [_stickers addObject:sticker];
- 
+    
     //NSLog(@"processed %@", stickerURL);
 }
 
@@ -144,7 +145,7 @@
 }
 
 - (void)setNewStickerSize:(MSStickerSize)stickerSize {
-
+    
 }
 
 @end

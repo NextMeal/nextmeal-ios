@@ -154,6 +154,7 @@
         fallbackURL = @"tel:4103205961";
     } else {
         NSLog(@"Unknown sender %@.", sender);
+        return;
     }
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:testURL]]) {
@@ -173,7 +174,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     
     NSError *error;
     NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];

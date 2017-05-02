@@ -100,6 +100,22 @@
                                        [feedbackAlert dismissViewControllerAnimated:YES completion:nil];
                                    }];
     
+    UIAlertAction *reviewAction = [UIAlertAction
+                                     actionWithTitle:@"Review on App Store"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action)
+                                     {
+                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=779302741&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"]];
+                                     }];
+    
+    UIAlertAction *settingsAction = [UIAlertAction
+                                   actionWithTitle:@"Adjust Settings"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                   }];
+    
     [feedbackAlert addTextFieldWithConfigurationHandler:^(UITextField *textfield) {
         _feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
         _feedbackTextFieldDelegate.createAction = sendAction;
@@ -113,6 +129,8 @@
     
     [feedbackAlert addAction:sendAction];
     [feedbackAlert addAction:cancelAction];
+    [feedbackAlert addAction:reviewAction];
+    [feedbackAlert addAction:settingsAction];
     
     [self presentViewController:feedbackAlert animated:YES completion:nil];
 }

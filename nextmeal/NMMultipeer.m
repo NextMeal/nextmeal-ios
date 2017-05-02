@@ -11,6 +11,9 @@
 #import "Constants.h"
 #import "Menu.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 @import MultipeerConnectivity;
 
 @interface NMMultipeer () <MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate>
@@ -27,6 +30,8 @@
 
 @property BOOL updatingDelegate;
 
+@property NSMutableArray<NSString *> *ephemeralDeviceIdBlacklist;
+
 @end
 
 @implementation NMMultipeer
@@ -34,6 +39,8 @@
 #pragma mark - Blacklist methods
 
 - (NSArray<NSString *> *)getDeviceIdBlacklist {
+    /*
+     //Permanent blacklist stored in user preferences
     NSArray<NSString *> *deviceIdBlacklist = [[NSUserDefaults standardUserDefaults] objectForKey:kNMMultipeerDeviceIdBlacklistKey];
     if (deviceIdBlacklist && [deviceIdBlacklist isKindOfClass:[NSArray class]])
         return deviceIdBlacklist;
@@ -43,11 +50,24 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         return deviceIdBlacklist;
     }
+     */
+    
+    //Ephemeral blacklist for app session
+    if (!_ephemeralDeviceIdBlacklist)
+        _ephemeralDeviceIdBlacklist = [NSMutableArray<NSString *> new];
+    
+    return _ephemeralDeviceIdBlacklist;
 }
 
 - (void)saveDeviceIdBlacklist:(NSArray<NSString *> *)blacklist {
+    /*
+     //Permanent blacklist stored in user preferences
     [[NSUserDefaults standardUserDefaults] setObject:blacklist forKey:kNMMultipeerDeviceIdBlacklistKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+     */
+    
+    //Ephemeral blacklist for app session
+    //Do nothing, blacklist only lasts for app session
 }
 
 #pragma mark - Seed/Leach count update methods
@@ -55,11 +75,21 @@
 - (void)incrementP2PSeedCount {
     NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
     [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PSeedTotal];
+    
+    //Fabric Answers activity logging for P2P
+    [Answers logCustomEventWithName:@"P2PTransfer"
+                   customAttributes:@{
+                                      @"transferType" : @"seed"}];
 }
 
-- (void)incrementP2PLeachount {
+- (void)incrementP2PLeachCount {
     NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
     [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PLeechTotal];
+    
+    //Fabric Answers activity logging for P2P
+    [Answers logCustomEventWithName:@"P2PTransfer"
+                   customAttributes:@{
+                                      @"transferType" : @"leech"}];
 }
 
 #pragma mark - PeerID creation
@@ -118,14 +148,20 @@
             
             [_delegate getMenuOnlineResultWithMenu:receivedMenu withUpdateDate:[_activePeerUpdateDates objectForKey:peerID.displayName] withURLResponse:nil withError:nil];
             //[session disconnect]; //Session will be autodisconnected when delegate restarts the advertiser and browser. Do not disconnect manually or else the MCSession delegate will set to start browsing again. Don't browse until the delegate has updated the menu and date data.
+            _updatingDelegate = NO;
             [self removePeerFromDateDict:peerID.displayName];
         });
-        [self incrementP2PLeachount];
+        [self incrementP2PLeachCount];
     } else if (![receivedMenu allWeeksValid]) { //If the menu is invalid, blacklist this device id from future connections.
         NSLog(@"Peer %@ provided an invalid menu. Adding peer to device id blacklist for future connections.", peerID.displayName);
         NSMutableArray<NSString *> *blacklist = [NSMutableArray arrayWithArray:[self getDeviceIdBlacklist]];
         [blacklist addObject:peerID.displayName];
         [self saveDeviceIdBlacklist:blacklist];
+        
+        //Fabric Answers activity logging for P2P
+        [Answers logCustomEventWithName:@"P2PBlacklist"
+                       customAttributes:@{
+                                          @"blacklistedDeviceUUID" : peerID.displayName}];
     }
 }
 
@@ -243,7 +279,7 @@
     //If local menu date or data is nil and remote peer's discovery date is over X seconds ahead of us, invite them to a session.
     NSDate *remotePeerUpdateDate = [NSDate dateWithTimeIntervalSince1970:[[info objectForKey:kNMDiscoveryInfoMenuUpdateDate] doubleValue]];
     NSLog(@"Time interval since remote peer date is %f", [_localMenuUpdateDate timeIntervalSinceDate:remotePeerUpdateDate]);
-    if (!_localMenuUpdateDate || !_localMenu || [_localMenuUpdateDate timeIntervalSinceDate:remotePeerUpdateDate] < -10) {
+    if (!_localMenuUpdateDate || !_localMenu || [_localMenuUpdateDate timeIntervalSinceDate:remotePeerUpdateDate] < kNMOutOfDateTimeInterval) {
         NSLog(@"Inviting peer %@ to session.", peerID.displayName);
         
         //Add peer to dictionary of connected peers
@@ -254,6 +290,11 @@
         sharingSession.delegate = self;
         [self addPeerToSessionDict:peerID.displayName session:sharingSession];
         [browser invitePeer:peerID toSession:sharingSession withContext:nil timeout:30];
+        
+        //Fabric Answers activity logging for P2P
+        [Answers logCustomEventWithName:@"P2PTransfer"
+                       customAttributes:@{
+                                          @"transferType" : @"inviteNewerPeer"}];
     }
 }
 
@@ -307,6 +348,7 @@
     } else {
         NSLog(@"Did not start advertising peer services due to invalid menu or null date.");
     }
+    
     [self startBrowsing];
 }
 

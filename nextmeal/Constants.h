@@ -76,6 +76,8 @@
 #define kNMServiceType @"NMMultipeerMenu"
 #define kNMDiscoveryInfoMenuUpdateDate @"menuUpdateDate"
 
+#define kNMOutOfDateTimeInterval -10
+
 #define kNMMultipeerDeviceIdBlacklistKey @"multipeerDeviceIdBlacklistKey"
 
 #define kP2PLeaderboardURL @"navy.herokuapp.com/leaderboard"

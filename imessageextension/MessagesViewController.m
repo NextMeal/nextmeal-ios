@@ -14,6 +14,9 @@
 #import "FluffcornStickerBrowserViewController.h"
 #import "FeedbackTextFieldDelegate.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 @interface MessagesViewController ()
 
 @property (nonatomic) NSArray<NSLayoutConstraint *> *permanentConstraints;
@@ -70,26 +73,26 @@
 
 /*
  //Unneeded because MSSticker is already typedef enum of NSInteger
-- (MSStickerSize)stickerSizeForIntValue:(NSInteger)value {
-    MSStickerSize stickerSize;
-    switch ((int)value) {
-        case 0:
-            stickerSize = MSStickerSizeSmall;
-            break;
-        case 1:
-            stickerSize = MSStickerSizeRegular;
-            break;
-        case 2:
-            stickerSize = MSStickerSizeLarge;
-            break;
-            
-        default:
-            NSLog(@"Unknown slider value %ld", (long)value);
-            stickerSize = MSStickerSizeRegular;
-            break;
-    }
-    return stickerSize;
-}
+ - (MSStickerSize)stickerSizeForIntValue:(NSInteger)value {
+ MSStickerSize stickerSize;
+ switch ((int)value) {
+ case 0:
+ stickerSize = MSStickerSizeSmall;
+ break;
+ case 1:
+ stickerSize = MSStickerSizeRegular;
+ break;
+ case 2:
+ stickerSize = MSStickerSizeLarge;
+ break;
+ 
+ default:
+ NSLog(@"Unknown slider value %ld", (long)value);
+ stickerSize = MSStickerSizeRegular;
+ break;
+ }
+ return stickerSize;
+ }
  */
 
 #pragma mark - UI action methods
@@ -105,26 +108,26 @@
     NSError *error;
     NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
     NSString *creditText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"openSourceCredit" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
-
+    
     
     UIAlertController *infoAlert = [UIAlertController
-                                alertControllerWithTitle:[NSString stringWithFormat:@"%@ v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]
+                                    alertControllerWithTitle:[NSString stringWithFormat:@"%@ v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]
                                     message:error ? error.localizedDescription : [NSString stringWithFormat:@"%@\n\n%@", aboutText, creditText]
-                                preferredStyle:UIAlertControllerStyleAlert];
+                                    preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *sendFeedbackAction = [UIAlertAction
-                              actionWithTitle:@"Idea and Suggestion Box"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  [self displayFeedbackAlert];
-                                  
-                              }];
+                                         actionWithTitle:@"Idea and Suggestion Box"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action)
+                                         {
+                                             [self displayFeedbackAlert];
+                                             
+                                         }];
     
     UIAlertAction *dismissAction = [UIAlertAction
-                                         actionWithTitle:@"Dismiss"
-                                         style:UIAlertActionStyleCancel
-                                         handler:nil];
+                                    actionWithTitle:@"Dismiss"
+                                    style:UIAlertActionStyleCancel
+                                    handler:nil];
     
     //If developer has enabled feedback
     if (kFeedbackAction)
@@ -132,7 +135,7 @@
     
     [infoAlert addAction:dismissAction];
     [self presentViewController:infoAlert animated:YES completion:nil];
-
+    
 }
 
 - (IBAction)sizeSliderValueChanged:(UISlider *)sender {
@@ -191,7 +194,7 @@
     //Create global constraints array
     _permanentConstraints = [NSArray arrayWithArray:messageViewConstraints];
     [self.view addConstraints:messageViewConstraints];
-
+    
 }
 
 - (void)loadLastSelectedCategoryToBrowserAndSegment {
@@ -268,25 +271,25 @@
 
 - (void)displayFeedbackAlert {
     UIAlertController *feedbackAlert = [UIAlertController
-                                    alertControllerWithTitle:@"Ideas and Suggestion Box"
-                                    message:nil
-                                    preferredStyle:UIAlertControllerStyleAlert];
+                                        alertControllerWithTitle:@"Ideas and Suggestion Box"
+                                        message:nil
+                                        preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *sendAction = [UIAlertAction
-                                         actionWithTitle:@"Send"
-                                         style:UIAlertActionStyleDefault
-                                         handler:^(UIAlertAction * action)
-                                         {
-                                             [self sendFeedbackAction:feedbackAlert.textFields.firstObject.text];
-                                         }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction
-                                 actionWithTitle:@"Cancel"
-                                 style:UIAlertActionStyleCancel
+                                 actionWithTitle:@"Send"
+                                 style:UIAlertActionStyleDefault
                                  handler:^(UIAlertAction * action)
                                  {
-                                     [feedbackAlert dismissViewControllerAnimated:YES completion:nil];
+                                     [self sendFeedbackAction:feedbackAlert.textFields.firstObject.text];
                                  }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [feedbackAlert dismissViewControllerAnimated:YES completion:nil];
+                                   }];
     
     [feedbackAlert addTextFieldWithConfigurationHandler:^(UITextField *textfield) {
         _feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
@@ -310,7 +313,7 @@
     //http://stackoverflow.com/questions/12358002/submit-data-to-google-spreadsheet-form-from-objective-c
     
     //initialize url that is going to be fetched.
-    NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/e/1FAIpQLSfq9oiddVHHDfPikoD3IGnoljuBcY7mRh8PFkr9aCVWFkiNGw/formResponse"];
+    NSURL *url = [NSURL URLWithString:@"https://docs.google.com/forms/d/e/1FAIpQLSe9ONAbDW-HbaYqtAAl3iBtDThtddFHM5sXCpRequrxi2esmg/formResponse"];
     
     //initialize a request from url
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
@@ -318,7 +321,7 @@
     //set http method
     [request setHTTPMethod:@"POST"];
     //initialize a post data
-    NSString *postData = [NSString stringWithFormat:@"entry.822294369=%@", feedback];
+    NSString *postData = [NSString stringWithFormat:@"entry.262066721=%@", feedback];
     //set request content type we MUST set this value.
     
     [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -391,6 +394,25 @@
         [self hideInfoButton];
         [self hideStickerSizeSlider];
     }
+    
+    if (kFabricEnabled) {
+        NSString *presentationStyleTitle;
+        switch (presentationStyle) {
+            case MSMessagesAppPresentationStyleCompact:
+                presentationStyleTitle = @"Compact";
+                break;
+            case MSMessagesAppPresentationStyleExpanded:
+                presentationStyleTitle = @"Expanded";
+                break;
+            default:
+                presentationStyleTitle = @"Unknown";
+                break;
+        }
+        //Fabric Answers activity logging for detecting when user expands or compacts view
+        [Answers logCustomEventWithName:@"Changed Presentation Style"
+                       customAttributes:@{
+                                          @"PresentationStyle" : presentationStyleTitle}];
+    }
 }
 
 - (void)willBecomeActiveWithConversation:(MSConversation *)conversation {
@@ -406,8 +428,32 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     [self saveSelectedCategory];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
+    if (!self) {
+        return nil;
+    }
+    
+    if (kFabricEnabled) {
+        //From http://herzbube.ch/blog/2016/08/how-hide-fabric-api-key-and-build-secret-open-source-project and https://twittercommunity.com/t/should-apikey-be-kept-secret/52644/6
+        //Get API key from fabric.apikey file in mainBundle
+        NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
+        NSStringEncoding usedEncoding;
+        NSString* fabricAPIKey = [NSString stringWithContentsOfURL:resourceURL usedEncoding:&usedEncoding error:NULL];
+        
+        // The string that results from reading the bundle resource contains a trailing
+        // newline character, which we must remove now because Fabric/Crashlytics
+        // can't handle extraneous whitespace.
+        NSCharacterSet* whitespaceToTrim = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
+        
+        [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -474,8 +520,6 @@
     //Apply constraints for autolayout
     [self applyPermanentConstraints];
     
-    //CUSTOM - HIDE SEGMENTED CONTROL
-    
     //Only show the segmented control if number of categories is > 1
     if (_segmentedControl.numberOfSegments > 1) {
         UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeUp:)];
@@ -491,6 +535,7 @@
     }
     
     
+    
     /*
      //Replaced by UIPanGestureRecognizer because we need to detect the second movement if user scrolls down and then up in one continuous movement.
      UISwipeGestureRecognizer *swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeDown:)];
@@ -502,11 +547,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     //iOS currently returns the wrong presentationStyle when switching from another expanded app to fluffcorn
     _infoButton.alpha = self.presentationStyle == MSMessagesAppPresentationStyleCompact ? 0.0f : 1.0f;
     _sizeSlider.alpha = self.presentationStyle == MSMessagesAppPresentationStyleCompact ? 0.0f : 1.0f;
-
+    
 }
 
 @end

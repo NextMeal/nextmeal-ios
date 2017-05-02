@@ -10,11 +10,43 @@
 
 #import "Constants.h"
 
-@interface NextMealTabBarController ()
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
+@interface NextMealTabBarController () <UITabBarControllerDelegate>
 
 @end
 
 @implementation NextMealTabBarController
+
+- (void)tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController{
+    NSUInteger indexOfTab = [tabBarController.viewControllers indexOfObject:viewController];
+    
+    switch (indexOfTab) {
+        case 0:
+            //Fabric Answers activity logging for detecting when user selects tab
+            [Answers logCustomEventWithName:@"SelectedTab"
+                           customAttributes:@{
+                                              @"tabName" : @"NextMenus"}];
+            break;
+        case 1:
+            //Fabric Answers activity logging for detecting when user selects tab
+            [Answers logCustomEventWithName:@"SelectedTab"
+                           customAttributes:@{
+                                              @"tabName" : @"ExtendedMenu"}];
+            break;
+        case 2:
+            //Fabric Answers activity logging for detecting when user selects tab
+            [Answers logCustomEventWithName:@"SelectedTab"
+                           customAttributes:@{
+                                              @"tabName" : @"Extras"}];
+            break;
+        default:
+            NSLog(@"Index %lu of tabbar selected. Is viewController of class %@", (unsigned long)indexOfTab, [viewController class]);
+            break;
+    }
+}
 
 - (void)switchToIndex:(NSNotification *)notification {
     NSUInteger targetIndex = [[notification.userInfo valueForKey:kSelectedViewIndexKey] unsignedIntegerValue];
@@ -24,6 +56,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToIndex:) name:kNotificationLoadView object:nil];
 }

@@ -9,6 +9,7 @@
 #ifndef Constants_h
 
 //Developer customization
+#define kFabricEnabled YES
 #define kStickerSizeSliderVisibility YES
 #define kDefaultStickerSize ((int)0)
 #define kFeedbackAction YES

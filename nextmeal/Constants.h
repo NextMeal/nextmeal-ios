@@ -65,11 +65,20 @@
 #define kServerMenu1Path @"/menu"
 #define kServerMenu2Path @"/menu2"
 
+#define kRequestTimeoutInteval 60
+#define kResourceTimeoutInterval 120
+
 #define kNMParseErrorDomain @"NMParseErrorDomain"
 #define kNMRetrieveSavedErrorDomain @"NMRetrieveSavedErrorDomain"
 
+#pragma mark - P2P constants
+
 #define kNMServiceType @"NMMultipeerMenu"
 #define kNMDiscoveryInfoMenuUpdateDate @"menuUpdateDate"
+
+#define kNMMultipeerDeviceIdBlacklistKey @"multipeerDeviceIdBlacklistKey"
+
+#define kP2PLeaderboardURL @"navy.herokuapp.com/leaderboard"
 
 
 #pragma mark - Menu JSON key constants

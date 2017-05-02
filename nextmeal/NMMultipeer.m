@@ -31,6 +31,25 @@
 
 @implementation NMMultipeer
 
+#pragma mark - Blacklist methods
+
+- (NSArray<NSString *> *)getDeviceIdBlacklist {
+    NSArray<NSString *> *deviceIdBlacklist = [[NSUserDefaults standardUserDefaults] objectForKey:kNMMultipeerDeviceIdBlacklistKey];
+    if (deviceIdBlacklist && [deviceIdBlacklist isKindOfClass:[NSArray class]])
+        return deviceIdBlacklist;
+    else {
+        deviceIdBlacklist = [NSArray<NSString *> new];
+        [[NSUserDefaults standardUserDefaults] setObject:deviceIdBlacklist forKey:kNMMultipeerDeviceIdBlacklistKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return deviceIdBlacklist;
+    }
+}
+
+- (void)saveDeviceIdBlacklist:(NSArray<NSString *> *)blacklist {
+    [[NSUserDefaults standardUserDefaults] setObject:blacklist forKey:kNMMultipeerDeviceIdBlacklistKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - Seed/Leach count update methods
 
 - (void)incrementP2PSeedCount {
@@ -102,6 +121,11 @@
             [self removePeerFromDateDict:peerID.displayName];
         });
         [self incrementP2PLeachount];
+    } else if (![receivedMenu allWeeksValid]) { //If the menu is invalid, blacklist this device id from future connections.
+        NSLog(@"Peer %@ provided an invalid menu. Adding peer to device id blacklist for future connections.", peerID.displayName);
+        NSMutableArray<NSString *> *blacklist = [NSMutableArray arrayWithArray:[self getDeviceIdBlacklist]];
+        [blacklist addObject:peerID.displayName];
+        [self saveDeviceIdBlacklist:blacklist];
     }
 }
 
@@ -200,6 +224,12 @@
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary<NSString *,NSString *> *)info {
     NSLog(@"Found peer %@ with info %@", peerID.displayName, info);
+    
+    if ([[self getDeviceIdBlacklist] containsObject:peerID.displayName]) {
+        NSLog(@"Peer %@ is on the device blacklist for providing an invalid menu. Not inviting.", peerID.displayName);
+        return;
+    }
+    
     
     //This shouldn't be needed? If we are connected to a peer, the same peer shouldn't show up again.
     /*

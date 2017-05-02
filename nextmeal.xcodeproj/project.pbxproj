@@ -181,6 +181,7 @@
 		280CC7451E8A1CA900B57C30 /* InterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		280CC7461E8A1CA900B57C30 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		281F6D2D1EB80C3F00BCE9F7 /* NMMultipeerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeerProtocol.h; sourceTree = "<group>"; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		285E0FAA1E7236D60092A233 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		285E0FAC1E7236D60092A233 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -444,6 +445,7 @@
 				285E0FE41E76094D0092A233 /* ParseMenu.m */,
 				2808808F1E831913005CD9B9 /* BackgroundFetchMenu.h */,
 				280880901E831913005CD9B9 /* BackgroundFetchMenu.m */,
+				281F6D2D1EB80C3F00BCE9F7 /* NMMultipeerProtocol.h */,
 				280880921E8324B0005CD9B9 /* NMMultipeer.h */,
 				280880931E8324B0005CD9B9 /* NMMultipeer.m */,
 				2800AFA21E8CB0AC00DEAD8F /* FeedbackTextFieldDelegate.h */,

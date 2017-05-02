@@ -163,7 +163,7 @@
     NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
     NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
     double ratio = (double)seedCount / leachCount;
-    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics (Experimental):\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @"...to be seen!" : @""];
+    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics:\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@\n\nLeaderboard at %@. Manage P2P and statistics in Settings.", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @" ...to be seen!" : @"", kP2PLeaderboardURL];
     
     NSString *aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", error ? error.localizedDescription : aboutText, statisticsText];
     

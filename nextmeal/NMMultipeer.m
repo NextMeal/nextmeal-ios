@@ -22,9 +22,10 @@
 @property Menu *localMenu;
 @property NSDate *localMenuUpdateDate;
 
-@property NSMutableDictionary<MCPeerID *, NSDate *> *activePeerUpdateDates;
+@property NSMutableDictionary<NSString *, NSDate *> *activePeerUpdateDates;
+@property NSMutableDictionary<NSString *, MCSession *> *activePeerSessions;
 
-@property MCSession *savedSession;
+@property BOOL updatingDelegate;
 
 @end
 
@@ -50,29 +51,42 @@
 
 #pragma mark - Session management methods
 
-- (BOOL)isSeederInSessionWithPeer:(MCPeerID *)remotePeerID {
-    if ([_activePeerUpdateDates objectForKey:remotePeerID] == _localMenuUpdateDate)
+- (BOOL)isSeederInSessionWithPeer:(NSString *)remotePeerUUID {
+    if ([_activePeerUpdateDates objectForKey:remotePeerUUID] == _localMenuUpdateDate)
         return YES;
     else
         return NO;
 }
 
-- (void)addPeerToDict:(MCPeerID *)remotePeerID updateDate:(NSDate *)date {
+- (void)addPeerToDateDict:(NSString *)remotePeerUUID updateDate:(NSDate *)date {
     if (!_activePeerUpdateDates)
         _activePeerUpdateDates = [[NSMutableDictionary alloc] init];
     
-    [_activePeerUpdateDates setObject:date forKey:remotePeerID];
+    [_activePeerUpdateDates setObject:date forKey:remotePeerUUID];
 }
 
-- (void)removePeerFromDict:(MCPeerID *)remotePeerID {
-    [_activePeerUpdateDates removeObjectForKey:remotePeerID];
+- (void)removePeerFromDateDict:(NSString *)remotePeerUUID {
+    if (!_activePeerUpdateDates)
+        [_activePeerUpdateDates removeObjectForKey:remotePeerUUID];
+}
+
+- (void)addPeerToSessionDict:(NSString *)remotePeerUUID session:(MCSession *)session {
+    if (!_activePeerSessions)
+        _activePeerSessions = [[NSMutableDictionary alloc] init];
+    
+    [_activePeerSessions setObject:session forKey:remotePeerUUID];
+}
+
+- (void)removePeerFromSessionDict:(NSString *)remotePeerUUID {
+    if (!_activePeerSessions)
+        [_activePeerSessions removeObjectForKey:remotePeerUUID];
 }
 
 #pragma mark - MCSessionDelegate methods
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
     NSLog(@"Received data of length %lu from peer %@", (unsigned long)data.length, peerID.displayName);
-    
+
     //If received menu is valid and delegate is set, call delegate with updated menu.
     Menu *receivedMenu = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ([receivedMenu allWeeksValid] && _delegate) {
@@ -80,12 +94,15 @@
         NSLog(@"Received menu is valid. Alerting delegate.");
         //Call delegate on main thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            [_delegate getMenuOnlineResultWithMenu:receivedMenu withURLResponse:nil withError:nil];
+            _updatingDelegate = YES;
+            [session disconnect];
+            
+            [_delegate getMenuOnlineResultWithMenu:receivedMenu withUpdateDate:[_activePeerUpdateDates objectForKey:peerID.displayName] withURLResponse:nil withError:nil];
+            //[session disconnect]; //Session will be autodisconnected when delegate restarts the advertiser and browser. Do not disconnect manually or else the MCSession delegate will set to start browsing again. Don't browse until the delegate has updated the menu and date data.
+            [self removePeerFromDateDict:peerID.displayName];
         });
         [self incrementP2PLeachount];
     }
-    
-    [session disconnect];
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress {
@@ -107,10 +124,11 @@
     switch (state) {
         case MCSessionStateNotConnected:
             sessionStateName = @"MCSessionStateNotConnected";
-            [self removePeerFromDict:peerID];
+            [self removePeerFromDateDict:peerID.displayName];
             
-            //Start looking for menus again.
-            [self startBrowsing];
+            //Start looking for menus again if the session was disconnected (now MCSessionStateNotConnected) and we are not updating the delegate as a result of successful menu transfer.
+            if (!_updatingDelegate)
+                [self startBrowsing];
             break;
             
         case MCSessionStateConnecting:
@@ -122,16 +140,23 @@
             
         case MCSessionStateConnected:
             sessionStateName = @"MCSessionStateConnected";
-            if ([self isSeederInSessionWithPeer:peerID]) {
+            if ([self isSeederInSessionWithPeer:peerID.displayName]) {
                 NSError *error;
                 [session sendData:[NSKeyedArchiver archivedDataWithRootObject:_localMenu] toPeers:@[peerID] withMode:MCSessionSendDataReliable error:&error];
                 if (error)
                     NSLog(@"Send data to peer %@ had error. %@", peerID.displayName, error.localizedDescription);
-                else
+                else {
+                    NSLog(@"Data sent to peer %@", peerID.displayName);
                     [self incrementP2PSeedCount];
+                }
                 
+                //Do not disconnect here, because the session may not have sent the data yet. Wait for ack from leecher and then disconnect.
+                /*
                 //Disconnect when transfer done
-                [session disconnect];
+                //[session disconnect];
+                 */
+            } else {
+                NSLog(@"Not the seeder, waiting for data from peer.");
             }
             break;
             
@@ -155,13 +180,15 @@
     
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession * _Nullable))invitationHandler {
     
+    NSLog(@"received invite from peer %@", peerID.displayName);
+    
     //Add peer to dict of connected peers
     //Use local menu update date as the value so we can determine we are the seeder for the menu later.
-    [self addPeerToDict:peerID updateDate:_localMenuUpdateDate];
+    [self addPeerToDateDict:peerID.displayName updateDate:_localMenuUpdateDate];
     
-    MCSession *sharingSession = [[MCSession alloc] initWithPeer:_localPeerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
+    MCSession *sharingSession = [[MCSession alloc] initWithPeer:_localPeerID securityIdentity:nil encryptionPreference:MCEncryptionOptional];
     sharingSession.delegate = self;
-    _savedSession = sharingSession;
+    [self addPeerToSessionDict:peerID.displayName session:sharingSession];
     invitationHandler(YES, sharingSession);
 }
 
@@ -190,11 +217,12 @@
         NSLog(@"Inviting peer %@ to session.", peerID.displayName);
         
         //Add peer to dictionary of connected peers
-        [self addPeerToDict:peerID updateDate:remotePeerUpdateDate];
+        [self addPeerToDateDict:peerID.displayName updateDate:remotePeerUpdateDate];
         
         //Create session and invite peer
-        MCSession *sharingSession = [[MCSession alloc] initWithPeer:_localPeerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
+        MCSession *sharingSession = [[MCSession alloc] initWithPeer:_localPeerID securityIdentity:nil encryptionPreference:MCEncryptionOptional];
         sharingSession.delegate = self;
+        [self addPeerToSessionDict:peerID.displayName session:sharingSession];
         [browser invitePeer:peerID toSession:sharingSession withContext:nil timeout:30];
     }
 }

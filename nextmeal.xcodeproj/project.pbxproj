@@ -11,6 +11,7 @@
 		280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880901E831913005CD9B9 /* BackgroundFetchMenu.m */; };
 		280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880931E8324B0005CD9B9 /* NMMultipeer.m */; };
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
+		281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		285E0FAB1E7236D60092A233 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAA1E7236D60092A233 /* main.m */; };
 		285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAD1E7236D60092A233 /* AppDelegate.m */; };
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
@@ -38,7 +39,7 @@
 		286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */; };
 		286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43A1E8F494D00067907 /* Fabric.framework */; };
 		286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43B1E8F494D00067907 /* Crashlytics.framework */; };
-		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; };
+		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */; };
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
 		289586EF1E7780430053A408 /* sampleMenu2.json in Resources */ = {isa = PBXBuildFile; fileRef = 289586EE1E7780430053A408 /* sampleMenu2.json */; };
@@ -179,6 +180,7 @@
 		280880931E8324B0005CD9B9 /* NMMultipeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMMultipeer.m; sourceTree = "<group>"; };
 		280CC7451E8A1CA900B57C30 /* InterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		280CC7461E8A1CA900B57C30 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		285E0FAA1E7236D60092A233 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		285E0FAC1E7236D60092A233 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */,
 				286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */,
 				28F9374F1E89CB4B00D98267 /* MapKit.framework in Frameworks */,
 				286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */,
@@ -495,6 +498,7 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */,
 				286AF43A1E8F494D00067907 /* Fabric.framework */,
 				286AF43B1E8F494D00067907 /* Crashlytics.framework */,
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
@@ -1079,6 +1083,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1093,6 +1098,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1101,6 +1107,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = nextmeal/nextmeal.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 3E2UWZ76C2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1115,6 +1122,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

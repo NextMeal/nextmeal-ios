@@ -29,7 +29,7 @@
 
 #pragma mark - ParseMenuProtocol methods
 
-- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withUpdateDate:(NSDate *)updateDate withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
     
 }
 

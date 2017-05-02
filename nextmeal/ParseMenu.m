@@ -147,7 +147,7 @@
     
     //Block for calling the delegate
     void (^alertDelegate)(Menu *, NSURLResponse *, NSError *) = ^void(Menu *outputMenu, NSURLResponse *menuResponse, NSError *menuError) {
-        [delegate getMenuOnlineResultWithMenu:outputMenu withURLResponse:menuResponse withError:menuError];
+        [delegate getMenuOnlineResultWithMenu:outputMenu withUpdateDate:[NSDate date] withURLResponse:menuResponse withError:menuError];
     };
     
     Menu *outputMenu = [Menu new];
@@ -212,6 +212,8 @@
             }
             
             NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+            sessionConfiguration.timeoutIntervalForRequest = 60;
+            sessionConfiguration.timeoutIntervalForResource = 120;
             NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
             NSURL *url = components.URL;
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

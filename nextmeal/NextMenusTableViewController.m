@@ -85,7 +85,7 @@
 #pragma mark - ParseMenuProtocol methods
 
 //Call on main thread!
-- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
+- (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withUpdateDate:(NSDate *)updateDate withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
     if (error) {
         NSLog(@"Error getting menu %@", [error localizedDescription]);
         self.navigationItem.prompt = [error localizedDescription];
@@ -101,7 +101,7 @@
             self.loadedMenu = responseMenu;
             
             //Update menu date in preferences
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kMenuLastUpdatedKey];
+            [[NSUserDefaults standardUserDefaults] setObject:updateDate forKey:kMenuLastUpdatedKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             //Block for saving menu to disk
@@ -115,23 +115,20 @@
             
             self.navigationItem.prompt = nil;
             
+            [self findNextMenus];
             [self.tableView reloadData];
+            
+            //Send the next meal to the watch
+            [self sendMealToWatch:self.nextMenus.count > 0 ? self.nextMenus[0] : nil];
+            
+            //Update and restart P2P. We only need to do this if we have new valid data to update the discovery info with. Otherwise, we already restarted P2P right after local menu refresh in reloadMenuDataLocalAndRemote.
+            [self startAndUpdateLocalPeerManager];
+        } else {
+            NSLog(@"Menu did not pass allWeeksValid check.\n%@", responseMenu);
         }
     }
     
     [self stopRefreshingElements];
-    
-    if (self.loadedMenu.allWeeksValid) {
-        [self findNextMenus];
-        [self.tableView reloadData];
-        
-        //Send the next meal to the watch
-        [self sendMealToWatch:self.nextMenus.count > 0 ? self.nextMenus[0] : nil];
-    } else {
-        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
-    }
-    
-    [self startAndUpdateLocalPeerManager];
 }
 
 #pragma mark - Reload data and UI methods
@@ -200,21 +197,20 @@
         [self reloadMenuDataFromLocal];
     }
     
-    [self.tableView reloadData];
-    
-    [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
-    
     if ([self.loadedMenu allWeeksValid]) {
         [self findNextMenus];
         [self.tableView reloadData];
         
         //Send the next meal to the watch
         [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
+        
     } else {
         NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
     
     [self startAndUpdateLocalPeerManager];
+    
+    [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
 }
 
 - (void)reloadMenuDataAndTableView {

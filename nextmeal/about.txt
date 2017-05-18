@@ -3,6 +3,7 @@ Know the next three meals being served in King Hall!
 Currently Maintainers:
 Anson Liu (ansonliu.com)
 Kim Do (kimpossible.co)
+Yogaish Khastgir
 
 Initial Development & Media: Michael Madrid, Anson Liu, Awad Mohammed, Bobby Nefzger, Alfred Garvey
 

@@ -72,12 +72,12 @@
 
 - (void)startRefreshingElements {
     [self.refreshControl beginRefreshing];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)stopRefreshingElements {
     [self.refreshControl endRefreshing];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)refreshControlPulled {

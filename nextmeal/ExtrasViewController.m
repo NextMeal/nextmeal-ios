@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UITextView *aboutTextView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aboutActivityIndicator;
 
 @property (weak, nonatomic) IBOutlet UIButton *uberButton;
 @property (weak, nonatomic) IBOutlet UIButton *lyftButton;
@@ -173,18 +174,54 @@
     
 }
 
+- (NSString *)createMultipeerStatsText {
+    NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
+    NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
+    double ratio = (double)seedCount / leachCount;
+    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics:\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@\n\nLeaderboard at %@. Manage P2P and statistics in Settings.", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @" ...to be seen!" : @"", kP2PLeaderboardURL];
+    
+    return statisticsText;
+}
+
+- (void)getOnlineAboutText {
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [_aboutActivityIndicator startAnimating];
+    });
+    
+    NSError *error;
+    NSURLComponents *components = [NSURLComponents new];
+    components.host = kServerHost;
+    components.scheme = kServerProtocol;
+    components.path = kAboutTextPath;
+    NSString *tmp = [[NSString alloc] initWithContentsOfURL:components.URL encoding:NSUTF8StringEncoding error:&error];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        NSString *aboutAndStatsText;
+        
+        if (error) {
+            NSError *localError;
+            NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&localError];
+            if (localError)
+                aboutText = error.localizedDescription;
+            aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", aboutText, [self createMultipeerStatsText]];
+        } else {
+            aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", tmp, [self createMultipeerStatsText]];
+        }
+        
+        _aboutTextView.text = aboutAndStatsText;
+        [_aboutActivityIndicator stopAnimating];
+        
+        
+    });
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     NSError *error;
     NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
     
-    NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
-    NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
-    double ratio = (double)seedCount / leachCount;
-    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics:\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@\n\nLeaderboard at %@. Manage P2P and statistics in Settings.", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @" ...to be seen!" : @"", kP2PLeaderboardURL];
-    
-    NSString *aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", error ? error.localizedDescription : aboutText, statisticsText];
+    NSString *aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", error ? error.localizedDescription : aboutText, [self createMultipeerStatsText]];
     
     _aboutTextView.text = aboutAndStatsText;
     
@@ -205,6 +242,13 @@
     NSError *error;
     NSString *taxiText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"taxi" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&error];
     _taxiTextView.text = error ? error.localizedDescription : taxiText;
+    
+    //Start loading online about info
+    [_aboutActivityIndicator setColor:[UIColor darkGrayColor]];
+    _aboutActivityIndicator.hidesWhenStopped = YES;
+    dispatch_async(dispatch_queue_create("com.apparentetch.nextmeal", NULL), ^(void) {
+        [self getOnlineAboutText];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

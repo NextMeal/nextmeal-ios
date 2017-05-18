@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rmx-2Q-af9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rmx-2Q-af9">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -29,7 +29,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IZx-gL-6oa">
-                                            <rect key="frame" x="16" y="0.0" width="289" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -67,7 +67,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="98H-87-NZT">
-                                            <rect key="frame" x="16" y="0.0" width="289" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -304,11 +304,16 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-MI-KfA">
+                                        <rect key="frame" x="150" y="263" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="uYY-mS-qmt" firstAttribute="leading" secondItem="JyT-Zi-gw0" secondAttribute="leading" constant="8" id="3tf-nS-SIp"/>
                                     <constraint firstAttribute="bottom" secondItem="uYY-mS-qmt" secondAttribute="bottom" id="56p-J9-H7O"/>
                                     <constraint firstAttribute="trailing" secondItem="Cae-g4-OnV" secondAttribute="trailing" constant="8" id="79A-Jc-Rso"/>
+                                    <constraint firstItem="Dk2-MI-KfA" firstAttribute="centerX" secondItem="uYY-mS-qmt" secondAttribute="centerX" id="LVb-ZL-1rZ"/>
+                                    <constraint firstItem="Dk2-MI-KfA" firstAttribute="centerY" secondItem="uYY-mS-qmt" secondAttribute="centerY" id="S0r-aU-gl1"/>
                                     <constraint firstItem="Cae-g4-OnV" firstAttribute="height" relation="lessThanOrEqual" secondItem="uYY-mS-qmt" secondAttribute="height" multiplier="0.5" id="aCe-o0-5TT"/>
                                     <constraint firstItem="Cae-g4-OnV" firstAttribute="leading" secondItem="JyT-Zi-gw0" secondAttribute="leading" constant="8" id="b1Q-gD-AGM"/>
                                     <constraint firstAttribute="trailing" secondItem="uYY-mS-qmt" secondAttribute="trailing" constant="8" id="uuZ-b0-Zwt"/>
@@ -554,6 +559,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="E3u-cI-FJ4"/>
                     <connections>
+                        <outlet property="aboutActivityIndicator" destination="Dk2-MI-KfA" id="CZN-Oz-cEt"/>
                         <outlet property="aboutTextView" destination="uYY-mS-qmt" id="aKM-EJ-evx"/>
                         <outlet property="backgroundMapView" destination="Z7s-hU-BCB" id="4vf-m9-Tnf"/>
                         <outlet property="lyftButton" destination="5AO-AK-or6" id="GW6-Pt-Nmm"/>

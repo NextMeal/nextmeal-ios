@@ -16,7 +16,7 @@
 #define kSampleFilename2 @"sampleMenu2.json"
 
 
-#pragma mark - URL parameters
+#pragma mark - openURL parameters
 
 #define kSelectedViewKey @"selectedView"
 #define kSelectedViewNextMeal @"nextMeal"
@@ -64,6 +64,7 @@
 #define kServerHost @"navy.herokuapp.com"
 #define kServerMenu1Path @"/menu"
 #define kServerMenu2Path @"/menu2"
+#define kAboutTextPath @"/about"
 
 #define kRequestTimeoutInteval 60
 #define kResourceTimeoutInterval 120
@@ -80,7 +81,7 @@
 
 #define kNMMultipeerDeviceIdBlacklistKey @"multipeerDeviceIdBlacklistKey"
 
-#define kP2PLeaderboardURL @"navy.herokuapp.com/leaderboard"
+#define kP2PLeaderboardURL @"nextmeal.github.io/leaderboard"
 
 
 #pragma mark - Menu JSON key constants

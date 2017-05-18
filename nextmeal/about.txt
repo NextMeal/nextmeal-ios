@@ -7,10 +7,7 @@ Yogaish Khastgir
 
 Initial Development & Media: Michael Madrid, Anson Liu, Awad Mohammed, Bobby Nefzger, Alfred Garvey
 
-Get the menu on the computer at https://NextMeal.tk.
-
-Follow at facebook.com/nextmealapp.
-Email us at nextmealapp@gmail.com.
+Get the menu on the computer at nextmeal.github.io.
 
 Next Meal is open source. iOS app, web app, and server side code is made available under MIT License (attribution required) at (github.com/NextMeal)
 

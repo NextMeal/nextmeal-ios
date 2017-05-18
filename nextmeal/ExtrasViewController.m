@@ -178,7 +178,7 @@
     NSInteger seedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
     NSInteger leachCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
     double ratio = (double)seedCount / leachCount;
-    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics:\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@\n\nLeaderboard at %@. Manage P2P and statistics in Settings.", (long)seedCount, (long)leachCount, ratio, isnan(ratio) ? @" ...to be seen!" : @"", kP2PLeaderboardURL];
+    NSString *statisticsText = [NSString stringWithFormat:@"Your P2P Menu Statistics:\nSeeds: %ld\nLeechs: %ld\nS/L Ratio: %f%@\n\n💥 P2P Leaderboard at %@.\n🔧 Manage P2P and statistics in Settings.", (long)seedCount, (long)leachCount, ratio, isnan(ratio) || isinf(ratio) ? @" ...to be seen!" : @"", kP2PLeaderboardURL];
     
     return statisticsText;
 }
@@ -199,6 +199,7 @@
         NSString *aboutAndStatsText;
         
         if (error) {
+            NSLog(@"Error getting online about info %@", error.localizedDescription);
             NSError *localError;
             NSString *aboutText = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"txt"] encoding:NSUTF8StringEncoding error:&localError];
             if (localError)

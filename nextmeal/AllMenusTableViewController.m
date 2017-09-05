@@ -64,6 +64,9 @@
         }
     }
     
+    //Set class variable to indicate no menu refresh operation in progress.
+    self.refreshingMenu = NO;
+    
     [self stopRefreshingElements];
 }
 
@@ -81,16 +84,6 @@
 }
 
 - (void)refreshControlPulled {
-    //Retrieve last updated time from preferences
-    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
-    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
-    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
-    //If last updated time is within 10 seconds of current time, do not update.
-    if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
-        [self.refreshControl endRefreshing];
-        return;
-    }
-    
     [self reloadMenuDataAndTableView];
 }
 
@@ -140,6 +133,25 @@
 }
 
 - (void)reloadMenuDataAndTableView {
+    //If menu refresh operation already in progress, do nothing. Avoid mutating objects while enumerating them in menu parsing methods. Found in Fabric crashlytics
+    if (self.refreshingMenu == YES) {
+        //Do not "stop" refreshing elements, let UI keep "refreshing" state
+        return;
+    }
+    
+    //Retrieve last updated time from preferences
+    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
+    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
+    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
+    //If last updated time is within 10 seconds of current time, do not update.
+    if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
+        [self stopRefreshingElements];
+        return;
+    }
+    
+    //Set class variable to indicate refresh in progress.
+    self.refreshingMenu = YES;
+    
     [self startRefreshingElements];
     [self reloadMenuDataLocalAndRemote];
 }

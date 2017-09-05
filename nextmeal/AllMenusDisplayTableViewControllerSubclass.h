@@ -16,6 +16,7 @@
 @interface AllMenusDisplayTableViewController ()
 
 @property Menu *loadedMenu;
+@property BOOL refreshingMenu;
 
 @end
 

@@ -97,36 +97,35 @@
         
     } else {
         Menu *responseMenu = outputMenu;
-        if (responseMenu.allWeeksValid) {
-            self.loadedMenu = responseMenu;
-            
-            //Update menu date in preferences
-            [[NSUserDefaults standardUserDefaults] setObject:updateDate forKey:kMenuLastUpdatedKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            //Block for saving menu to disk
-            void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
-                NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
-                [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
-            };
-            saveMenu(responseMenu);
-            
-            [self setRefreshControlTitle];
-            
-            self.navigationItem.prompt = nil;
-            
-            [self findNextMenus];
-            [self.tableView reloadData];
-            
-            //Send the next meal to the watch
-            [self sendMealToWatch:self.nextMenus.count > 0 ? self.nextMenus[0] : nil];
-            
-            //Update and restart P2P. We only need to do this if we have new valid data to update the discovery info with. Otherwise, we already restarted P2P right after local menu refresh in reloadMenuDataLocalAndRemote.
-            [self startAndUpdateLocalPeerManager];
-        } else {
-            NSLog(@"Menu did not pass allWeeksValid check.\n%@", responseMenu);
-        }
+        self.loadedMenu = responseMenu;
+        
+        //Update menu date in preferences
+        [[NSUserDefaults standardUserDefaults] setObject:updateDate forKey:kMenuLastUpdatedKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        //Block for saving menu to disk
+        void (^saveMenu)(Menu *) = ^void(Menu *outputMenu) {
+            NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:outputMenu];
+            [ReadWriteLocalData saveData:menuData withFilename:kMenuLastSavedFilename];
+        };
+        saveMenu(responseMenu);
+        
+        [self setRefreshControlTitle];
+        
+        self.navigationItem.prompt = nil;
+        
+        [self findNextMenus];
+        [self.tableView reloadData];
+        
+        //Send the next meal to the watch
+        [self sendMealToWatch:self.nextMenus.count > 0 ? self.nextMenus[0] : nil];
+        
+        //Update and restart P2P. We only need to do this if we have new valid data to update the discovery info with. Otherwise, we already restarted P2P right after local menu refresh in reloadMenuDataLocalAndRemote.
+        [self startAndUpdateLocalPeerManager];
     }
+    
+    //Set class variable to indicate no menu refresh operation in progress.
+    self.refreshingMenu = NO;
     
     [self stopRefreshingElements];
 }
@@ -135,25 +134,15 @@
 
 - (void)startRefreshingElements {
     [self.refreshControl beginRefreshing];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)stopRefreshingElements {
     [self.refreshControl endRefreshing];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 - (void)refreshControlPulled {
-    //Retrieve last updated time from preferences
-    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
-    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
-    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
-    //If last updated time is within 10 seconds of current time, do not update.
-    if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
-        [self.refreshControl endRefreshing];
-        return;
-    }
-    
     [self reloadMenuDataAndTableView];
 }
 
@@ -214,6 +203,26 @@
 }
 
 - (void)reloadMenuDataAndTableView {
+    //If menu refresh operation already in progress, do nothing. Avoid mutating objects while enumerating them in menu parsing methods. Found in Fabric crashlytics
+    if (self.refreshingMenu == YES) {
+        //Do not "stop" refreshing elements, let UI keep "refreshing" state
+        NSLog(@"already refreshing");
+        return;
+    }
+    
+    //Retrieve last updated time from preferences
+    NSUserDefaults *userDefaultsInstance = [NSUserDefaults standardUserDefaults];
+    //[userDefaultsInstance registerDefaults:@{ kMenuLastUpdatedKey : [NSNull null] }];
+    id menuLastUpdatedObject = [userDefaultsInstance objectForKey:kMenuLastUpdatedKey];
+    //If last updated time is within 10 seconds of current time, do not update.
+    if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
+        [self stopRefreshingElements];
+        return;
+    }
+    
+    //Set class variable to indicate refresh in progress.
+    self.refreshingMenu = YES;
+    
     [self startRefreshingElements];
     [self reloadMenuDataLocalAndRemote];
 }

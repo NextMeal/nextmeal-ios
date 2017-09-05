@@ -152,7 +152,7 @@
     
     Menu *outputMenu = [Menu new];
     
-    if (kDebug) {
+    if (kDebug) { //set kDebug to YES to simulate network
         for (int i = 1; i < 3; i++) {
             NSData *menuData = [self readSampleLocalNumber:i];
             [outputMenu addWeek:[self parseMenu:menuData error:nil]];
@@ -260,10 +260,24 @@
                         saveMenu(outputMenu);
                      */
                     
-                    //Call delegate on main thread
-                    dispatch_async(dispatch_get_main_queue(), ^(void){
-                        alertDelegate(outputMenu, response, requestLastError);
-                    });
+                    if (outputMenu.allWeeksValid) {
+                        //Call delegate on main thread
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            alertDelegate(outputMenu, response, requestLastError);
+                        });
+                    } else {
+                        NSString *errorString = @"Parsed outputMenu failed allWeeksValid check";
+                        NSError *allWeeksValidError = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
+                        NSLog(@"%@", errorString);
+                        
+                        //Call delegate on main thread
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            alertDelegate(nil, response, allWeeksValidError);
+                        });
+                    }
+                    
+                    
+                    
                 }
             }];
             [postDataTask resume];

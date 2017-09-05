@@ -116,9 +116,10 @@
 - (void)reloadMenuDataFromLocal {
     NSError *error;
     Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
-    if (!error)
+    if (!error) {
         self.loadedMenu = savedMenu;
-    else
+        [self.tableView reloadData];
+    } else
         self.navigationItem.prompt = [error localizedDescription];
 }
 
@@ -126,8 +127,6 @@
     if (!self.loadedMenu) {
         [self reloadMenuDataFromLocal];
     }
-    
-    [self.tableView reloadData];
     
     [ParseMenu retrieveMenusWithDelegate:self withOriginType:NMForeground];
 }
@@ -146,6 +145,7 @@
     //If last updated time is within 10 seconds of current time, do not update.
     if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
         [self stopRefreshingElements];
+        [self reloadMenuDataFromLocal]; //reload table in case view just loaded and table isn't populated.
         return;
     }
     

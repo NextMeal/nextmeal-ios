@@ -13,6 +13,10 @@
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
 		281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
+		283879F91F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
+		283879FA1F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
+		283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F81F5F274A0034E047 /* Fabric.framework */; };
+		283879FC1F5F274A0034E047 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F81F5F274A0034E047 /* Fabric.framework */; };
 		285E0FAB1E7236D60092A233 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAA1E7236D60092A233 /* main.m */; };
 		285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAD1E7236D60092A233 /* AppDelegate.m */; };
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
@@ -38,8 +42,6 @@
 		286AF41C1E8F39C500067907 /* stem-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41B1E8F39C500067907 /* stem-logo.png */; };
 		286AF41E1E8F39CE00067907 /* trident-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41D1E8F39CE00067907 /* trident-logo.png */; };
 		286AF4201E8F3D9C00067907 /* anchor-blue-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */; };
-		286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43A1E8F494D00067907 /* Fabric.framework */; };
-		286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43B1E8F494D00067907 /* Crashlytics.framework */; };
 		286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		286EBDC41E8AAE4500B1EF2E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286EBDC31E8AAE4500B1EF2E /* DetailInterfaceController.m */; };
 		289586ED1E777C990053A408 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 289586EC1E777C990053A408 /* Menu.m */; };
@@ -92,8 +94,6 @@
 		28F937861E8A0F0C00D98267 /* ItemRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F937851E8A0F0C00D98267 /* ItemRow.m */; };
 		28F9378A1E8A10BC00D98267 /* Meal.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FDA1E74F3400092A233 /* Meal.m */; };
 		28F9378B1E8A10BE00D98267 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD61E74F30A0092A233 /* Item.m */; };
-		28FEE3E31EB9171C00B9015D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43B1E8F494D00067907 /* Crashlytics.framework */; };
-		28FEE3E41EB9172200B9015D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286AF43A1E8F494D00067907 /* Fabric.framework */; };
 		28FEE3E61EB917E300B9015D /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
 		28FEE3E71EB917E500B9015D /* fabric.buildsecret in Resources */ = {isa = PBXBuildFile; fileRef = 286AF4401E8F4E2200067907 /* fabric.buildsecret */; };
 /* End PBXBuildFile section */
@@ -187,6 +187,8 @@
 		280CC7461E8A1CA900B57C30 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		281F6D2D1EB80C3F00BCE9F7 /* NMMultipeerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeerProtocol.h; sourceTree = "<group>"; };
+		283879F71F5F274A0034E047 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		283879F81F5F274A0034E047 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		285E0FAA1E7236D60092A233 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		285E0FAC1E7236D60092A233 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -225,8 +227,6 @@
 		286AF41B1E8F39C500067907 /* stem-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stem-logo.png"; sourceTree = "<group>"; };
 		286AF41D1E8F39CE00067907 /* trident-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trident-logo.png"; sourceTree = "<group>"; };
 		286AF41F1E8F3D9C00067907 /* anchor-blue-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anchor-blue-yellow.png"; sourceTree = "<group>"; };
-		286AF43A1E8F494D00067907 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		286AF43B1E8F494D00067907 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		286AF43E1E8F4E1B00067907 /* fabric.apikey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.apikey; sourceTree = "<group>"; };
 		286AF4401E8F4E2200067907 /* fabric.buildsecret */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.buildsecret; sourceTree = "<group>"; };
 		286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
@@ -306,10 +306,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */,
+				283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */,
 				286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */,
+				283879F91F5F274A0034E047 /* Crashlytics.framework in Frameworks */,
 				28F9374F1E89CB4B00D98267 /* MapKit.framework in Frameworks */,
-				286AF43D1E8F494D00067907 /* Crashlytics.framework in Frameworks */,
-				286AF43C1E8F494D00067907 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,9 +325,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28FEE3E31EB9171C00B9015D /* Crashlytics.framework in Frameworks */,
+				283879FA1F5F274A0034E047 /* Crashlytics.framework in Frameworks */,
 				28F5498D1E8E063C00937C71 /* Messages.framework in Frameworks */,
-				28FEE3E41EB9172200B9015D /* Fabric.framework in Frameworks */,
+				283879FC1F5F274A0034E047 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,9 +507,9 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				283879F71F5F274A0034E047 /* Crashlytics.framework */,
+				283879F81F5F274A0034E047 /* Fabric.framework */,
 				281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */,
-				286AF43A1E8F494D00067907 /* Fabric.framework */,
-				286AF43B1E8F494D00067907 /* Crashlytics.framework */,
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
 				28F9374E1E89CB4B00D98267 /* MapKit.framework */,
 				28AC00271E8580E600D2988F /* NotificationCenter.framework */,

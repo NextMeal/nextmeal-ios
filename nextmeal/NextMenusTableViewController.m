@@ -175,26 +175,26 @@
 - (void)reloadMenuDataFromLocal {
     NSError *error;
     Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
-    if (!error)
+    if (!error) {
         self.loadedMenu = savedMenu;
-    else
+        
+        if ([self.loadedMenu allWeeksValid]) {
+            [self findNextMenus];
+            [self.tableView reloadData];
+            
+            //Send the next meal to the watch
+            [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
+            
+        } else {
+            NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
+        }
+    } else
         self.navigationItem.prompt = [error localizedDescription];
 }
 
 - (void)reloadMenuDataLocalAndRemote {
     if (!self.loadedMenu) {
         [self reloadMenuDataFromLocal];
-    }
-    
-    if ([self.loadedMenu allWeeksValid]) {
-        [self findNextMenus];
-        [self.tableView reloadData];
-        
-        //Send the next meal to the watch
-        [self sendMealToWatch:self.nextMenus ? self.nextMenus[0] : nil];
-        
-    } else {
-        NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
     }
     
     [self startAndUpdateLocalPeerManager];
@@ -217,6 +217,7 @@
     //If last updated time is within 10 seconds of current time, do not update.
     if (menuLastUpdatedObject && [[NSDate date] timeIntervalSinceDate:menuLastUpdatedObject] < 10) {
         [self stopRefreshingElements];
+        [self reloadMenuDataFromLocal];
         return;
     }
     

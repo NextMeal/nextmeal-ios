@@ -212,8 +212,17 @@
             }
             
             NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-            sessionConfiguration.timeoutIntervalForRequest = kRequestTimeoutInteval;
-            sessionConfiguration.timeoutIntervalForResource = kResourceTimeoutInterval;
+            
+            if (originType == NMBackground) {
+                sessionConfiguration.timeoutIntervalForRequest = 10;
+                sessionConfiguration.timeoutIntervalForResource = 25; //This is the important part for background fetch. Request for resource must end <30s. https://stackoverflow.com/a/31008311
+            } else {
+                sessionConfiguration.timeoutIntervalForRequest = kRequestTimeoutInteval;
+                sessionConfiguration.timeoutIntervalForResource = kResourceTimeoutInterval;
+            }
+            
+            
+            
             NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
             NSURL *url = components.URL;
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -229,7 +238,7 @@
                 //If the request had no error, parse the data
                 if (error) {
                     [requestErrorLock lock];
-                    requestLastError = error;
+                    requestLastError = error; //update with any REQUEST error
                     [requestErrorLock unlock];
                 } else {
                     Week *outputWeek = [self parseMenu:data error:&error];
@@ -237,19 +246,18 @@
                     //Update menu object if parse has no error
                     if (error) {
                         [requestErrorLock lock];
-                        requestLastError = error;
+                        requestLastError = error; //update with any PARSE error
                         [requestErrorLock unlock];
                     } else
                         [outputMenu updateWeekIndex:i withWeek:outputWeek];
                 }
                 
-                //Save menu to disk and call delegate if all requests have completed. Lock/unlock request complete array and loop to check if all values are YES.
+                //Call delegate if all requests have completed. Lock/unlock request complete array and loop to check if all values are YES.
                 BOOL allRequestsComplete = YES;
                 [requestCompletionArrayLock lock];
                 for (NSNumber *value in requestComplete)
                     if (![value boolValue])
                         allRequestsComplete = NO;
-                [requestCompletionArrayLock unlock];
                 
                 if (allRequestsComplete) {
                     //NSLog(@"all requests complete");
@@ -267,18 +275,16 @@
                         });
                     } else {
                         NSString *errorString = @"Parsed outputMenu failed allWeeksValid check";
-                        NSError *allWeeksValidError = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
-                        NSLog(@"%@", errorString);
+                        requestLastError = [[NSError alloc] initWithDomain:kNMParseErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : errorString}];
                         
                         //Call delegate on main thread
                         dispatch_async(dispatch_get_main_queue(), ^(void){
-                            alertDelegate(nil, response, allWeeksValidError);
+                            alertDelegate(nil, response, requestLastError);
                         });
                     }
-                    
-                    
-                    
                 }
+                //Unlock requestCompletionArrayLock AFTER thread checks the allRequestComplete variable. Possible case of the first request thread to loop through requestComplete array but not check allRequestsComplete condition until the second thread loops through the requestComplete array and changes the allRequestsComplete variable. Then both threads will all delegate method > completionHandler may be called twice! (background fetch crash)
+                [requestCompletionArrayLock unlock];
             }];
             [postDataTask resume];
         }

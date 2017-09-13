@@ -115,7 +115,7 @@
 }
 
 - (void)removePeerFromDateDict:(NSString *)remotePeerUUID {
-    if (!_activePeerUpdateDates)
+    if (_activePeerUpdateDates)
         [_activePeerUpdateDates removeObjectForKey:remotePeerUUID];
 }
 
@@ -127,8 +127,16 @@
 }
 
 - (void)removePeerFromSessionDict:(NSString *)remotePeerUUID {
-    if (!_activePeerSessions)
+    if (_activePeerSessions)
         [_activePeerSessions removeObjectForKey:remotePeerUUID];
+}
+
+//Unused
+- (NSInteger)activePeerSessionCount {
+    if (_activePeerSessions)
+        return _activePeerSessions.count;
+    else
+        return 0;
 }
 
 #pragma mark - MCSessionDelegate methods

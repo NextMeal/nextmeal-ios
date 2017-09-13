@@ -58,7 +58,8 @@
             
             [self setRefreshControlTitle];
             
-            self.navigationItem.prompt = nil;
+            if (self.navigationItem.prompt)
+                self.navigationItem.prompt = nil;
             
             [self.tableView reloadData];
         }
@@ -119,6 +120,8 @@
     if (!error) {
         self.loadedMenu = savedMenu;
         [self.tableView reloadData];
+        if (self.navigationItem.prompt)
+            self.navigationItem.prompt = nil;
     } else
         self.navigationItem.prompt = [error localizedDescription];
 }

@@ -87,7 +87,7 @@
 //Call on main thread!
 - (void)getMenuOnlineResultWithMenu:(Menu *)outputMenu withUpdateDate:(NSDate *)updateDate withURLResponse:(NSURLResponse *)response withError:(NSError *)error {
     if (error) {
-        NSLog(@"Error getting menu %@", [error localizedDescription]);
+        NSLog(@"Error getting menu from peer %@", [error localizedDescription]);
         self.navigationItem.prompt = [error localizedDescription];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
             sleep(5);
@@ -96,6 +96,7 @@
         });
         
     } else {
+        NSLog(@"Success. Got menu from peer.");
         Menu *responseMenu = outputMenu;
         self.loadedMenu = responseMenu;
         
@@ -112,7 +113,8 @@
         
         [self setRefreshControlTitle];
         
-        self.navigationItem.prompt = nil;
+        if (self.navigationItem.prompt)
+            self.navigationItem.prompt = nil;
         
         [self findNextMenus];
         [self.tableView reloadData];
@@ -188,6 +190,9 @@
         } else {
             NSLog(@"Menu did not pass allWeeksValid check.\n%@", self.loadedMenu);
         }
+        
+        if (self.navigationItem.prompt)
+            self.navigationItem.prompt = nil;
     } else
         self.navigationItem.prompt = [error localizedDescription];
 }

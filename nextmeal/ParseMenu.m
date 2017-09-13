@@ -267,8 +267,11 @@
                     if (!requestLastError)
                         saveMenu(outputMenu);
                      */
-                    
-                    if (outputMenu.allWeeksValid) {
+                    if (requestLastError) {
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            alertDelegate(nil, response, requestLastError);
+                        });
+                    } else if (outputMenu.allWeeksValid) {
                         //Call delegate on main thread
                         dispatch_async(dispatch_get_main_queue(), ^(void){
                             alertDelegate(outputMenu, response, requestLastError);

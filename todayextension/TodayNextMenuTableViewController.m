@@ -53,7 +53,8 @@
             };
             saveMenu(responseMenu);
             
-            self.navigationItem.prompt = nil;
+            if (self.navigationItem.prompt)
+                self.navigationItem.prompt = nil;
             
             [self.tableView reloadData];
             
@@ -86,9 +87,11 @@
 - (void)reloadMenuData {
     NSError *error;
     Menu *savedMenu = [ParseMenu retrieveSavedMenusWithError:&error];
-    if (!error)
+    if (!error) {
         self.loadedMenu = savedMenu;
-    else
+        if (self.navigationItem.prompt)
+            self.navigationItem.prompt = nil;
+    } else
         self.navigationItem.prompt = [error localizedDescription];
     
     [self.tableView reloadData];

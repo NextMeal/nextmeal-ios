@@ -13,6 +13,7 @@
 #import "FeedbackTextFieldDelegate.h"
 
 @import MapKit;
+@import StoreKit;
 
 @interface ExtrasViewController ()
 
@@ -106,7 +107,10 @@
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action)
                                      {
-                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=779302741&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software"]];
+                                         if ([SKStoreReviewController class])
+                                             [SKStoreReviewController requestReview];
+                                         else
+                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id779302741?action=write-review"]];
                                      }];
     
     UIAlertAction *settingsAction = [UIAlertAction

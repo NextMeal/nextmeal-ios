@@ -14,6 +14,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+@import StoreKit;
+
 @interface AppDelegate ()
 
 @end
@@ -86,9 +88,22 @@
     
     [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
     
+    NSString *versionLaunchCountKey = [NSString stringWithFormat:@"%@-%@", kLaunchesForVersionPrefix, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     //Set settings bundle defaults
     //https://clang.llvm.org/docs/ObjectiveCLiterals.html for use of literals for integers
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeechTotal : @0, kNMMultipeerDeviceIdBlacklistKey : [NSArray<NSString *> new]}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{kSettingsP2PKey : [NSNumber numberWithBool:YES], kSettingsP2PShareKey : [NSNumber numberWithBool:YES], kP2PSeedTotal : @0, kP2PLeechTotal : @0, kNMMultipeerDeviceIdBlacklistKey : [NSArray<NSString *> new], versionLaunchCountKey : @0}];
+    
+    NSInteger launches = [[NSUserDefaults standardUserDefaults] integerForKey:versionLaunchCountKey];
+    
+    NSLog(@"launches %ld", (long)launches);
+    
+    if (launches == kLaunchesToReview && [SKStoreReviewController class]) {
+        [SKStoreReviewController requestReview];
+    }
+    
+    if (launches < kLaunchesToReview || [SKStoreReviewController class]) {
+        [[NSUserDefaults standardUserDefaults] setInteger:++launches forKey:versionLaunchCountKey];
+    }
     
     return YES;
 }

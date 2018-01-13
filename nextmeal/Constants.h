@@ -57,6 +57,8 @@
 #define kP2PSeedTotal @"seedTotal"
 #define kP2PLeechTotal @"leachTotal"
 
+#define kLaunchesToReview 10
+#define kLaunchesForVersionPrefix @"launchesFor"
 
 #pragma mark - Connectivity constants
 

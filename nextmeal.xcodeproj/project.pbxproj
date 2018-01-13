@@ -13,6 +13,7 @@
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
 		281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
+		282E9F3420098BB200FFAFC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282E9F3320098BB200FFAFC6 /* StoreKit.framework */; };
 		283879F91F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
 		283879FA1F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
 		283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F81F5F274A0034E047 /* Fabric.framework */; };
@@ -187,6 +188,7 @@
 		280CC7461E8A1CA900B57C30 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		281F6D2D1EB80C3F00BCE9F7 /* NMMultipeerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeerProtocol.h; sourceTree = "<group>"; };
+		282E9F3320098BB200FFAFC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		283879F71F5F274A0034E047 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		283879F81F5F274A0034E047 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				282E9F3420098BB200FFAFC6 /* StoreKit.framework in Frameworks */,
 				281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */,
 				283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */,
 				286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */,
@@ -403,9 +406,9 @@
 			isa = PBXGroup;
 			children = (
 				28B732CC1E861919007C2442 /* nextmeal.entitlements */,
+				285E0FD21E7245960092A233 /* Constants.h */,
 				285E0FAC1E7236D60092A233 /* AppDelegate.h */,
 				285E0FAD1E7236D60092A233 /* AppDelegate.m */,
-				285E0FD21E7245960092A233 /* Constants.h */,
 				2808808D1E82F5FF005CD9B9 /* View */,
 				285E0FE21E7608840092A233 /* Logic */,
 				285E0FD81E74F3100092A233 /* Model */,
@@ -507,6 +510,7 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				282E9F3320098BB200FFAFC6 /* StoreKit.framework */,
 				283879F71F5F274A0034E047 /* Crashlytics.framework */,
 				283879F81F5F274A0034E047 /* Fabric.framework */,
 				281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */,
@@ -706,7 +710,7 @@
 		285E0F9E1E7236D60092A233 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Anson Liu";
 				TargetAttributes = {
 					285E0FA51E7236D60092A233 = {
@@ -1021,7 +1025,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1029,7 +1035,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -1070,7 +1080,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1078,7 +1090,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;

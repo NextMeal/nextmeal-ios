@@ -53,6 +53,10 @@
 		28AC002C1E8580E600D2988F /* TodayNextMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AC002B1E8580E600D2988F /* TodayNextMenuTableViewController.m */; };
 		28AC002F1E8580E600D2988F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28AC002D1E8580E600D2988F /* MainInterface.storyboard */; };
 		28AC00331E8580E600D2988F /* todayextension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 28AC00251E8580E600D2988F /* todayextension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		28AF49262009A647001BF5B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
+		28AF49272009A647001BF5B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
+		28AF49282009A648001BF5B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
+		28AF49292009A648001BF5B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB81E7236D60092A233 /* Assets.xcassets */; };
 		28B732CD1E86228E007C2442 /* ParseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FE41E76094D0092A233 /* ParseMenu.m */; };
 		28B732CE1E862296007C2442 /* ReadWriteLocalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD01E7240C90092A233 /* ReadWriteLocalData.m */; };
 		28B732CF1E862F67007C2442 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FD61E74F30A0092A233 /* Item.m */; };
@@ -796,6 +800,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28AF49262009A647001BF5B4 /* Assets.xcassets in Resources */,
 				28AC002F1E8580E600D2988F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -808,6 +813,7 @@
 				28F54A221E8E0B2300937C71 /* nextmeal-logo.png in Resources */,
 				286AF4141E8F39A400067907 /* nimitz-logo.png in Resources */,
 				28FEE3E71EB917E500B9015D /* fabric.buildsecret in Resources */,
+				28AF49292009A648001BF5B4 /* Assets.xcassets in Resources */,
 				286AF4181E8F39B000067907 /* ocean-goat-logo.png in Resources */,
 				28F549961E8E063C00937C71 /* Assets.xcassets in Resources */,
 				28F549AE1E8E06EC00937C71 /* newPacks.json in Resources */,
@@ -834,6 +840,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F9375A1E8A089000D98267 /* Assets.xcassets in Resources */,
+				28AF49272009A647001BF5B4 /* Assets.xcassets in Resources */,
 				28F937581E8A089000D98267 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,6 +849,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28AF49282009A648001BF5B4 /* Assets.xcassets in Resources */,
 				28F937741E8A089000D98267 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

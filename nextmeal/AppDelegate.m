@@ -99,10 +99,13 @@
     
     if (launches == kLaunchesToReview && [SKStoreReviewController class]) {
         [SKStoreReviewController requestReview];
+        [Answers logCustomEventWithName:@"RequestReview"
+                       customAttributes:nil];
     }
     
     if (launches < kLaunchesToReview || [SKStoreReviewController class]) {
         [[NSUserDefaults standardUserDefaults] setInteger:++launches forKey:versionLaunchCountKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     return YES;

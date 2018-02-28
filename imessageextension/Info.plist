@@ -17,15 +17,15 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.4</string>
+	<string>1.2.6</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>10</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.photo-editing</string>
+		<string>com.apple.message-payload-provider</string>
 	</dict>
 </dict>
 </plist>

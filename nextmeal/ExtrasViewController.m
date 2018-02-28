@@ -107,9 +107,7 @@
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action)
                                      {
-                                         if ([SKStoreReviewController class])
-                                             [SKStoreReviewController requestReview];
-                                         else
+  
                                          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id779302741?action=write-review"]];
                                      }];
     

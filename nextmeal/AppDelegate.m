@@ -11,8 +11,9 @@
 #import "Constants.h"
 #import "BackgroundFetchMenu.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+//Firebase integration
+//https://firebase.google.com/docs/ios/setup?authuser=0#frameworks
+#import "Firebase.h"
 
 @import StoreKit;
 
@@ -73,7 +74,12 @@
 #pragma mark - Application lifecycle methods
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //Fabric
+    
+    //Firebase initialization
+    [FIRApp configure];
+    
+    /*
+    //Fabric initialization (old)
     //See https://github.com/ansonl/fabric-ios-extension
     //Get API key from fabric.apikey file in mainBundle
     NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
@@ -87,6 +93,7 @@
     NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
     
     [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+     */
     
     NSString *versionLaunchCountKey = [NSString stringWithFormat:@"%@-%@", kLaunchesForVersionPrefix, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     //Set settings bundle defaults
@@ -99,8 +106,14 @@
     
     if (launches == kLaunchesToReview && [SKStoreReviewController class]) {
         [SKStoreReviewController requestReview];
+        
+        [FIRAnalytics logEventWithName:@"RequestReview"
+                            parameters:nil];
+        
+        /*
         [Answers logCustomEventWithName:@"RequestReview"
                        customAttributes:nil];
+         */
     }
     
     if (launches < kLaunchesToReview || [SKStoreReviewController class]) {

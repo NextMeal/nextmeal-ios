@@ -11,13 +11,30 @@
 		280880911E831913005CD9B9 /* BackgroundFetchMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880901E831913005CD9B9 /* BackgroundFetchMenu.m */; };
 		280880941E8324B0005CD9B9 /* NMMultipeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 280880931E8324B0005CD9B9 /* NMMultipeer.m */; };
 		280CC7471E8A1CA900B57C30 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280CC7461E8A1CA900B57C30 /* InterfaceController.m */; };
+		280DE2BA21DA818200EBA301 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2B921DA818200EBA301 /* GoogleService-Info.plist */; };
+		280DE2CA21DA81E700EBA301 /* FirebaseRemoteConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2BB21DA81E500EBA301 /* FirebaseRemoteConfig.framework */; };
+		280DE2CB21DA81E700EBA301 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2BC21DA81E600EBA301 /* GoogleUtilities.framework */; };
+		280DE2CC21DA81E700EBA301 /* FirebaseCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2BD21DA81E600EBA301 /* FirebaseCrash.framework */; };
+		280DE2CD21DA81E700EBA301 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2BE21DA81E600EBA301 /* FIRAnalyticsConnector.framework */; };
+		280DE2CE21DA81E700EBA301 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2BF21DA81E600EBA301 /* FirebaseCore.framework */; };
+		280DE2CF21DA81E700EBA301 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C021DA81E600EBA301 /* FirebaseAnalytics.framework */; };
+		280DE2D021DA81E700EBA301 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C121DA81E600EBA301 /* nanopb.framework */; };
+		280DE2D121DA81E700EBA301 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C221DA81E600EBA301 /* FirebasePerformance.framework */; };
+		280DE2D221DA81E700EBA301 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C321DA81E600EBA301 /* FirebaseInstanceID.framework */; };
+		280DE2D321DA81E700EBA301 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C421DA81E600EBA301 /* Protobuf.framework */; };
+		280DE2D421DA81E700EBA301 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C521DA81E600EBA301 /* GoogleAppMeasurement.framework */; };
+		280DE2D521DA81E700EBA301 /* FirebaseABTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C621DA81E600EBA301 /* FirebaseABTesting.framework */; };
+		280DE2D621DA81E700EBA301 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C721DA81E600EBA301 /* FirebaseCoreDiagnostics.framework */; };
+		280DE2D721DA81E700EBA301 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C821DA81E700EBA301 /* GoogleToolboxForMac.framework */; };
+		280DE2D821DA81E700EBA301 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280DE2C921DA81E700EBA301 /* GTMSessionFetcher.framework */; };
+		280DE2DE21DA81F900EBA301 /* extract-keys in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2D921DA81F800EBA301 /* extract-keys */; };
+		280DE2DF21DA81F900EBA301 /* upload-sym-util.bash in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2DA21DA81F800EBA301 /* upload-sym-util.bash */; };
+		280DE2E021DA81F900EBA301 /* upload-sym in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2DB21DA81F800EBA301 /* upload-sym */; };
+		280DE2E121DA81F900EBA301 /* upload-sym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2DC21DA81F800EBA301 /* upload-sym.sh */; };
+		280DE2E221DA81F900EBA301 /* batch-upload in Resources */ = {isa = PBXBuildFile; fileRef = 280DE2DD21DA81F800EBA301 /* batch-upload */; };
 		281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 286AF43E1E8F4E1B00067907 /* fabric.apikey */; };
 		282E9F3420098BB200FFAFC6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282E9F3320098BB200FFAFC6 /* StoreKit.framework */; };
-		283879F91F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
-		283879FA1F5F274A0034E047 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F71F5F274A0034E047 /* Crashlytics.framework */; };
-		283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F81F5F274A0034E047 /* Fabric.framework */; };
-		283879FC1F5F274A0034E047 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283879F81F5F274A0034E047 /* Fabric.framework */; };
 		285E0FAB1E7236D60092A233 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAA1E7236D60092A233 /* main.m */; };
 		285E0FAE1E7236D60092A233 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 285E0FAD1E7236D60092A233 /* AppDelegate.m */; };
 		285E0FB71E7236D60092A233 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 285E0FB51E7236D60092A233 /* Main.storyboard */; };
@@ -190,11 +207,31 @@
 		280880931E8324B0005CD9B9 /* NMMultipeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMMultipeer.m; sourceTree = "<group>"; };
 		280CC7451E8A1CA900B57C30 /* InterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		280CC7461E8A1CA900B57C30 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		280DE2B921DA818200EBA301 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		280DE2BB21DA81E500EBA301 /* FirebaseRemoteConfig.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseRemoteConfig.framework; sourceTree = "<group>"; };
+		280DE2BC21DA81E600EBA301 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		280DE2BD21DA81E600EBA301 /* FirebaseCrash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCrash.framework; sourceTree = "<group>"; };
+		280DE2BE21DA81E600EBA301 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		280DE2BF21DA81E600EBA301 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		280DE2C021DA81E600EBA301 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		280DE2C121DA81E600EBA301 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		280DE2C221DA81E600EBA301 /* FirebasePerformance.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebasePerformance.framework; sourceTree = "<group>"; };
+		280DE2C321DA81E600EBA301 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		280DE2C421DA81E600EBA301 /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
+		280DE2C521DA81E600EBA301 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		280DE2C621DA81E600EBA301 /* FirebaseABTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseABTesting.framework; sourceTree = "<group>"; };
+		280DE2C721DA81E600EBA301 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		280DE2C821DA81E700EBA301 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		280DE2C921DA81E700EBA301 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = "<group>"; };
+		280DE2D921DA81F800EBA301 /* extract-keys */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "extract-keys"; sourceTree = "<group>"; };
+		280DE2DA21DA81F800EBA301 /* upload-sym-util.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "upload-sym-util.bash"; sourceTree = "<group>"; };
+		280DE2DB21DA81F800EBA301 /* upload-sym */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-sym"; sourceTree = "<group>"; };
+		280DE2DC21DA81F800EBA301 /* upload-sym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-sym.sh"; sourceTree = "<group>"; };
+		280DE2DD21DA81F800EBA301 /* batch-upload */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "batch-upload"; sourceTree = "<group>"; };
+		280DE2E521DA825300EBA301 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		281F6D2D1EB80C3F00BCE9F7 /* NMMultipeerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMMultipeerProtocol.h; sourceTree = "<group>"; };
 		282E9F3320098BB200FFAFC6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		283879F71F5F274A0034E047 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		283879F81F5F274A0034E047 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		285E0FA61E7236D60092A233 /* nextmeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nextmeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		285E0FAA1E7236D60092A233 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		285E0FAC1E7236D60092A233 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -311,12 +348,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				280DE2CB21DA81E700EBA301 /* GoogleUtilities.framework in Frameworks */,
 				282E9F3420098BB200FFAFC6 /* StoreKit.framework in Frameworks */,
+				280DE2D421DA81E700EBA301 /* GoogleAppMeasurement.framework in Frameworks */,
+				280DE2D021DA81E700EBA301 /* nanopb.framework in Frameworks */,
+				280DE2CE21DA81E700EBA301 /* FirebaseCore.framework in Frameworks */,
+				280DE2D221DA81E700EBA301 /* FirebaseInstanceID.framework in Frameworks */,
+				280DE2CC21DA81E700EBA301 /* FirebaseCrash.framework in Frameworks */,
+				280DE2CF21DA81E700EBA301 /* FirebaseAnalytics.framework in Frameworks */,
+				280DE2CA21DA81E700EBA301 /* FirebaseRemoteConfig.framework in Frameworks */,
+				280DE2D721DA81E700EBA301 /* GoogleToolboxForMac.framework in Frameworks */,
+				280DE2D621DA81E700EBA301 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				280DE2D521DA81E700EBA301 /* FirebaseABTesting.framework in Frameworks */,
 				281F6D2C1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework in Frameworks */,
-				283879FB1F5F274A0034E047 /* Fabric.framework in Frameworks */,
+				280DE2D321DA81E700EBA301 /* Protobuf.framework in Frameworks */,
+				280DE2D121DA81E700EBA301 /* FirebasePerformance.framework in Frameworks */,
+				280DE2D821DA81E700EBA301 /* GTMSessionFetcher.framework in Frameworks */,
 				286EBDBF1E8AADDA00B1EF2E /* WatchConnectivity.framework in Frameworks */,
-				283879F91F5F274A0034E047 /* Crashlytics.framework in Frameworks */,
 				28F9374F1E89CB4B00D98267 /* MapKit.framework in Frameworks */,
+				280DE2CD21DA81E700EBA301 /* FIRAnalyticsConnector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,9 +382,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283879FA1F5F274A0034E047 /* Crashlytics.framework in Frameworks */,
 				28F5498D1E8E063C00937C71 /* Messages.framework in Frameworks */,
-				283879FC1F5F274A0034E047 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +428,20 @@
 			name = Old;
 			sourceTree = "<group>";
 		};
+		280DE2B821DA816100EBA301 /* Firebase resources */ = {
+			isa = PBXGroup;
+			children = (
+				280DE2B921DA818200EBA301 /* GoogleService-Info.plist */,
+				280DE2E521DA825300EBA301 /* Firebase.h */,
+				280DE2DD21DA81F800EBA301 /* batch-upload */,
+				280DE2D921DA81F800EBA301 /* extract-keys */,
+				280DE2DB21DA81F800EBA301 /* upload-sym */,
+				280DE2DA21DA81F800EBA301 /* upload-sym-util.bash */,
+				280DE2DC21DA81F800EBA301 /* upload-sym.sh */,
+			);
+			path = "Firebase resources";
+			sourceTree = "<group>";
+		};
 		285E0F9D1E7236D60092A233 = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +451,7 @@
 				28F937551E8A089000D98267 /* watchapp */,
 				28F937641E8A089000D98267 /* watchapp Extension */,
 				28F5498E1E8E063C00937C71 /* imessageextension */,
+				280DE2B821DA816100EBA301 /* Firebase resources */,
 				28AC00261E8580E600D2988F /* Frameworks */,
 				285E0FA71E7236D60092A233 /* Products */,
 			);
@@ -514,9 +577,22 @@
 		28AC00261E8580E600D2988F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				280DE2BE21DA81E600EBA301 /* FIRAnalyticsConnector.framework */,
+				280DE2C621DA81E600EBA301 /* FirebaseABTesting.framework */,
+				280DE2C021DA81E600EBA301 /* FirebaseAnalytics.framework */,
+				280DE2BF21DA81E600EBA301 /* FirebaseCore.framework */,
+				280DE2C721DA81E600EBA301 /* FirebaseCoreDiagnostics.framework */,
+				280DE2BD21DA81E600EBA301 /* FirebaseCrash.framework */,
+				280DE2C321DA81E600EBA301 /* FirebaseInstanceID.framework */,
+				280DE2C221DA81E600EBA301 /* FirebasePerformance.framework */,
+				280DE2BB21DA81E500EBA301 /* FirebaseRemoteConfig.framework */,
+				280DE2C521DA81E600EBA301 /* GoogleAppMeasurement.framework */,
+				280DE2C821DA81E700EBA301 /* GoogleToolboxForMac.framework */,
+				280DE2BC21DA81E600EBA301 /* GoogleUtilities.framework */,
+				280DE2C921DA81E700EBA301 /* GTMSessionFetcher.framework */,
+				280DE2C121DA81E600EBA301 /* nanopb.framework */,
+				280DE2C421DA81E600EBA301 /* Protobuf.framework */,
 				282E9F3320098BB200FFAFC6 /* StoreKit.framework */,
-				283879F71F5F274A0034E047 /* Crashlytics.framework */,
-				283879F81F5F274A0034E047 /* Fabric.framework */,
 				281F6D2B1EB7EA0A00BCE9F7 /* MultipeerConnectivity.framework */,
 				286EBDBE1E8AADDA00B1EF2E /* WatchConnectivity.framework */,
 				28F9374E1E89CB4B00D98267 /* MapKit.framework */,
@@ -625,7 +701,6 @@
 				280880891E7F5DE0005CD9B9 /* Embed Frameworks */,
 				28AC00371E8580E600D2988F /* Embed App Extensions */,
 				28F937801E8A089000D98267 /* Embed Watch Content */,
-				286AF4391E8F493800067907 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -663,7 +738,6 @@
 				28F549871E8E063C00937C71 /* Sources */,
 				28F549881E8E063C00937C71 /* Frameworks */,
 				28F549891E8E063C00937C71 /* Resources */,
-				28FEE3E51EB917A300B9015D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -714,7 +788,7 @@
 		285E0F9E1E7236D60092A233 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Anson Liu";
 				TargetAttributes = {
 					285E0FA51E7236D60092A233 = {
@@ -786,12 +860,18 @@
 			files = (
 				28F937511E89F99300D98267 /* Settings.bundle in Resources */,
 				285E0FD41E72464B0092A233 /* sampleMenu1.json in Resources */,
+				280DE2DF21DA81F900EBA301 /* upload-sym-util.bash in Resources */,
+				280DE2DE21DA81F900EBA301 /* extract-keys in Resources */,
 				285E0FBC1E7236D60092A233 /* LaunchScreen.storyboard in Resources */,
 				281F6D2E1EB8257200BCE9F7 /* fabric.apikey in Resources */,
 				285E0FB91E7236D60092A233 /* Assets.xcassets in Resources */,
+				280DE2E121DA81F900EBA301 /* upload-sym.sh in Resources */,
+				280DE2E021DA81F900EBA301 /* upload-sym in Resources */,
 				28F9374B1E89C87F00D98267 /* about.txt in Resources */,
 				28F9374D1E89C8DB00D98267 /* taxi.txt in Resources */,
+				280DE2BA21DA818200EBA301 /* GoogleService-Info.plist in Resources */,
 				285E0FB71E7236D60092A233 /* Main.storyboard in Resources */,
+				280DE2E221DA81F900EBA301 /* batch-upload in Resources */,
 				289586EF1E7780430053A408 /* sampleMenu2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,35 +935,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		286AF4391E8F493800067907 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "FABRIC_APIKEY=$(cat ${SRCROOT}/fabric.apikey)\nFABRIC_BUILDSECRET=$(cat ${SRCROOT}/fabric.buildsecret)\n${SRCROOT}/Fabric.framework/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET}";
-		};
-		28FEE3E51EB917A300B9015D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "FABRIC_APIKEY=$(cat ${SRCROOT}/fabric.apikey)\nFABRIC_BUILDSECRET=$(cat ${SRCROOT}/fabric.buildsecret)\n${SRCROOT}/Fabric.framework/run ${FABRIC_APIKEY} ${FABRIC_BUILDSECRET}";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		285E0FA21E7236D60092A233 /* Sources */ = {
@@ -1037,6 +1088,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1044,6 +1096,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1092,6 +1145,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1099,6 +1153,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1142,9 +1197,10 @@
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Crashlytics.framework",
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1166,9 +1222,10 @@
 				INFOPLIST_FILE = nextmeal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Crashlytics.framework",
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1217,6 +1274,10 @@
 				INFOPLIST_FILE = imessageextension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.imessageextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1236,6 +1297,10 @@
 				INFOPLIST_FILE = imessageextension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.apparentetch.nextmeal.imessageextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

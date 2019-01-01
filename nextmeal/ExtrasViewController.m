@@ -66,7 +66,7 @@
     [self presentViewController:_sendingAlertController animated:YES completion:nil];
     
     NSURLSessionDataTask *uploadTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        [_sendingAlertController dismissViewControllerAnimated:YES completion:^() {
+        [self->_sendingAlertController dismissViewControllerAnimated:YES completion:^() {
             UIAlertController *sentAlert = [UIAlertController
                                             alertControllerWithTitle:error ? @"Unable to send. Please try later." : @"Sent successfully!"
                                             message:error ? error.localizedDescription : nil
@@ -120,9 +120,9 @@
                                    }];
     
     [feedbackAlert addTextFieldWithConfigurationHandler:^(UITextField *textfield) {
-        _feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
-        _feedbackTextFieldDelegate.createAction = sendAction;
-        textfield.delegate = _feedbackTextFieldDelegate;
+        self->_feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
+        self->_feedbackTextFieldDelegate.createAction = sendAction;
+        textfield.delegate = self->_feedbackTextFieldDelegate;
         textfield.placeholder = @"Your suggestion here.";
         textfield.autocorrectionType = UITextAutocorrectionTypeDefault;
         textfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
@@ -187,7 +187,7 @@
 
 - (void)getOnlineAboutText {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [_aboutActivityIndicator startAnimating];
+        [self->_aboutActivityIndicator startAnimating];
     });
     
     NSError *error;
@@ -211,8 +211,8 @@
             aboutAndStatsText = [NSString stringWithFormat:@"%@\n\n%@", tmp, [self createMultipeerStatsText]];
         }
         
-        _aboutTextView.text = aboutAndStatsText;
-        [_aboutActivityIndicator stopAnimating];
+        self->_aboutTextView.text = aboutAndStatsText;
+        [self->_aboutActivityIndicator stopAnimating];
         
         
     });

@@ -110,7 +110,7 @@
             break;
             
         default:
-            NSLog(@"Section %ld %% 3 produced %ld. Unknown meal type.", (long)section, section % 3);
+            NSLog(@"Section %ld produced %ld. Unknown meal type.", (long)section, (long)section % 3);
             break;
     }
     

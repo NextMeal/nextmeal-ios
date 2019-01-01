@@ -41,10 +41,18 @@
     {
       "size" : "44x44",
       "idiom" : "watch",
-      "filename" : "WatchOSIcon-44@2x.png",
+      "filename" : "iOSIcon-44@2x.png",
       "scale" : "2x",
-      "role" : "longLook",
-      "subtype" : "42mm"
+      "role" : "appLauncher",
+      "subtype" : "40mm"
+    },
+    {
+      "size" : "50x50",
+      "idiom" : "watch",
+      "filename" : "iOSIcon-50@2x.png",
+      "scale" : "2x",
+      "role" : "appLauncher",
+      "subtype" : "44mm"
     },
     {
       "size" : "86x86",
@@ -61,6 +69,20 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "size" : "108x108",
+      "idiom" : "watch",
+      "filename" : "watch-44@2x 216.jpeg",
+      "scale" : "2x",
+      "role" : "quickLook",
+      "subtype" : "44mm"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "watch-marketing",
+      "filename" : "iTunesArtwork.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

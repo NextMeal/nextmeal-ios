@@ -10,8 +10,7 @@
 
 #import "Constants.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import "Firebase.h"
 
 @interface NextMealTabBarController () <UITabBarControllerDelegate>
 
@@ -25,22 +24,43 @@
     
     switch (indexOfTab) {
         case 0:
+            [FIRAnalytics logEventWithName:@"SelectedTab"
+                                parameters:@{
+                                             kFIRParameterItemID:[NSString stringWithFormat:@"id-%@", self.title],
+                                             @"tabName":@"NextMenus"
+                                             }];
+            /*
             //Fabric Answers activity logging for detecting when user selects tab
             [Answers logCustomEventWithName:@"SelectedTab"
                            customAttributes:@{
                                               @"tabName" : @"NextMenus"}];
+             */
             break;
         case 1:
+            [FIRAnalytics logEventWithName:@"SelectedTab"
+                                parameters:@{
+                                             kFIRParameterItemID:[NSString stringWithFormat:@"id-%@", self.title],
+                                             @"tabName":@"ExtendedMenu"
+                                             }];
+            /*
             //Fabric Answers activity logging for detecting when user selects tab
             [Answers logCustomEventWithName:@"SelectedTab"
                            customAttributes:@{
                                               @"tabName" : @"ExtendedMenu"}];
+             */
             break;
         case 2:
+            [FIRAnalytics logEventWithName:@"SelectedTab"
+                                parameters:@{
+                                             kFIRParameterItemID:[NSString stringWithFormat:@"id-%@", self.title],
+                                             @"tabName":@"Extras"
+                                             }];
+            /*
             //Fabric Answers activity logging for detecting when user selects tab
             [Answers logCustomEventWithName:@"SelectedTab"
                            customAttributes:@{
                                               @"tabName" : @"Extras"}];
+             */
             break;
         default:
             NSLog(@"Index %lu of tabbar selected. Is viewController of class %@", (unsigned long)indexOfTab, [viewController class]);

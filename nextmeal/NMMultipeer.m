@@ -11,8 +11,7 @@
 #import "Constants.h"
 #import "Menu.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import "Firebase.h"
 
 @import MultipeerConnectivity;
 
@@ -76,20 +75,30 @@
     NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PSeedTotal];
     [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PSeedTotal];
     
+    [FIRAnalytics logEventWithName:@"P2PTransfer"
+                        parameters:@{@"transferType" : @"seed"}];
+    
+    /*
     //Fabric Answers activity logging for P2P
     [Answers logCustomEventWithName:@"P2PTransfer"
                    customAttributes:@{
                                       @"transferType" : @"seed"}];
+     */
 }
 
 - (void)incrementP2PLeachCount {
     NSInteger savedCount = [[NSUserDefaults standardUserDefaults] integerForKey:kP2PLeechTotal];
     [[NSUserDefaults standardUserDefaults] setInteger:savedCount+1 forKey:kP2PLeechTotal];
     
+    [FIRAnalytics logEventWithName:@"P2PTransfer"
+                        parameters:@{@"transferType" : @"leech"}];
+    
+    /*
     //Fabric Answers activity logging for P2P
     [Answers logCustomEventWithName:@"P2PTransfer"
                    customAttributes:@{
                                       @"transferType" : @"leech"}];
+     */
 }
 
 #pragma mark - PeerID creation
@@ -151,12 +160,12 @@
         NSLog(@"Received menu is valid. Alerting delegate.");
         //Call delegate on main thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
-            _updatingDelegate = YES;
+            self->_updatingDelegate = YES;
             [session disconnect];
             
-            [_delegate getMenuOnlineResultWithMenu:receivedMenu withUpdateDate:[_activePeerUpdateDates objectForKey:peerID.displayName] withURLResponse:nil withError:nil];
+            [self->_delegate getMenuOnlineResultWithMenu:receivedMenu withUpdateDate:[self->_activePeerUpdateDates objectForKey:peerID.displayName] withURLResponse:nil withError:nil];
             //[session disconnect]; //Session will be autodisconnected when delegate restarts the advertiser and browser. Do not disconnect manually or else the MCSession delegate will set to start browsing again. Don't browse until the delegate has updated the menu and date data.
-            _updatingDelegate = NO;
+            self->_updatingDelegate = NO;
             [self removePeerFromDateDict:peerID.displayName];
         });
         [self incrementP2PLeachCount];
@@ -166,10 +175,15 @@
         [blacklist addObject:peerID.displayName];
         [self saveDeviceIdBlacklist:blacklist];
         
+        [FIRAnalytics logEventWithName:@"P2PBlacklist"
+                            parameters:@{@"blacklistedDeviceUUID" : peerID.displayName}];
+        
+        /*
         //Fabric Answers activity logging for P2P
         [Answers logCustomEventWithName:@"P2PBlacklist"
                        customAttributes:@{
                                           @"blacklistedDeviceUUID" : peerID.displayName}];
+         */
     }
 }
 
@@ -299,10 +313,15 @@
         [self addPeerToSessionDict:peerID.displayName session:sharingSession];
         [browser invitePeer:peerID toSession:sharingSession withContext:nil timeout:30];
         
+        [FIRAnalytics logEventWithName:@"P2PTransfer"
+                            parameters:@{@"transferType" : @"inviteNewerPeer"}];
+        
+        /*
         //Fabric Answers activity logging for P2P
         [Answers logCustomEventWithName:@"P2PTransfer"
                        customAttributes:@{
                                           @"transferType" : @"inviteNewerPeer"}];
+         */
     }
 }
 

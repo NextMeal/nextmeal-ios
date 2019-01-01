@@ -14,9 +14,6 @@
 #import "FluffcornStickerBrowserViewController.h"
 #import "FeedbackTextFieldDelegate.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-
 @interface MessagesViewController ()
 
 @property (nonatomic) NSArray<NSLayoutConstraint *> *permanentConstraints;
@@ -233,38 +230,38 @@
 
 - (void)hideSegmentedControl {
     [UIView animateWithDuration:0.2 animations:^() {
-        _segmentedControl.alpha = 0.0f;
+        self->_segmentedControl.alpha = 0.0f;
     }];
 }
 
 - (void)showSegmentedControl {
     [UIView animateWithDuration:0.7 animations:^() {
-        _segmentedControl.alpha = 1.0f;
+        self->_segmentedControl.alpha = 1.0f;
     }];
 }
 
 - (void)hideInfoButton {
     [UIView animateWithDuration:0.2 animations:^() {
-        _infoButton.alpha = 0.0f;
+        self->_infoButton.alpha = 0.0f;
     }];
 }
 
 - (void)showInfoButton {
     [UIView animateWithDuration:0.7 animations:^() {
-        _infoButton.alpha = 1.0f;
+        self->_infoButton.alpha = 1.0f;
     }];
 }
 
 - (void)hideStickerSizeSlider {
     [UIView animateWithDuration:0.2 animations:^() {
-        _sizeSlider.alpha = 0.0f;
+        self->_sizeSlider.alpha = 0.0f;
     }];
 }
 
 - (void)showStickerSizeSlider {
     if ([self readStickerSizeSliderVisibility]) {
         [UIView animateWithDuration:0.7 animations:^() {
-            _sizeSlider.alpha = 1.0f;
+            self->_sizeSlider.alpha = 1.0f;
         }];
     }
 }
@@ -292,9 +289,9 @@
                                    }];
     
     [feedbackAlert addTextFieldWithConfigurationHandler:^(UITextField *textfield) {
-        _feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
-        _feedbackTextFieldDelegate.createAction = sendAction;
-        textfield.delegate = _feedbackTextFieldDelegate;
+        self->_feedbackTextFieldDelegate = [[FeedbackTextFieldDelegate alloc] init];
+        self->_feedbackTextFieldDelegate.createAction = sendAction;
+        textfield.delegate = self->_feedbackTextFieldDelegate;
         textfield.placeholder = @"Your suggestion here.";
         textfield.autocorrectionType = UITextAutocorrectionTypeDefault;
         textfield.autocapitalizationType = UITextAutocapitalizationTypeWords;
@@ -339,7 +336,7 @@
     [self presentViewController:_sendingAlertController animated:YES completion:nil];
     
     NSURLSessionDataTask *uploadTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        [_sendingAlertController dismissViewControllerAnimated:YES completion:^() {
+        [self->_sendingAlertController dismissViewControllerAnimated:YES completion:^() {
             UIAlertController *sentAlert = [UIAlertController
                                             alertControllerWithTitle:error ? @"Unable to send. Please try later." : @"Sent successfully!"
                                             message:error ? error.localizedDescription : nil
@@ -408,10 +405,19 @@
                 presentationStyleTitle = @"Unknown";
                 break;
         }
+        
+        /*
+         //Firebase not integrated in message app yet
+        [FIRAnalytics logEventWithName:@"Changed Presentation Style"
+                            parameters:@{@"PresentationStyle" : presentationStyleTitle}];
+         */
+        
+        /*
         //Fabric Answers activity logging for detecting when user expands or compacts view
         [Answers logCustomEventWithName:@"Changed Presentation Style"
                        customAttributes:@{
                                           @"PresentationStyle" : presentationStyleTitle}];
+         */
     }
 }
 
@@ -438,6 +444,7 @@
     }
     
     if (kFabricEnabled) {
+        /*
         //From http://herzbube.ch/blog/2016/08/how-hide-fabric-api-key-and-build-secret-open-source-project and https://twittercommunity.com/t/should-apikey-be-kept-secret/52644/6
         //Get API key from fabric.apikey file in mainBundle
         NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric.apikey" withExtension:nil];
@@ -451,6 +458,7 @@
         NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:whitespaceToTrim];
         
         [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+         */
     }
     
     return self;
